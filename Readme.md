@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [Галина Коцарь](https://up.htmlacademy.ru/react/8/user/848001).
-* Наставник: `Неизвестно`.
+* Наставник: [Артём Рудов](https://htmlacademy.ru/profile/artrudov).
 
 ---
 
