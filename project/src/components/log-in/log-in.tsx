@@ -1,4 +1,4 @@
-function Login(): JSX.Element {
+function LogIn(): JSX.Element {
   return (
     <main className="page__main page__main--login">
       <div className="page__login-container container">
@@ -28,4 +28,4 @@ function Login(): JSX.Element {
   );
 }
 
-export default Login;
+export default LogIn;

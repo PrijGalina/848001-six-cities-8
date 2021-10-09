@@ -1,10 +1,10 @@
 import OfferCard from '../offer-card/offer-card';
 
-type MainPageProps = {
+type HomeProps = {
   offersCount: number,
 }
 
-function MainPage({offersCount}: MainPageProps): JSX.Element {
+function Home({offersCount}: HomeProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -110,4 +110,4 @@ function MainPage({offersCount}: MainPageProps): JSX.Element {
   );
 }
 
-export default MainPage;
+export default Home;

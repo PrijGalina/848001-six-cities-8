@@ -1,11 +1,11 @@
-import MainPage from '../main-page/main-page';
+import Home from '../home/home';
 
-type AppScreenProps = {
+type AppProps = {
   offersCount: number,
 };
 
-function App({offersCount}: AppScreenProps): JSX.Element {
-  return <MainPage offersCount={offersCount}/>;
+function App({offersCount}: AppProps): JSX.Element {
+  return <Home offersCount={offersCount}/>;
 }
 
 export default App;
