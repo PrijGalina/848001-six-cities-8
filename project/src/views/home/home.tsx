@@ -1,11 +1,13 @@
 import Logo from '../../components/logo/logo';
-import OfferCard from '../../components/offer-card/offer-card';
+import OfferList from '../../components/offers-list/offers-list';
+import {Offers} from '../../types/offers';
 
 type HomeProps = {
   offersCount: number,
+  offers: Offers,
 }
 
-function Home({offersCount}: HomeProps): JSX.Element {
+function Home({offersCount, offers}: HomeProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -92,11 +94,7 @@ function Home({offersCount}: HomeProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <OfferCard />
-                <OfferCard/>
-                <OfferCard />
-                <OfferCard />
-                <OfferCard />
+                <OfferList offers={offers}/>
               </div>
             </section>
             <div className="cities__right-section">

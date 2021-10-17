@@ -16,7 +16,7 @@ export type Hosts = {
   name: string,
 }
 
-export type Offers = {
+export type Offer = {
   bedrooms: number,
   city: Cities,
   description: string,
@@ -34,3 +34,5 @@ export type Offers = {
   title: string,
   type:string,
 }
+
+export type Offers = Offer[];

@@ -6,17 +6,21 @@ import LogIn from '../../views/log-in/log-in';
 import Favorites from '../../views/favorites/favorites';
 import Property from '../../views/property/property';
 import PrivateRoute from '../private-route/private-route';
+import {Reviews} from '../../types/reviews';
+import {Offers} from '../../types/offers';
 
 type AppProps = {
   offersCount: number,
+  offers: Offers,
+  reviews: Reviews[],
 };
 
-function App({offersCount}: AppProps): JSX.Element {
+function App({offersCount, offers, reviews}: AppProps): JSX.Element {
   return(
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.Root}>
-          <Home offersCount={offersCount} />
+          <Home offersCount={offersCount} offers={offers}/>
         </Route>
         <Route exact path={AppRoute.Login}>
           <LogIn/>
@@ -24,8 +28,8 @@ function App({offersCount}: AppProps): JSX.Element {
         <PrivateRoute
           exact
           path={AppRoute.Favorites}
-          render={() => <Favorites/>}
-          authorizationStatus={AuthorizationStatus.NoAuth}
+          render={() => <Favorites offers={offers}/>}
+          authorizationStatus={AuthorizationStatus.Auth}
         >
         </PrivateRoute>
         <Route exact path={AppRoute.Room}>
