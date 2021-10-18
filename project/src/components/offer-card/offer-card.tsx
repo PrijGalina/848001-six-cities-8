@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import {Fragment,useState} from 'react';
+import {useState} from 'react';
 import {Offers, Offer} from '../../types/offers';
 
 type OffersCardProps = {
@@ -11,12 +11,13 @@ function OfferCard(props: OffersCardProps): JSX.Element {
   const customActiveOffer = {} as Offer;
   const [activeOffer, setActiveOffer] = useState(customActiveOffer);
   return (
-    <Fragment>
+    <>
       <span className="visually-hidden">{activeOffer.id}</span>
       {offers.map((offer: Offer, id: number) => {
         const keyValue = `${id}-${offer.host.name}`;
         const bookmarkClass = offer.isFavorite ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'place-card__bookmark-button button';
         const pathToOffer = `/offer/:${offer.id}`;
+
         return(
           <article key={keyValue} className="cities__place-card place-card" onMouseEnter={() => setActiveOffer(offer)} onMouseLeave={() => setActiveOffer(customActiveOffer)}>
             {offer.isPremium ?
@@ -55,7 +56,7 @@ function OfferCard(props: OffersCardProps): JSX.Element {
           </article>
         );
       })}
-    </Fragment>
+    </>
   );
 }
 

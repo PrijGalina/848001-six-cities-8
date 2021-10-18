@@ -3,11 +3,10 @@ import OfferList from '../../components/offers-list/offers-list';
 import {Offers} from '../../types/offers';
 
 type HomeProps = {
-  offersCount: number,
   offers: Offers,
 }
 
-function Home({offersCount, offers}: HomeProps): JSX.Element {
+function Home({offers}: HomeProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -77,7 +76,7 @@ function Home({offersCount, offers}: HomeProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersCount} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>

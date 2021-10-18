@@ -8,7 +8,8 @@ type FavoritesProps = {
 
 function Favorites(props: FavoritesProps): JSX.Element {
   const {offers} = props;
-  const offersFiltred = offers.filter((offer) => offer.isFavorite);
+  const offersFiltred = offers.filter(({isFavorite}) => isFavorite);
+
   return (
     <div className="page">
       <header className="header">
@@ -53,6 +54,7 @@ function Favorites(props: FavoritesProps): JSX.Element {
                   {offersFiltred.map((offer: Offer, id: number) => {
                     const keyValue = `${offer.id}-${offer.host.name}`;
                     const pathToOffer = `/offer/:${offer.id}`;
+
                     return(
                       <article className="favorites__card place-card" key={keyValue}>
                         <div className="favorites__image-wrapper place-card__image-wrapper">
