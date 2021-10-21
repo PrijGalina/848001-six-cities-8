@@ -3,7 +3,7 @@ import Logo from '../../components/logo/logo';
 import NewCommentForm from '../../components/new-comment-form/new-comment-form';
 
 function Property(): JSX.Element {
-  return(
+  return (
     <div className="page">
       <header className="header">
         <div className="container">

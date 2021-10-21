@@ -15,7 +15,7 @@ type AppProps = {
 };
 
 function App({offers, reviews}: AppProps): JSX.Element {
-  return(
+  return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.Root}>

@@ -6,20 +6,20 @@ type OffersCardProps = {
   offers: Offers,
 };
 
-function OfferCard(props: OffersCardProps): JSX.Element {
-  const {offers} = props;
-  const customActiveOffer = {} as Offer;
-  const [activeOffer, setActiveOffer] = useState(customActiveOffer);
+function OfferCard({offers}: OffersCardProps): JSX.Element {
+  const customActiveOffer = 0;
+  const [activeOffer, setActiveOffer] = useState(0);
+
   return (
     <>
-      <span className="visually-hidden">{activeOffer.id}</span>
+      <span className="visually-hidden">{activeOffer}</span>
       {offers.map((offer: Offer, id: number) => {
         const keyValue = `${id}-${offer.host.name}`;
         const bookmarkClass = offer.isFavorite ? 'place-card__bookmark-button place-card__bookmark-button--active button' : 'place-card__bookmark-button button';
         const pathToOffer = `/offer/:${offer.id}`;
 
-        return(
-          <article key={keyValue} className="cities__place-card place-card" onMouseEnter={() => setActiveOffer(offer)} onMouseLeave={() => setActiveOffer(customActiveOffer)}>
+        return (
+          <article key={keyValue} className="cities__place-card place-card" onMouseEnter={() => setActiveOffer(offer.id)} onMouseLeave={() => setActiveOffer(customActiveOffer)}>
             {offer.isPremium ?
               <div className="place-card__mark">
                 <span>Premium</span>

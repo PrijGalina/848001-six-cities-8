@@ -6,7 +6,7 @@ type OffersListProps = {
 };
 
 function offersList({offers}:OffersListProps): JSX.Element {
-  return(
+  return (
     <OfferCard offers={offers}/>
   );
 }

@@ -6,8 +6,7 @@ type FavoritesProps = {
   offers: Offers,
 }
 
-function Favorites(props: FavoritesProps): JSX.Element {
-  const {offers} = props;
+function Favorites({offers}: FavoritesProps): JSX.Element {
   const offersFiltred = offers.filter(({isFavorite}) => isFavorite);
 
   return (
@@ -55,7 +54,7 @@ function Favorites(props: FavoritesProps): JSX.Element {
                     const keyValue = `${offer.id}-${offer.host.name}`;
                     const pathToOffer = `/offer/:${offer.id}`;
 
-                    return(
+                    return (
                       <article className="favorites__card place-card" key={keyValue}>
                         <div className="favorites__image-wrapper place-card__image-wrapper">
                           <Link to={pathToOffer}>
