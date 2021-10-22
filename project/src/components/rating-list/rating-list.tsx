@@ -11,7 +11,7 @@ function RatingList(): JSX.Element {
   };
 
   return (
-    <Fragment>
+    <>
       {ratingValueArray.map((rating: number, id: number) => {
         const keyValue = `key-${id}`;
 
@@ -26,7 +26,7 @@ function RatingList(): JSX.Element {
           </Fragment>
         );
       })}
-    </Fragment>
+    </>
   );
 }
 

@@ -1,5 +1,5 @@
 import Logo from '../../components/logo/logo';
-import OfferList from '../../components/offers-list/offers-list';
+import OffersList from '../../components/offers-list/offers-list';
 import {Offers} from '../../types/offers';
 
 type HomeProps = {
@@ -93,7 +93,7 @@ function Home({offers}: HomeProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <OfferList offers={offers}/>
+                <OffersList offers={offers} isFavoritePage={false}/>
               </div>
             </section>
             <div className="cities__right-section">

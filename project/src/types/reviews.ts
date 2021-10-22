@@ -1,4 +1,4 @@
-export type Users = {
+export type User = {
   avatarUrl: string,
   id: number,
   isPro: boolean,
@@ -10,5 +10,5 @@ export type Reviews = {
   date: string,
   id: number,
   rating: number,
-  user: Users,
+  user: User,
 }
