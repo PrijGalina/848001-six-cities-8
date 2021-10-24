@@ -1,6 +1,7 @@
 import {Offer} from '../../types/offers';
 import OfferImageWrapper from '../offer-image-wrapper/offer-image-wrapper';
 import OfferInfoWrapper from '../offer-info-wrapper/offer-info-wrapper';
+import classnames from 'classnames';
 
 type OfferCardProps = {
   offer: Offer,
@@ -19,7 +20,7 @@ function OfferCard({offer, isFavoritePage, onStateChange, onStateReset}: OfferCa
   );
 
   return (
-    <article className={`${isFavoritePage ? 'favorites__card' : 'cities__place-card'} place-card`} onMouseEnter={onStateChange} onMouseLeave={onStateReset}>
+    <article className={classnames('place-card', isFavoritePage ? 'favorites__card' : 'cities__place-card')} onMouseEnter={onStateChange} onMouseLeave={onStateReset}>
       {isPremiumBlock}
       <OfferImageWrapper
         className={isFavoritePage ? 'favorites' : 'cities'}

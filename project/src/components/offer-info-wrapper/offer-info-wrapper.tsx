@@ -1,4 +1,5 @@
 import {Link} from 'react-router-dom';
+import {RATING_STARS, RATING_STYLE} from '../../const';
 
 type OfferInfoWrapperProps = {
   isFavoritesPage: boolean,
@@ -12,30 +13,45 @@ type OfferInfoWrapperProps = {
 
 function getRatingStyle(rating: number): number {
   rating = Math.round(rating);
-  let ratingWidth = 0;
-  switch (rating) {
-    case 1:
-      ratingWidth = 20;
+  let value = RATING_STYLE.zero;
+  /*
+    switch(rating){
+      case RATING_STARS.one:
+        return RATING_STYLE.one;
+      case RATING_STARS.two:
+        return RATING_STYLE.two;
+      case RATING_STARS.three:
+        return RATING_STYLE.three;
+      case RATING_STARS.four:
+        return RATING_STYLE.four;
+      case RATING_STARS.five:
+        return RATING_STYLE.five;
+    }
+  */
+  switch(rating){
+    case RATING_STARS.one:
+      value = RATING_STYLE.one;
       break;
-    case 2:
-      ratingWidth = 40;
+    case RATING_STARS.two:
+      value = RATING_STYLE.two;
       break;
-    case 3:
-      ratingWidth = 60;
+    case RATING_STARS.three:
+      value = RATING_STYLE.three;
       break;
-    case 4:
-      ratingWidth = 80;
+    case RATING_STARS.four:
+      value = RATING_STYLE.four;
       break;
-    case 5:
-      ratingWidth = 100;
+    case RATING_STARS.five:
+      value = RATING_STYLE.five;
       break;
   }
 
-  return ratingWidth;
+  return value;
 }
 
 function OfferInfoWrapper({isFavoritesPage, pathToOffer, isFavorite, rating, price, title, type}: OfferInfoWrapperProps): JSX.Element {
   const isBookmark = isFavorite && ('place-card__bookmark-button--active');
+
   return (
     <div className={`${isFavoritesPage && 'favorites__card-info'} place-card__info`}>
       <div className="place-card__price-wrapper">
@@ -45,7 +61,7 @@ function OfferInfoWrapper({isFavoritesPage, pathToOffer, isFavorite, rating, pri
         </div>
         <button className={`place-card__bookmark-button button ${isBookmark}`} type="button">
           <svg className="place-card__bookmark-icon" width="18" height="19">
-            <use xlinkHref="#icon-bookmark"></use>
+            <use xlinkHref="#icon-bookmark"/>
           </svg>
           <span className="visually-hidden">{isFavorite ? 'In' : 'To'} bookmarks</span>
         </button>

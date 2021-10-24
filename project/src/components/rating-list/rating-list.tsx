@@ -1,7 +1,6 @@
 import {Fragment} from 'react';
 import {useState, ChangeEvent} from 'react';
-
-const ratingValueArray: number[] = [5,4,3,2,1];
+import {RATING_VALUES} from '../../const';
 
 function RatingList(): JSX.Element {
   const [ratingValue, setRatingValue] = useState(0);
@@ -12,7 +11,7 @@ function RatingList(): JSX.Element {
 
   return (
     <>
-      {ratingValueArray.map((rating: number, id: number) => {
+      {RATING_VALUES.map((rating: number, id: number) => {
         const keyValue = `key-${id}`;
 
         return (

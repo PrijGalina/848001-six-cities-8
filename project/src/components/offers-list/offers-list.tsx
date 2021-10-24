@@ -7,19 +7,10 @@ type OffersListProps = {
   isFavoritePage: boolean,
 };
 
-type stateFunction = (id:number) => void;
-
-function handleStateChange(id:number, setFunc: stateFunction): void {
-  setFunc(id);
-}
-
-function handleStateReset(setFunc: stateFunction): void {
-  setFunc(0);
-}
+type NullNum = number | undefined | null;
 
 function OffersList({offers, isFavoritePage}:OffersListProps): JSX.Element {
-  const customActiveOffer = 0;
-  const [activeOffer, setActiveOffer] = useState(customActiveOffer);
+  const [activeOffer, setActiveOffer] = useState<NullNum>(null);
 
   return (
     <>
@@ -28,7 +19,7 @@ function OffersList({offers, isFavoritePage}:OffersListProps): JSX.Element {
         const keyValue = `${offer.id}-${offer.host.name}`;
 
         return (
-          <OfferCard key={keyValue} offer={offer} isFavoritePage={isFavoritePage} onStateChange={() => handleStateChange(offer.id, setActiveOffer)} onStateReset={() => handleStateReset(setActiveOffer)}/>
+          <OfferCard key={keyValue} offer={offer} isFavoritePage={isFavoritePage} onStateChange={() => setActiveOffer(offer.id)} onStateReset={() => setActiveOffer(null)}/>
         );
       })}
     </>
