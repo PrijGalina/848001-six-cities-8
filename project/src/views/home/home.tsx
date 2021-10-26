@@ -1,12 +1,25 @@
 import Logo from '../../components/logo/logo';
 import OffersList from '../../components/offers-list/offers-list';
-import {Offers} from '../../types/offers';
+import {Offers, City} from '../../types/offers';
+import Map from '../../components/map/map';
 
 type HomeProps = {
   offers: Offers,
 }
 
 function Home({offers}: HomeProps): JSX.Element {
+  const points = offers.map((offer) => offer.location);
+  const tmpArray:string[] = [];
+
+  const cities = offers.map((offer) => offer.city);
+  const citiesUnique = cities.filter((item:City) => {
+    if (tmpArray.indexOf(item.name) === -1) {
+      tmpArray.push(item.name);
+      return true;
+    }
+    return false;
+  });
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -33,7 +46,6 @@ function Home({offers}: HomeProps): JSX.Element {
           </div>
         </div>
       </header>
-
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -96,9 +108,7 @@ function Home({offers}: HomeProps): JSX.Element {
                 <OffersList offers={offers} isFavoritePage={false}/>
               </div>
             </section>
-            <div className="cities__right-section">
-              <section className="cities__map map"></section>
-            </div>
+            <div className="cities__right-section">{<Map city={citiesUnique} points={points}/>}</div>
           </div>
         </div>
       </main>
