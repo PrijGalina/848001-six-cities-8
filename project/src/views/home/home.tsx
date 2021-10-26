@@ -2,14 +2,24 @@ import Logo from '../../components/logo/logo';
 import OffersList from '../../components/offers-list/offers-list';
 import {Offers, City} from '../../types/offers';
 import Map from '../../components/map/map';
+import {useState, ChangeEvent} from 'react';
 
 type HomeProps = {
   offers: Offers,
 }
 
 function Home({offers}: HomeProps): JSX.Element {
+  const [hoverPoint, setHoverPoint] = useState({});
+
   const points = offers.map((offer) => offer.location);
   const tmpArray:string[] = [];
+
+  const onPointHover = (pointLatitude:number, pointLongitude:number) => {
+    const currentPoint = points.find((point) =>
+      point.latitude === pointLatitude && point.longitude === pointLongitude,
+    );
+    setHoverPoint(currentPoint);
+  };
 
   const cities = offers.map((offer) => offer.city);
   const citiesUnique = cities.filter((item:City) => {
@@ -108,7 +118,9 @@ function Home({offers}: HomeProps): JSX.Element {
                 <OffersList offers={offers} isFavoritePage={false}/>
               </div>
             </section>
-            <div className="cities__right-section">{<Map city={citiesUnique} points={points}/>}</div>
+            <div className="cities__right-section">
+              <Map city={citiesUnique} points={points} hoverPoint={hoverPoint} onPointHover={onPointHover}/>
+            </div>
           </div>
         </div>
       </main>
