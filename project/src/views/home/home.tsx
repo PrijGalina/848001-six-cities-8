@@ -1,27 +1,19 @@
 import Logo from '../../components/logo/logo';
 import OffersList from '../../components/offers-list/offers-list';
-import {Offers, City} from '../../types/offers';
+import {Offer, City} from '../../types/offers';
 import Map from '../../components/map/map';
-import {useState, ChangeEvent} from 'react';
+import {useState} from 'react';
 
 type HomeProps = {
-  offers: Offers,
+  offers: Offer[],
 }
 
-type NullNum = number | undefined | null;
-
 function Home({offers}: HomeProps): JSX.Element {
-  const [activeOffer, setActiveOffer] = useState<NullNum>(null);
+  const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
   const points = offers.map((offer) => offer.location);
   const tmpArray:string[] = [];
-
-  const hoverHandler = (offerId) => {
-    const currentOffer = offers.find((offer) =>
-      offer.id = offerId;
-    );
-    setActiveOffer(currentOffer);
-  };
-
+  const hoverHandler = (offer: Offer | null) => (offer !== null) ? setActiveOffer(offer) : setActiveOffer(null);
+  const activePoint = (activeOffer !== null) ? activeOffer.location : null;
   const cities = offers.map((offer) => offer.city);
   const citiesUnique = cities.filter((item:City) => {
     if (tmpArray.indexOf(item.name) === -1) {
@@ -120,7 +112,7 @@ function Home({offers}: HomeProps): JSX.Element {
               </div>
             </section>
             <div className="cities__right-section">
-              <Map city={citiesUnique} points={points} hoverPoint={hoverPoint}/>
+              <Map city={citiesUnique} points={points} hoverPoint={activePoint}/>
             </div>
           </div>
         </div>

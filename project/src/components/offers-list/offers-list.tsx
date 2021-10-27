@@ -1,10 +1,10 @@
 import OfferCard from '../../components/offer-card/offer-card';
-import {Offers, Offer} from '../../types/offers';
+import {Offer} from '../../types/offers';
 
 type OffersListProps = {
-  offers: Offers,
+  offers: Offer[],
   isFavoritePage: boolean,
-  hoverHandler: (id: number | null) => void,
+  hoverHandler?: (offer: Offer | null) => void,
 };
 
 function OffersList({offers, isFavoritePage, hoverHandler}:OffersListProps): JSX.Element {
@@ -14,7 +14,9 @@ function OffersList({offers, isFavoritePage, hoverHandler}:OffersListProps): JSX
         const keyValue = `${offer.id}-${offer.host.name}`;
 
         return (
-          <OfferCard key={keyValue} offer={offer} isFavoritePage={isFavoritePage} onStateChange={() => hoverHandler(offer.id)} onStateReset={() => hoverHandler(null)}/>
+          hoverHandler !== undefined ?
+            <OfferCard key={keyValue} offer={offer} isFavoritePage={isFavoritePage} onStateChange={() => hoverHandler(offer)} onStateReset={() => hoverHandler(null)}/> :
+            <OfferCard key={keyValue} offer={offer} isFavoritePage={isFavoritePage}/>
         );
       })}
     </>

@@ -7,10 +7,10 @@ import Favorites from '../../views/favorites/favorites';
 import Property from '../../views/property/property';
 import PrivateRoute from '../private-route/private-route';
 import {Reviews} from '../../types/reviews';
-import {Offers} from '../../types/offers';
+import {Offer} from '../../types/offers';
 
 type AppProps = {
-  offers: Offers,
+  offers: Offer[],
   reviews: Reviews[],
 };
 

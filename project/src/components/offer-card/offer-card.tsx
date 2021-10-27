@@ -6,8 +6,8 @@ import classnames from 'classnames';
 type OfferCardProps = {
   offer: Offer,
   isFavoritePage: boolean,
-  onStateChange: () => void,
-  onStateReset: () => void,
+  onStateChange?: () => void,
+  onStateReset?: () => void,
 };
 
 function OfferCard({offer, isFavoritePage, onStateChange, onStateReset}: OfferCardProps): JSX.Element {
