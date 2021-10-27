@@ -5,10 +5,12 @@ import {City, Location} from '../../types/offers';
 //import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../const';
 import {URL_MARKER_DEFAULT} from '../../const';
 import 'leaflet/dist/leaflet.css';
+import {MouseEvent} from 'react';
 
 type MapProps = {
   city: City[];
   points: Location[];
+  hoverPoint: {},
 };
 
 const defaultCustomIcon = new Icon({
@@ -24,7 +26,7 @@ const defaultCustomIcon = new Icon({
 });*/
 
 function Map(props: MapProps): JSX.Element {
-  const {city, points} = props;
+  const {city, points, hoverPoint} = props;
   const mapRef = useRef(null);
   const map = useMap(mapRef, city[0]);
 

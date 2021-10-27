@@ -8,17 +8,18 @@ type HomeProps = {
   offers: Offers,
 }
 
-function Home({offers}: HomeProps): JSX.Element {
-  const [hoverPoint, setHoverPoint] = useState({});
+type NullNum = number | undefined | null;
 
+function Home({offers}: HomeProps): JSX.Element {
+  const [activeOffer, setActiveOffer] = useState<NullNum>(null);
   const points = offers.map((offer) => offer.location);
   const tmpArray:string[] = [];
 
-  const onPointHover = (pointLatitude:number, pointLongitude:number) => {
-    const currentPoint = points.find((point) =>
-      point.latitude === pointLatitude && point.longitude === pointLongitude,
+  const hoverHandler = (offerId) => {
+    const currentOffer = offers.find((offer) =>
+      offer.id = offerId;
     );
-    setHoverPoint(currentPoint);
+    setActiveOffer(currentOffer);
   };
 
   const cities = offers.map((offer) => offer.city);
@@ -115,11 +116,11 @@ function Home({offers}: HomeProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={offers} isFavoritePage={false}/>
+                <OffersList offers={offers} isFavoritePage={false} hoverHandler={hoverHandler}/>
               </div>
             </section>
             <div className="cities__right-section">
-              <Map city={citiesUnique} points={points} hoverPoint={hoverPoint} onPointHover={onPointHover}/>
+              <Map city={citiesUnique} points={points} hoverPoint={hoverPoint}/>
             </div>
           </div>
         </div>
