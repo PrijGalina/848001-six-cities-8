@@ -24,25 +24,22 @@ const LeafIcon = (url:string) => {
 const defaultCustomIcon = LeafIcon(URL_MARKER_DEFAULT);
 const currentCustomIcon = LeafIcon(URL_MARKER_CURRENT);
 
-function Map(props: MapProps): JSX.Element {
-  const {cities, points, hoverPoint} = props;
+function Map({cities, points, hoverPoint}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, cities[0]);
 
   useEffect(() => {
     if (map) {
-      points.forEach((point) => {
+      points.forEach(({latitude: lat, longitude: lng}) => {
         const marker = new Marker({
-          lat: point.latitude,
-          lng: point.longitude,
+          lat,
+          lng,
         });
 
+        const isHoverPoint = hoverPoint && lat === hoverPoint.latitude && lng === hoverPoint.longitude;
+
         marker
-          .setIcon(
-            hoverPoint !== undefined && hoverPoint !== null && point.latitude === hoverPoint.latitude && point.longitude === hoverPoint.longitude
-              ? currentCustomIcon
-              : defaultCustomIcon,
-          )
+          .setIcon(isHoverPoint ? currentCustomIcon : defaultCustomIcon)
           .addTo(map);
       });
     }

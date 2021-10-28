@@ -11,16 +11,13 @@ type HomeProps = {
 function Home({offers}: HomeProps): JSX.Element {
   const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
   const points = offers.map((offer) => offer.location);
-  const tmpArray:string[] = [];
   const hoverHandler = (offer: Offer | null) => (offer !== null) ? setActiveOffer(offer) : setActiveOffer(null);
   const activePoint = (activeOffer !== null) ? activeOffer.location : null;
-  const cities = offers.map((offer) => offer.city);
-  const citiesUnique = cities.filter((item:City) => {
-    if (tmpArray.indexOf(item.name) === -1) {
-      tmpArray.push(item.name);
-      return true;
-    }
-    return false;
+
+  const object = {};
+  const citiesAndCountArray = offers.reduce((previousValue, currentValue) => {
+    console.log('previousValue',previousValue.city.name);
+    console.log('currentValue',currentValue.city.name);
   });
 
   return (
