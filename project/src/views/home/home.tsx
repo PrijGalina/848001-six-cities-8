@@ -112,7 +112,7 @@ function Home({offers}: HomeProps): JSX.Element {
               </div>
             </section>
             <div className="cities__right-section">
-              <Map city={citiesUnique} points={points} hoverPoint={activePoint}/>
+              <Map cities={citiesUnique} points={points} hoverPoint={activePoint}/>
             </div>
           </div>
         </div>

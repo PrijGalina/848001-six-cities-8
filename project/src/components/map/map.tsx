@@ -1,32 +1,33 @@
 import {useRef, useEffect} from 'react';
-import {Icon, Marker} from 'leaflet';
+import {Icon, IconOptions, Marker} from 'leaflet';
 import useMap from '../../hooks/useMap';
 import {City, Location} from '../../types/offers';
-import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../const';
+import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT, PIN_SIZE, PIN_ANCHOR} from '../../const';
 import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
-  city: City[];
+  cities: City[];
   points: Location[];
   hoverPoint: Location | null,
 };
 
-const defaultCustomIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [20, 30],
-  iconAnchor: [10, 30],
-});
+const LeafIcon = (url:string) => {
+  const options: IconOptions = {
+    iconUrl: url,
+    iconSize: PIN_SIZE,
+    iconAnchor: PIN_ANCHOR,
+  };
 
-const currentCustomIcon = new Icon({
-  iconUrl: URL_MARKER_CURRENT,
-  iconSize: [20, 30],
-  iconAnchor: [10, 30],
-});
+  return new Icon(options);
+};
+
+const defaultCustomIcon = LeafIcon(URL_MARKER_DEFAULT);
+const currentCustomIcon = LeafIcon(URL_MARKER_CURRENT);
 
 function Map(props: MapProps): JSX.Element {
-  const {city, points, hoverPoint} = props;
+  const {cities, points, hoverPoint} = props;
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city[0]);
+  const map = useMap(mapRef, cities[0]);
 
   useEffect(() => {
     if (map) {
