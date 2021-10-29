@@ -8,6 +8,8 @@ import Property from '../../views/property/property';
 import PrivateRoute from '../private-route/private-route';
 import {Reviews} from '../../types/reviews';
 import {Offer} from '../../types/offers';
+import {useState} from 'react';
+import {CITIES} from '../../const';
 
 type AppProps = {
   offers: Offer[],
@@ -15,11 +17,17 @@ type AppProps = {
 };
 
 function App({offers, reviews}: AppProps): JSX.Element {
+  const [activeCity, setActiveCity] = useState<string>(CITIES[0]);
+
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.Root}>
-          <Home offers={offers}/>
+          <Home
+            offers={offers}
+            onStateChange={setActiveCity}
+            activeCity={activeCity}
+          />
         </Route>
         <Route exact path={AppRoute.Login}>
           <LogIn/>

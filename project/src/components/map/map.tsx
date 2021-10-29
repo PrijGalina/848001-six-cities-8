@@ -1,12 +1,12 @@
 import {useRef, useEffect} from 'react';
 import {Icon, IconOptions, Marker} from 'leaflet';
 import useMap from '../../hooks/useMap';
-import {City, Location} from '../../types/offers';
+import {Location} from '../../types/offers';
 import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT, PIN_SIZE, PIN_ANCHOR} from '../../const';
 import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
-  cities: City[];
+  city: string;
   points: Location[];
   hoverPoint: Location | null,
 };
@@ -24,9 +24,9 @@ const LeafIcon = (url:string) => {
 const defaultCustomIcon = LeafIcon(URL_MARKER_DEFAULT);
 const currentCustomIcon = LeafIcon(URL_MARKER_CURRENT);
 
-function Map({cities, points, hoverPoint}: MapProps): JSX.Element {
+function Map({city, points, hoverPoint}: MapProps): JSX.Element {
   const mapRef = useRef(null);
-  const map = useMap(mapRef, cities[0]);
+  const map = useMap(mapRef, city);
 
   useEffect(() => {
     if (map) {

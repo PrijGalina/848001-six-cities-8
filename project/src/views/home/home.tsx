@@ -1,24 +1,30 @@
 import Logo from '../../components/logo/logo';
 import OffersList from '../../components/offers-list/offers-list';
-import {Offer, City} from '../../types/offers';
+import {Offer} from '../../types/offers';
 import Map from '../../components/map/map';
+import MenuItem from '../../components/menu-item/menu-item';
 import {useState} from 'react';
+import {CITIES} from '../../const';
 
 type HomeProps = {
   offers: Offer[],
+  onStateChange: React.Dispatch<React.SetStateAction<string>>,
+  activeCity: string,
 }
 
-function Home({offers}: HomeProps): JSX.Element {
+function Home({offers, onStateChange, activeCity}: HomeProps): JSX.Element {
   const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
-  const points = offers.map((offer) => offer.location);
+  const offersFiltred = offers.filter((offer) => (offer.city.name === activeCity));
+  const points = offersFiltred.map((offer) => offer.location);
   const hoverHandler = (offer: Offer | null) => (offer !== null) ? setActiveOffer(offer) : setActiveOffer(null);
   const activePoint = (activeOffer !== null) ? activeOffer.location : null;
 
-  const object = {};
-  const citiesAndCountArray = offers.reduce((previousValue, currentValue) => {
-    console.log('previousValue',previousValue.city.name);
-    console.log('currentValue',currentValue.city.name);
-  });
+  const citiesCount = offers.reduce((previousValue, currentValue) => {
+    const {name} = currentValue.city;
+    previousValue[name] = (previousValue[name] || 0) + 1;
+
+    return previousValue;
+  },{} as { [key: string]: number });
 
   return (
     <div className="page page--gray page--main">
@@ -51,36 +57,14 @@ function Home({offers}: HomeProps): JSX.Element {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#/">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#/">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#/">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active" href="#/">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#/">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#/">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
+              {
+                CITIES.map((city: string) => {
+                  const isActive = (city === activeCity);
+                  return(
+                    <MenuItem key={city} isActive={isActive} city={city} onStateChange={onStateChange}/>
+                  );
+                })
+              }
             </ul>
           </section>
         </div>
@@ -88,7 +72,7 @@ function Home({offers}: HomeProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+              <b className="places__found">{citiesCount[activeCity] ? citiesCount[activeCity] : 0 } places to stay in {activeCity}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -105,11 +89,11 @@ function Home({offers}: HomeProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={offers} isFavoritePage={false} hoverHandler={hoverHandler}/>
+                <OffersList offers={offersFiltred} isFavoritePage={false} hoverHandler={() => hoverHandler}/>
               </div>
             </section>
             <div className="cities__right-section">
-              <Map cities={citiesUnique} points={points} hoverPoint={activePoint}/>
+              <Map city={activeCity} points={points} hoverPoint={activePoint}/>
             </div>
           </div>
         </div>

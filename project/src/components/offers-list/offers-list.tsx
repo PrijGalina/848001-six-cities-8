@@ -4,7 +4,7 @@ import {Offer} from '../../types/offers';
 type OffersListProps = {
   offers: Offer[],
   isFavoritePage: boolean,
-  hoverHandler?: (offer: Offer | null) => void,
+  hoverHandler?: (offer?: Offer | null) => void,
 };
 
 function OffersList({offers, isFavoritePage, hoverHandler}:OffersListProps): JSX.Element {

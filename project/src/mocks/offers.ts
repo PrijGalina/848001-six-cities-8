@@ -39,11 +39,11 @@ export const offers: Offer[] = [
     bedrooms: 1,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        latitude: 50.216,
+        longitude: 6.2388,
         zoom: 10,
       },
-      name: 'London',
+      name: 'Paris',
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
@@ -58,8 +58,8 @@ export const offers: Offer[] = [
     isFavorite: true,
     isPremium: false,
     location: {
-      latitude: 52.369553943508,
-      longitude: 4.85309666406198,
+      latitude: 48.838270287830674,
+      longitude: 2.3408418979472327,
       zoom: 8,
     },
     maxAdults: 3,
@@ -73,11 +73,11 @@ export const offers: Offer[] = [
     bedrooms: 4,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        latitude: 50.216,
+        longitude: 6.2388,
         zoom: 10,
       },
-      name: 'Amsterdam',
+      name: 'Paris',
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
@@ -92,8 +92,8 @@ export const offers: Offer[] = [
     isFavorite: false,
     isPremium: false,
     location: {
-      latitude: 52.3909553943508,
-      longitude: 4.929309666406198,
+      latitude: 48.857087360223794,
+      longitude: 2.319574097326833,
       zoom: 8,
     },
     maxAdults: 2,
@@ -107,11 +107,11 @@ export const offers: Offer[] = [
     bedrooms: 2,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
-        zoom: 10,
+        latitude: 48.00216,
+        longitude: 2.168,
+        zoom: 11,
       },
-      name: 'Minsk',
+      name: 'Hamburg',
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: ['Heating', 'Kitchen'],

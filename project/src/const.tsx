@@ -33,14 +33,7 @@ export const RATING_STYLE = {
 };
 
 
-export const CITY = {
-  name: 'Амстердам',
-  location: {
-    latitude: 52.2226,
-    longitude: 4.5322,
-    zoom: 10,
-  },
-};
+export const CITIES = [ 'Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 export const URL_MARKER_DEFAULT = 'http://localhost:3000/img/pin.svg';
 export const URL_MARKER_CURRENT = 'http://localhost:3000/img/pin-active.svg';
