@@ -13,40 +13,21 @@ type OfferInfoWrapperProps = {
 
 function getRatingStyle(rating: number): number {
   rating = Math.round(rating);
-  let value = RATING_STYLE.zero;
-  /*
-    switch(rating){
-      case RATING_STARS.one:
-        return RATING_STYLE.one;
-      case RATING_STARS.two:
-        return RATING_STYLE.two;
-      case RATING_STARS.three:
-        return RATING_STYLE.three;
-      case RATING_STARS.four:
-        return RATING_STYLE.four;
-      case RATING_STARS.five:
-        return RATING_STYLE.five;
-    }
-  */
+
   switch(rating){
     case RATING_STARS.one:
-      value = RATING_STYLE.one;
-      break;
+      return RATING_STYLE.one;
     case RATING_STARS.two:
-      value = RATING_STYLE.two;
-      break;
+      return RATING_STYLE.two;
     case RATING_STARS.three:
-      value = RATING_STYLE.three;
-      break;
+      return RATING_STYLE.three;
     case RATING_STARS.four:
-      value = RATING_STYLE.four;
-      break;
+      return RATING_STYLE.four;
     case RATING_STARS.five:
-      value = RATING_STYLE.five;
-      break;
+      return RATING_STYLE.five;
+    default:
+      return RATING_STYLE.zero;
   }
-
-  return value;
 }
 
 function OfferInfoWrapper({isFavoritesPage, pathToOffer, isFavorite, rating, price, title, type}: OfferInfoWrapperProps): JSX.Element {

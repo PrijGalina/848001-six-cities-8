@@ -1,9 +1,9 @@
 import Logo from '../../components/logo/logo';
-import {Offers} from '../../types/offers';
+import {Offer} from '../../types/offers';
 import OffersList from '../../components/offers-list/offers-list';
 
 type FavoritesProps = {
-  offers: Offers,
+  offers: Offer[],
 }
 
 function Favorites({offers}: FavoritesProps): JSX.Element {

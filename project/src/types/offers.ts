@@ -1,11 +1,11 @@
-export type Locations = {
+export type Location = {
   latitude: number,
   longitude: number,
   zoom: number,
 }
 
-export type Cities = {
-  location: Locations,
+export type City = {
+  location: Location,
   name: string,
 }
 
@@ -18,7 +18,7 @@ export type Hosts = {
 
 export type Offer = {
   bedrooms: number,
-  city: Cities,
+  city: City,
   description: string,
   goods: string[],
   host: Hosts,
@@ -26,7 +26,7 @@ export type Offer = {
   images: string[],
   isFavorite: boolean,
   isPremium: boolean,
-  location: Locations,
+  location: Location,
   maxAdults: number,
   previewImage: string,
   price: number,
@@ -34,5 +34,3 @@ export type Offer = {
   title: string,
   type:string,
 }
-
-export type Offers = Offer[];
