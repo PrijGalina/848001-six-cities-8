@@ -7,8 +7,8 @@ import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
   city: string;
-  points: Location[];
-  hoverPoint: Location | null,
+  locations: Location[];
+  hoverPoint?: Location,
 };
 
 const LeafIcon = (url:string) => {
@@ -24,13 +24,13 @@ const LeafIcon = (url:string) => {
 const defaultCustomIcon = LeafIcon(URL_MARKER_DEFAULT);
 const currentCustomIcon = LeafIcon(URL_MARKER_CURRENT);
 
-function Map({city, points, hoverPoint}: MapProps): JSX.Element {
+function Map({city, locations, hoverPoint}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
   useEffect(() => {
     if (map) {
-      points.forEach(({latitude: lat, longitude: lng}) => {
+      locations.forEach(({latitude: lat, longitude: lng}) => {
         const marker = new Marker({
           lat,
           lng,
@@ -43,7 +43,7 @@ function Map({city, points, hoverPoint}: MapProps): JSX.Element {
           .addTo(map);
       });
     }
-  }, [map, points, hoverPoint]);
+  }, [map, locations, hoverPoint]);
 
   return <section className="cities__map map" style={{height: '752px'}} ref={mapRef}></section>;
 }

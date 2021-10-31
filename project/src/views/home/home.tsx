@@ -13,11 +13,11 @@ type HomeProps = {
 }
 
 function Home({offers, onStateChange, activeCity}: HomeProps): JSX.Element {
-  const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
-  const offersFiltred = offers.filter((offer) => (offer.city.name === activeCity));
-  const points = offersFiltred.map((offer) => offer.location);
-  const hoverHandler = (offer: Offer | null) => (offer !== null) ? setActiveOffer(offer) : setActiveOffer(null);
-  const activePoint = (activeOffer !== null) ? activeOffer.location : null;
+  const [activeOffer, setActiveOffer] = useState<Offer>();
+  const offersFiltred = offers.filter(({city}) => (city.name === activeCity));
+  const locations = offersFiltred.map(({location}) => location);
+  const hoverHandler = (offer?: Offer) => setActiveOffer(offer);
+  const activePoint = (activeOffer) && activeOffer.location;
 
   const citiesCount = offers.reduce((previousValue, currentValue) => {
     const {name} = currentValue.city;
@@ -89,11 +89,11 @@ function Home({offers, onStateChange, activeCity}: HomeProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={offersFiltred} isFavoritePage={false} hoverHandler={() => hoverHandler}/>
+                <OffersList offers={offersFiltred} isFavoritePage={false} hoverHandler={hoverHandler}/>
               </div>
             </section>
             <div className="cities__right-section">
-              <Map city={activeCity} points={points} hoverPoint={activePoint}/>
+              <Map city={activeCity} locations={locations} hoverPoint={activePoint}/>
             </div>
           </div>
         </div>
