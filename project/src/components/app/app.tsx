@@ -6,17 +6,15 @@ import LogIn from '../../views/log-in/log-in';
 import Favorites from '../../views/favorites/favorites';
 import Property from '../../views/property/property';
 import PrivateRoute from '../private-route/private-route';
-import {Reviews} from '../../types/reviews';
-import {Offer} from '../../types/offers';
+import {Offer} from '../../types/offer';
 import {useState} from 'react';
 import {CITIES} from '../../const';
 
 type AppProps = {
   offers: Offer[],
-  reviews: Reviews[],
 };
 
-function App({offers, reviews}: AppProps): JSX.Element {
+function App({offers}: AppProps): JSX.Element {
   const [activeCity, setActiveCity] = useState<string>(CITIES[0]);
 
   return (

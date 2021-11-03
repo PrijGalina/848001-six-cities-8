@@ -1,6 +1,7 @@
 import Logo from '../../components/logo/logo';
-import {Offer} from '../../types/offers';
+import {Offer} from '../../types/offer';
 import OffersList from '../../components/offers-list/offers-list';
+import {useState} from 'react';
 
 type FavoritesProps = {
   offers: Offer[],
@@ -8,6 +9,12 @@ type FavoritesProps = {
 
 function Favorites({offers}: FavoritesProps): JSX.Element {
   const offersFiltred = offers.filter(({isFavorite}) => isFavorite);
+  const [activeOffer, setActiveOffer] =  useState<Offer>();
+  const hoverHandler = (offer?: Offer) => {
+    if(activeOffer !== offer){
+      setActiveOffer(offer);
+    }
+  };
 
   return (
     <div className="page">
@@ -50,7 +57,11 @@ function Favorites({offers}: FavoritesProps): JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <OffersList offers={offersFiltred} isFavoritePage/>
+                  <OffersList
+                    offers={offersFiltred}
+                    isFavoritePage
+                    hoverHandler={hoverHandler}
+                  />
                 </div>
               </li>
             </ul>

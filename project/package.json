@@ -7,6 +7,7 @@
     "@types/leaflet.icon.glyph": "^0.2.1",
     "axios": "^0.21.4",
     "classnames": "^2.3.1",
+    "dayjs": "^1.10.7",
     "history": "^4.10.1",
     "leaflet": "^1.7.1",
     "leaflet-geosearch": "^3.6.0",

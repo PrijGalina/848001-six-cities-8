@@ -1,4 +1,4 @@
-import {Offer} from '../../types/offers';
+import {Offer} from '../../types/offer';
 import OfferImageWrapper from '../offer-image-wrapper/offer-image-wrapper';
 import OfferInfoWrapper from '../offer-info-wrapper/offer-info-wrapper';
 import classnames from 'classnames';

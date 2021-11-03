@@ -1,4 +1,4 @@
-import {Offer} from '../types/offers';
+import {Offer} from '../types/offer';
 
 export const offers: Offer[] = [
   {
@@ -135,6 +135,111 @@ export const offers: Offer[] = [
     price: 100,
     rating: 3.4,
     title: 'Luxurious studio at great location',
+    type: 'apartment',
+  },
+];
+
+export const offersInParis: Offer[] = [
+  {
+    bedrooms: 2,
+    city: {
+      location: {
+        latitude: 50.216,
+        longitude: 6.2388,
+        zoom: 10,
+      },
+      name: 'Paris',
+    },
+    description: 'Julien Duboué pays tribute to his native Southwest France with A Noste (meaning "Our Home" in the Gascon dialect): he gives tapas a Landes-style twist, served in a lively atmosphere.',
+    goods: ['Heating', 'Kitchen', 'Coffee machine'],
+    host: {
+      avatarUrl: '/img/avatar-angelina.jpg',
+      id: 10,
+      isPro: true,
+      name: 'Alba',
+    },
+    id: 2,
+    images: ['/img/apartment-01.jpg', '/img/apartment-03.jpg'],
+    isFavorite: false,
+    isPremium: true,
+    location: {
+      latitude: 48.838837779656366,
+      longitude: 2.337333458761587,
+      zoom: 8,
+    },
+    maxAdults: 5,
+    previewImage: '/img/apartment-01.jpg',
+    price: 360,
+    rating: 5.0,
+    title: 'Dalia',
+    type: 'apartment',
+  },
+  {
+    bedrooms: 1,
+    city: {
+      location: {
+        latitude: 50.216,
+        longitude: 6.2388,
+        zoom: 10,
+      },
+      name: 'Paris',
+    },
+    description: 'Niché au cœur du quartier de la Bourse, Dalia nous invite à un voyage à travers les saveurs du Levant, d’Israël au Liban, en passant par la Syrie',
+    goods: ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
+    host: {
+      avatarUrl: '/img/avatar-angelina.jpg',
+      id: 11,
+      isPro: true,
+      name: 'Dan',
+    },
+    id: 13,
+    images: ['/img/apartment-01.jpg', '/img/apartment-03.jpg'],
+    isFavorite: false,
+    isPremium: false,
+    location: {
+      latitude: 48.8679712445524,
+      longitude: 2.3435920846354565,
+      zoom: 8,
+    },
+    maxAdults: 2,
+    previewImage: '/img/apartment-01.jpg',
+    price: 230,
+    rating: 4.4,
+    title: 'Beautiful location',
+    type: 'apartment',
+  },
+  {
+    bedrooms: 6,
+    city: {
+      location: {
+        latitude: 50.216,
+        longitude: 6.2388,
+        zoom: 10,
+      },
+      name: 'Paris',
+    },
+    description: 'Le port du masque dans le magasin reste obligatoire. Passe sanitaire nécessaire pour la consommation sur place, pas pour le click and collectee',
+    goods: ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
+    host: {
+      avatarUrl: '/img/avatar-angelina.jpg',
+      id: 12,
+      isPro: true,
+      name: 'Adam',
+    },
+    id: 9,
+    images: ['/img/apartment-01.jpg', '/img/apartment-03.jpg'],
+    isFavorite: false,
+    isPremium: false,
+    location: {
+      latitude: 48.8440937414396,
+      longitude: 2.410656933061089,
+      zoom: 8,
+    },
+    maxAdults: 2,
+    previewImage: '/img/apartment-01.jpg',
+    price: 230,
+    rating: 4.4,
+    title: 'LA BOÎTE A PIZZA Paris 12 Courteline',
     type: 'apartment',
   },
 ];

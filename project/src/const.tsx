@@ -38,5 +38,5 @@ export const CITIES = [ 'Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 
 export const URL_MARKER_DEFAULT = 'http://localhost:3000/img/pin.svg';
 export const URL_MARKER_CURRENT = 'http://localhost:3000/img/pin-active.svg';
 
-export const PIN_SIZE: PointExpression | undefined = [20, 30];
-export const PIN_ANCHOR: PointExpression | undefined = [10, 30];
+export const PIN_SIZE: PointExpression = [20, 30];
+export const PIN_ANCHOR: PointExpression = [10, 30];

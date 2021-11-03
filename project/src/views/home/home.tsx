@@ -1,10 +1,12 @@
+import React from 'react';
 import Logo from '../../components/logo/logo';
 import OffersList from '../../components/offers-list/offers-list';
-import {Offer} from '../../types/offers';
+import {Offer} from '../../types/offer';
 import Map from '../../components/map/map';
 import MenuItem from '../../components/menu-item/menu-item';
-import {useState} from 'react';
 import {CITIES} from '../../const';
+import {useState} from 'react';
+
 
 type HomeProps = {
   offers: Offer[],
@@ -13,18 +15,23 @@ type HomeProps = {
 }
 
 function Home({offers, onStateChange, activeCity}: HomeProps): JSX.Element {
-  const [activeOffer, setActiveOffer] = useState<Offer>();
   const offersFiltred = offers.filter(({city}) => (city.name === activeCity));
   const locations = offersFiltred.map(({location}) => location);
-  const hoverHandler = (offer?: Offer) => setActiveOffer(offer);
-  const activePoint = (activeOffer) && activeOffer.location;
+  const [activeOffer, setActiveOffer] =  useState<Offer>();
+  const activePoint = activeOffer?.location;
 
-  const citiesCount = offers.reduce((previousValue, currentValue) => {
+  const hoverHandler = (offer?: Offer) => {
+    if(activeOffer !== offer){
+      setActiveOffer(offer);
+    }
+  };
+
+  const citiesCount = offers.reduce((previousValue: {[key: string]: number}, currentValue) => {
     const {name} = currentValue.city;
     previousValue[name] = (previousValue[name] || 0) + 1;
 
     return previousValue;
-  },{} as { [key: string]: number });
+  },{});
 
   return (
     <div className="page page--gray page--main">
@@ -61,7 +68,12 @@ function Home({offers, onStateChange, activeCity}: HomeProps): JSX.Element {
                 CITIES.map((city: string) => {
                   const isActive = (city === activeCity);
                   return(
-                    <MenuItem key={city} isActive={isActive} city={city} onStateChange={onStateChange}/>
+                    <MenuItem
+                      key={city}
+                      isActive={isActive}
+                      city={city}
+                      onStateChange={onStateChange}
+                    />
                   );
                 })
               }
@@ -89,11 +101,22 @@ function Home({offers, onStateChange, activeCity}: HomeProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={offersFiltred} isFavoritePage={false} hoverHandler={hoverHandler}/>
+                <React.StrictMode>
+                  <OffersList
+                    offers={offersFiltred}
+                    isFavoritePage={false}
+                    hoverHandler={hoverHandler}
+                  />
+                </React.StrictMode>
               </div>
             </section>
             <div className="cities__right-section">
-              <Map city={activeCity} locations={locations} hoverPoint={activePoint}/>
+              <Map
+                city={activeCity}
+                locations={locations}
+                height={752}
+                hoverPoint={activePoint}
+              />
             </div>
           </div>
         </div>
