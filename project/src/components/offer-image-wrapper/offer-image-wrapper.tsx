@@ -8,7 +8,7 @@ type OfferImageWrapperProps = {
   height: string,
 };
 
-function OfferImageWrapper({className, pathToOffer, previewImage, width, height}: OfferImageWrapperProps): JSX.Element {
+export default function OfferImageWrapper({className, pathToOffer, previewImage, width, height}: OfferImageWrapperProps): JSX.Element {
   return (
     <div className={`${className}__image-wrapper place-card__image-wrapper`}>
       <Link to={pathToOffer}>
@@ -17,5 +17,3 @@ function OfferImageWrapper({className, pathToOffer, previewImage, width, height}
     </div>
   );
 }
-
-export default OfferImageWrapper;

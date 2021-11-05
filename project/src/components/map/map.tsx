@@ -10,6 +10,7 @@ type MapProps = {
   locations: Location[];
   hoverPoint?: Location,
   height: number,
+  width: number,
 };
 
 const LeafIcon = (url:string) => {
@@ -40,7 +41,7 @@ function getMarkers(locations: Location[], map: MapContainer, hoverPoint?: Locat
   });
 }
 
-function Map ({city, locations, hoverPoint, height}: MapProps): JSX.Element {
+export default function Map ({city, locations, hoverPoint, height, width}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -48,9 +49,7 @@ function Map ({city, locations, hoverPoint, height}: MapProps): JSX.Element {
     if (map) {
       getMarkers(locations, map, hoverPoint);
     }
-  }, [map, locations, hoverPoint, height]);
+  }, [map, locations, hoverPoint, height, width, city]);
 
-  return <section className="cities__map map" style={{height: `${height}px`}} ref={mapRef}></section>;
+  return <section className="cities__map map" style={{height: `${height}px`, width: `${width}px`}} ref={mapRef}></section>;
 }
-
-export default Map;

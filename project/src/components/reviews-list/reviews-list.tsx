@@ -5,7 +5,7 @@ type reviewsProps = {
   reviews: Review[],
 }
 
-function ReviewsList({reviews}: reviewsProps): JSX.Element {
+export default function ReviewsList({reviews}: reviewsProps): JSX.Element {
   return(
     <>
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{(reviews) ? reviews.length : 0}</span></h2>
@@ -22,5 +22,3 @@ function ReviewsList({reviews}: reviewsProps): JSX.Element {
     </>
   );
 }
-
-export default ReviewsList;

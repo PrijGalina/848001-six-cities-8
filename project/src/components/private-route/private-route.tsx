@@ -7,7 +7,7 @@ type PrivateRouteProps = RouteProps & {
   authorizationStatus: AuthorizationStatus;
 }
 
-function PrivateRoute(props: PrivateRouteProps): JSX.Element {
+export default function PrivateRoute(props: PrivateRouteProps): JSX.Element {
   const {exact, path, render, authorizationStatus} = props;
 
   return (
@@ -22,5 +22,3 @@ function PrivateRoute(props: PrivateRouteProps): JSX.Element {
     />
   );
 }
-
-export default PrivateRoute;

@@ -10,7 +10,7 @@ type OfferCardProps = {
   onStateReset?: () => void,
 };
 
-function OfferCard({offer, isFavoritePage, onStateChange, onStateReset}: OfferCardProps): JSX.Element {
+export default function OfferCard({offer, isFavoritePage, onStateChange, onStateReset}: OfferCardProps): JSX.Element {
   const {isPremium, previewImage, price, title, type, rating, isFavorite} = offer;
   const pathToOffer = `/offer/:${offer.id}`;
   const isPremiumBlock = isFavoritePage && isPremium && (
@@ -41,5 +41,3 @@ function OfferCard({offer, isFavoritePage, onStateChange, onStateReset}: OfferCa
     </article>
   );
 }
-
-export default OfferCard;

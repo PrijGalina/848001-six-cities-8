@@ -118,7 +118,7 @@ export const offers: Offer[] = [
     host: {
       avatarUrl: '/img/avatar-angelina.jpg',
       id: 1,
-      isPro: false,
+      isPro: true,
       name: 'Olga',
     },
     id: 4,

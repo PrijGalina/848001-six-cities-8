@@ -2,7 +2,7 @@ import {useEffect, useState, MutableRefObject} from 'react';
 import {Map, TileLayer} from 'leaflet';
 import {OpenStreetMapProvider} from 'leaflet-geosearch';
 
-function useMap (mapRef: MutableRefObject<HTMLElement | null>, city: string): Map | null {
+export default function useMap (mapRef: MutableRefObject<HTMLElement | null>, city: string): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const newLocal = new OpenStreetMapProvider();
   const provider = newLocal;
@@ -40,5 +40,3 @@ function useMap (mapRef: MutableRefObject<HTMLElement | null>, city: string): Ma
 
   return map;
 }
-
-export default useMap;

@@ -11,7 +11,7 @@ type OfferInfoWrapperProps = {
   type: string,
 };
 
-function OfferInfoWrapper({isFavoritesPage, pathToOffer, isFavorite, rating, price, title, type}: OfferInfoWrapperProps): JSX.Element {
+export default function OfferInfoWrapper({isFavoritesPage, pathToOffer, isFavorite, rating, price, title, type}: OfferInfoWrapperProps): JSX.Element {
   const isBookmark = isFavorite && ('place-card__bookmark-button--active');
 
   return (
@@ -41,5 +41,3 @@ function OfferInfoWrapper({isFavoritesPage, pathToOffer, isFavorite, rating, pri
     </div>
   );
 }
-
-export default OfferInfoWrapper;

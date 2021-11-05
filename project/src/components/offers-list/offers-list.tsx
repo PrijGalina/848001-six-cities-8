@@ -8,7 +8,7 @@ type OffersListProps = {
   hoverHandler: (offer?:Offer) => void,
 };
 
-function OffersList({offers, isFavoritePage, hoverHandler}: OffersListProps): JSX.Element {
+export default function OffersList({offers, isFavoritePage, hoverHandler}: OffersListProps): JSX.Element {
   return (
     <>
       {offers.map((offer: Offer) => {
@@ -28,5 +28,3 @@ function OffersList({offers, isFavoritePage, hoverHandler}: OffersListProps): JS
     </>
   );
 }
-
-export default OffersList;

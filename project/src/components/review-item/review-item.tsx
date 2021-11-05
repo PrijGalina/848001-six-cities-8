@@ -7,7 +7,7 @@ type ReviewItemProps = {
   review: Review,
 }
 
-function ReviewItem({review}: ReviewItemProps): JSX.Element {
+export default function ReviewItem({review}: ReviewItemProps): JSX.Element {
   const {comment, user, date, rating} = review;
   const formatedDate = dayjs(date).format('MMMM YYYY');
   const formatedDateAttribute = dayjs(date).format('YYYY-MM-DD');
@@ -37,5 +37,3 @@ function ReviewItem({review}: ReviewItemProps): JSX.Element {
     </li>
   );
 }
-
-export default ReviewItem;

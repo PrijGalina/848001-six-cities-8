@@ -40,3 +40,19 @@ export const URL_MARKER_CURRENT = 'http://localhost:3000/img/pin-active.svg';
 
 export const PIN_SIZE: PointExpression = [20, 30];
 export const PIN_ANCHOR: PointExpression = [10, 30];
+
+export const PagesClass = new Map ([
+  ['Home', 'page__main--index'],
+  ['LogIn', 'page__main--login'],
+  ['Favorites', 'page__main--favorites'],
+  ['Property', 'page__main--property'],
+  ['undefined', 'page__main--undefined'],
+]);
+
+export enum PagesApp {
+  Home = 'Home',
+  LogIn = 'LogIn',
+  Favorites = 'Favorites',
+  Property = 'Property',
+  undefined = 'undefined',
+}

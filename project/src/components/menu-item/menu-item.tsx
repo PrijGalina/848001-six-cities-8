@@ -6,7 +6,7 @@ type MenuItemProps = {
   onStateChange: React.Dispatch<React.SetStateAction<string>>,
 };
 
-function MenuItem({city,isActive,onStateChange}: MenuItemProps): JSX.Element {
+export default function MenuItem({city,isActive,onStateChange}: MenuItemProps): JSX.Element {
   return(
     <li className="locations__item">
       <a className={classnames('locations__item-link tabs__item', {'tabs__item--active': isActive})} href="#/" onClick={() => onStateChange(city)}>
@@ -15,5 +15,3 @@ function MenuItem({city,isActive,onStateChange}: MenuItemProps): JSX.Element {
     </li>
   );
 }
-
-export default MenuItem;

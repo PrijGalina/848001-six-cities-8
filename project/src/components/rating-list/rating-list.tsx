@@ -2,7 +2,7 @@ import {Fragment} from 'react';
 import {useState, ChangeEvent} from 'react';
 import {RATING_VALUES} from '../../const';
 
-function RatingList(): JSX.Element {
+export default function RatingList(): JSX.Element {
   const [ratingValue, setRatingValue] = useState(0);
 
   const changeRating = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -28,5 +28,3 @@ function RatingList(): JSX.Element {
     </>
   );
 }
-
-export default RatingList;
