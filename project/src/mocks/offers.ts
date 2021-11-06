@@ -20,7 +20,7 @@ export const offers: Offer[] = [
       name: 'Angelina',
     },
     id: 1,
-    images: ['/img/room.jpg', '/img/apartment-02.jpg'],
+    images: ['/img/room.jpg', '/img/apartment-02.jpg', '/img/room.jpg', '/img/apartment-03.jpg', '/img/room.jpg', '/img/apartment-02.jpg'],
     isFavorite: false,
     isPremium: true,
     location: {
@@ -54,7 +54,7 @@ export const offers: Offer[] = [
       name: 'Regina',
     },
     id: 2,
-    images: ['/img/apartment-01.jpg', '/img/apartment-03.jpg'],
+    images: ['/img/apartment-01.jpg', '/img/apartment-03.jpg','/img/apartment-02.jpg', '/img/apartment-01.jpg','/img/apartment-03.jpg', '/img/apartment-01.jpg'],
     isFavorite: true,
     isPremium: false,
     location: {
@@ -88,7 +88,7 @@ export const offers: Offer[] = [
       name: 'Alice',
     },
     id: 3,
-    images: ['/img/apartment-01.jpg', '/img/apartment-03.jpg'],
+    images: ['/img/apartment-01.jpg', '/img/apartment-03.jpg', '/img/apartment-02.jpg', '/img/apartment-01.jpg'],
     isFavorite: false,
     isPremium: false,
     location: {
@@ -122,7 +122,7 @@ export const offers: Offer[] = [
       name: 'Olga',
     },
     id: 4,
-    images: ['/img/apartment-02.jpg', '/img/apartment-03.jpg'],
+    images: ['/img/apartment-02.jpg', '/img/apartment-03.jpg', '/img/apartment-01.jpg', '/img/apartment-03.jpg', '/img/apartment-03.jpg', '/img/apartment-02.jpg'],
     isFavorite: true,
     isPremium: true,
     location: {

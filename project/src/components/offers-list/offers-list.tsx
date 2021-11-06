@@ -1,14 +1,15 @@
-import { Fragment } from 'react';
-import {Offer} from '../../types/offer';
+import {Fragment} from 'react';
+import {Offer, OfferClasses} from '../../types/offer';
 import OfferCard from '../../components/offer-card/offer-card';
 
 type OffersListProps = {
   offers: Offer[],
-  isFavoritePage: boolean,
+  classes: OfferClasses,
+  page: string,
   hoverHandler: (offer?:Offer) => void,
 };
 
-export default function OffersList({offers, isFavoritePage, hoverHandler}: OffersListProps): JSX.Element {
+export default function OffersList({offers, classes, page, hoverHandler}: OffersListProps): JSX.Element {
   return (
     <>
       {offers.map((offer: Offer) => {
@@ -18,7 +19,8 @@ export default function OffersList({offers, isFavoritePage, hoverHandler}: Offer
           <Fragment key={key}>
             <OfferCard
               offer={offer}
-              isFavoritePage={isFavoritePage}
+              classes={classes}
+              page={page}
               onStateChange={() => hoverHandler(offer)}
               onStateReset={() => hoverHandler()}
             />

@@ -3,6 +3,7 @@ import OffersList from '../offers-list/offers-list';
 import Map from '../map/map';
 import {Offer} from '../../types/offer';
 import {useState} from 'react';
+import {PagesApp, OFFER_IN_HOME} from '../../const';
 
 type PlacesInCityProps = {
   offers: Offer[],
@@ -30,7 +31,8 @@ export default function PlacesInCity({offers, offersCount, activeCity}: PlacesIn
         <div className='cities__places-list places__list tabs__content'>
           <OffersList
             offers={offers}
-            isFavoritePage={false}
+            classes={OFFER_IN_HOME}
+            page={PagesApp.Home}
             hoverHandler={hoverHandler}
           />
         </div>

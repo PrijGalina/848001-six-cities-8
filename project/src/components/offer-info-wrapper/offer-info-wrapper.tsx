@@ -1,8 +1,9 @@
 import {Link} from 'react-router-dom';
-import {getRatingStyle} from '../../utils';
+import RatingBlock from '../rating-block/rating-block';
+import BookmarkBlock from '../bookmark-block/bookmark-block';
 
 type OfferInfoWrapperProps = {
-  isFavoritesPage: boolean,
+  infoClass: string,
   pathToOffer: string,
   isFavorite: boolean,
   rating: number,
@@ -11,29 +12,17 @@ type OfferInfoWrapperProps = {
   type: string,
 };
 
-export default function OfferInfoWrapper({isFavoritesPage, pathToOffer, isFavorite, rating, price, title, type}: OfferInfoWrapperProps): JSX.Element {
-  const isBookmark = isFavorite && ('place-card__bookmark-button--active');
-
+export default function OfferInfoWrapper({infoClass, pathToOffer, isFavorite, rating, price, title, type}: OfferInfoWrapperProps): JSX.Element {
   return (
-    <div className={`${isFavoritesPage && 'favorites__card-info'} place-card__info`}>
+    <div className={`${infoClass} place-card__info`}>
       <div className="place-card__price-wrapper">
         <div className="place-card__price">
           <b className="place-card__price-value">&euro;{price}</b>
           <span className="place-card__price-text">&#47;&nbsp;night</span>
         </div>
-        <button className={`place-card__bookmark-button button ${isBookmark}`} type="button">
-          <svg className="place-card__bookmark-icon" width="18" height="19">
-            <use xlinkHref="#icon-bookmark"/>
-          </svg>
-          <span className="visually-hidden">{isFavorite ? 'In' : 'To'} bookmarks</span>
-        </button>
+        <BookmarkBlock isFavorite={isFavorite}/>
       </div>
-      <div className="place-card__rating rating">
-        <div className="place-card__stars rating__stars">
-          <span style={{ width: `${getRatingStyle(rating)}%` }}></span>
-          <span className="visually-hidden">Rating</span>
-        </div>
-      </div>
+      <RatingBlock rating={rating}/>
       <h2 className="place-card__name">
         <Link to={pathToOffer}>{title}</Link>
       </h2>

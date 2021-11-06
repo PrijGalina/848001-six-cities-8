@@ -1,36 +1,33 @@
-import {Offer} from '../../types/offer';
+import {Offer, OfferClasses} from '../../types/offer';
 import OfferImageWrapper from '../offer-image-wrapper/offer-image-wrapper';
 import OfferInfoWrapper from '../offer-info-wrapper/offer-info-wrapper';
-import classnames from 'classnames';
+import PremiumBlock from '../premium-block/premium-block';
+import {PagesApp} from '../../const';
 
 type OfferCardProps = {
   offer: Offer,
-  isFavoritePage: boolean,
+  classes: OfferClasses,
+  page: string,
   onStateChange?: () => void,
   onStateReset?: () => void,
 };
 
-export default function OfferCard({offer, isFavoritePage, onStateChange, onStateReset}: OfferCardProps): JSX.Element {
+export default function OfferCard({offer, classes, page, onStateChange, onStateReset}: OfferCardProps): JSX.Element {
   const {isPremium, previewImage, price, title, type, rating, isFavorite} = offer;
   const pathToOffer = `/offer/:${offer.id}`;
-  const isPremiumBlock = isFavoritePage && isPremium && (
-    <div className="place-card__mark">
-      <span>Premium</span>
-    </div>
-  );
 
   return (
-    <article className={classnames('place-card', isFavoritePage ? 'favorites__card' : 'cities__place-card')} onMouseEnter={onStateChange} onMouseLeave={onStateReset}>
-      {isPremiumBlock}
+    <article className={`${classes.article} place-card`} onMouseEnter={onStateChange} onMouseLeave={onStateReset}>
+      {isPremium && <PremiumBlock/>}
       <OfferImageWrapper
-        className={isFavoritePage ? 'favorites' : 'cities'}
+        imageClass={classes.image}
         pathToOffer={pathToOffer}
         previewImage={previewImage}
-        width={isFavoritePage ? '150' : '260'}
-        height={isFavoritePage ? '110' : '200'}
+        width={page === PagesApp.Favorites ? '150' : '260'}
+        height={page === PagesApp.Favorites ? '110' : '200'}
       />
       <OfferInfoWrapper
-        isFavoritesPage={isFavoritePage}
+        infoClass={classes.info}
         pathToOffer={pathToOffer}
         isFavorite={isFavorite}
         rating={rating}

@@ -10,7 +10,12 @@ import {useState} from 'react';
 import {Offer} from '../../types/offer';
 import {useLocation} from 'react-router';
 import {offers} from '../../mocks/offers';
-import {getRatingStyle} from '../../utils';
+import RatingBlock from '../../components/rating-block/rating-block';
+import BookmarkBlock from '../../components/bookmark-block/bookmark-block';
+import PremiumBlock from '../../components/premium-block/premium-block';
+import Features from '../../components/features/features';
+import ImagesOfPlace from '../../components/images-of-place/images-of-place';
+import {PagesApp, OFFER_IN_PROPERTY} from '../../const';
 
 export default function Property(): JSX.Element {
   const reviewList:Review[] = reviews;
@@ -26,60 +31,20 @@ export default function Property(): JSX.Element {
     }
   };
 
-  const isPremium = currentOffer && currentOffer.isPremium && (
-    <div className="property__mark">
-      <span>Premium</span>
-    </div>
-  );
-
-  const isBookmarkClass = currentOffer && currentOffer.isFavorite && ('property__bookmark-button--active');
-
   return (
     <>
       <section className="property">
-        <div className="property__gallery-container container">
-          <div className="property__gallery">
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/room.jpg" alt="Studio"/>
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-01.jpg" alt="Studio"/>
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-02.jpg" alt="Studio"/>
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-03.jpg" alt="Studio"/>
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/studio-01.jpg" alt="Studio"/>
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-01.jpg" alt="Studio"/>
-            </div>
-          </div>
-        </div>
+        <ImagesOfPlace images={currentOffer && currentOffer.images}/>
         <div className="property__container container">
           <div className="property__wrapper">
-            {isPremium}
+            {currentOffer && currentOffer.isPremium && <PremiumBlock/>}
             <div className="property__name-wrapper">
               <h1 className="property__name">
                 {currentOffer?.title}
               </h1>
-              <button className={`property__bookmark-button button ${isBookmarkClass}`} type="button">
-                <svg className="property__bookmark-icon" width="31" height="33">
-                  <use xlinkHref="#icon-bookmark"></use>
-                </svg>
-                <span className="visually-hidden">{currentOffer && currentOffer.isFavorite ? 'In' : 'To'}  bookmarks</span>
-              </button>
+              <BookmarkBlock  isPropertyDetail isFavorite={currentOffer ? currentOffer.isFavorite : false}/>
             </div>
-            <div className="property__rating rating">
-              <div className="property__stars rating__stars">
-                <span style={{width: `${currentOffer && getRatingStyle(currentOffer.rating)}%`}}></span>
-                <span className="visually-hidden">Rating</span>
-              </div>
-              <span className="property__rating-value rating__value">{currentOffer && currentOffer.rating}</span>
-            </div>
+            <RatingBlock rating={currentOffer ? currentOffer.rating : 0} isPropertyDetail/>
             <ul className="property__features">
               <li className="property__feature property__feature--entire">
                 {currentOffer && currentOffer.type}
@@ -95,41 +60,7 @@ export default function Property(): JSX.Element {
               <b className="property__price-value">&euro;{currentOffer && currentOffer.price}</b>
               <span className="property__price-text">&nbsp;night</span>
             </div>
-            <div className="property__inside">
-              <h2 className="property__inside-title">What&apos;s inside</h2>
-              <ul className="property__inside-list">
-                <li className="property__inside-item">
-                  Wi-Fi
-                </li>
-                <li className="property__inside-item">
-                  Washing machine
-                </li>
-                <li className="property__inside-item">
-                  Towels
-                </li>
-                <li className="property__inside-item">
-                  Heating
-                </li>
-                <li className="property__inside-item">
-                  Coffee machine
-                </li>
-                <li className="property__inside-item">
-                  Baby seat
-                </li>
-                <li className="property__inside-item">
-                  Kitchen
-                </li>
-                <li className="property__inside-item">
-                  Dishwasher
-                </li>
-                <li className="property__inside-item">
-                  Cabel TV
-                </li>
-                <li className="property__inside-item">
-                  Fridge
-                </li>
-              </ul>
-            </div>
+            <Features features={currentOffer && currentOffer.goods}/>
             <div className="property__host">
               <h2 className="property__host-title">Meet the host</h2>
               <div className="property__host-user user">
@@ -171,7 +102,8 @@ export default function Property(): JSX.Element {
           <div className="near-places__list places__list">
             <OffersList
               offers={offersInParis}
-              isFavoritePage={false}
+              classes={OFFER_IN_PROPERTY}
+              page={PagesApp.Property}
               hoverHandler={hoverHandler}
             />
           </div>
