@@ -1,4 +1,8 @@
-export default function LogIn(): JSX.Element {
+type LogInProps = {
+  activeCity: string,
+}
+
+export default function LogIn({activeCity}: LogInProps): JSX.Element {
   return (
     <div className="page__login-container container">
       <section className="login">
@@ -18,7 +22,7 @@ export default function LogIn(): JSX.Element {
       <section className="locations locations--login locations--current">
         <div className="locations__item">
           <a className="locations__item-link" href="#/">
-            <span>Amsterdam</span>
+            <span>{activeCity}</span>
           </a>
         </div>
       </section>

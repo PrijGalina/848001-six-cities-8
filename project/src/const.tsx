@@ -74,3 +74,5 @@ export const OFFER_IN_PROPERTY = {
   image: 'near-places__image-wrapper',
   info: '',
 };
+
+

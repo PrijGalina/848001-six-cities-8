@@ -12,13 +12,13 @@ type PlacesInCityProps = {
 }
 
 export default function PlacesInCity({offers, offersCount, activeCity}: PlacesInCityProps): JSX.Element {
+  const [offer, setActiveOffer] =  useState<Offer>();
   const locations = offers.map(({location}) => location);
-  const [activeOffer, setActiveOffer] =  useState<Offer>();
-  const activePoint = activeOffer?.location;
+  const activePoint = offer?.location;
 
-  const hoverHandler = (offer?: Offer) => {
-    if(activeOffer !== offer){
-      setActiveOffer(offer);
+  const hoverHandler = (offerItem?: Offer) => {
+    if(offer?.id !== offerItem?.id){
+      setActiveOffer(offerItem);
     }
   };
 

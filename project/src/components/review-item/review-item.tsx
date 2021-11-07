@@ -9,8 +9,11 @@ type ReviewItemProps = {
 
 export default function ReviewItem({review}: ReviewItemProps): JSX.Element {
   const {comment, user, date, rating} = review;
-  const formatedDate = dayjs(date).format('MMMM YYYY');
-  const formatedDateAttribute = dayjs(date).format('YYYY-MM-DD');
+
+  const FormatsOfDate = {
+    formatedDateShort: dayjs(date).format('MMMM YYYY'),
+    formatedDateFull: dayjs(date).format('YYYY-MM-DD'),
+  };
 
   return(
     <li className="reviews__item">
@@ -32,7 +35,7 @@ export default function ReviewItem({review}: ReviewItemProps): JSX.Element {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime={formatedDateAttribute}>{formatedDate}</time>
+        <time className="reviews__time" dateTime={FormatsOfDate.formatedDateFull}>{FormatsOfDate.formatedDateShort}</time>
       </div>
     </li>
   );

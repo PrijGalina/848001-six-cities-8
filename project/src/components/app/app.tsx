@@ -32,7 +32,7 @@ function App({offers}: AppProps): JSX.Element {
 
         <Route exact path={AppRoute.Login}>
           <Layout page={PagesApp.LogIn} isLogIn isGrey>
-            <LogIn/>
+            <LogIn activeCity={activeCity}/>
           </Layout>
         </Route>
 

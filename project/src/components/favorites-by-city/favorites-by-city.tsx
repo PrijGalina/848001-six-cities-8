@@ -5,7 +5,7 @@ import {PagesApp, OFFER_IN_FAVORITES} from '../../const';
 type FavoritesByCityProps = {
   city: string,
   offers: Offer[],
-  hoverHandler: (offer?:Offer) => void,
+  hoverHandler: (offer?: Offer) => void,
 };
 
 export default function FavoritesByCity({city, offers, hoverHandler}: FavoritesByCityProps): JSX.Element {

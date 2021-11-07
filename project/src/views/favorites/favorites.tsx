@@ -11,7 +11,7 @@ export default function Favorites({offers}: FavoritesProps): JSX.Element {
   const [activeOffer, setActiveOffer] =  useState<Offer>();
 
   const hoverHandler = (offer?: Offer) => {
-    if(activeOffer !== offer){
+    if(activeOffer?.id !== offer?.id){
       setActiveOffer(offer);
     }
   };
