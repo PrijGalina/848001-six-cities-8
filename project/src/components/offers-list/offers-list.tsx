@@ -14,7 +14,7 @@ export default function OffersList({offers, classes, page, hoverHandler}: Offers
       {offers.map((offer: Offer) => {
         const key = offer.host.name;
 
-        return(
+        return (
           <OfferCard
             key={key}
             offer={offer}

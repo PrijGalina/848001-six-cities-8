@@ -7,9 +7,9 @@ type MenuItemProps = {
 };
 
 export default function MenuItem({city,isActive,onStateChange}: MenuItemProps): JSX.Element {
-  return(
+  return (
     <li className="locations__item">
-      <a className={classnames('locations__item-link tabs__item', {'tabs__item--active': isActive})} href="#/" onClick={() => onStateChange(city)}>
+      <a className={classnames ('locations__item-link tabs__item', {'tabs__item--active': isActive})} href="#/" onClick={() => onStateChange(city)}>
         <span>{city}</span>
       </a>
     </li>

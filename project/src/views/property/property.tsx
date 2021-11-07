@@ -1,9 +1,9 @@
 import {useState} from 'react';
 import {useLocation} from 'react-router';
-import {CITIES, PagesApp, OFFER_IN_PROPERTY} from '../../const';
+import {CITIES, PagesApp, OFFER_IN_PROPERTY, MAP_PROPERTY} from '../../const';
 import {reviews} from '../../mocks/reviews';
 import {offers, offersInParis} from '../../mocks/offers';
-import {Review} from '../../types/review';
+import {ReviewType} from '../../types/review';
 import {Offer} from '../../types/offer';
 import NewCommentForm from '../../components/new-comment-form/new-comment-form';
 import ReviewsList from '../../components//reviews-list/reviews-list';
@@ -16,7 +16,7 @@ import AboutPlace from '../../components/about-place/about-place';
 export default function Property(): JSX.Element {
   const [activeOffer, setActiveOffer] =  useState<Offer>();
   const activePoint = activeOffer?.location;
-  const reviewList:Review[] = reviews;
+  const reviewList: ReviewType[] = reviews;
   const locations = offersInParis.map(({location}) => location);
   const offerId = useLocation().pathname.split(':')[1];
   const offer: Offer = offers.filter((element: Offer) => element.id === +offerId)[0];
@@ -45,8 +45,8 @@ export default function Property(): JSX.Element {
           <Map
             city={CITIES[0]}
             locations={locations}
-            height={579}
-            width={1144}
+            height={MAP_PROPERTY.propertyMapSize.height}
+            width={MAP_PROPERTY.propertyMapSize.width}
             hoverPoint={activePoint}
           />
         </section>

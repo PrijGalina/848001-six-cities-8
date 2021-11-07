@@ -3,7 +3,7 @@ import OffersList from '../offers-list/offers-list';
 import Map from '../map/map';
 import {Offer} from '../../types/offer';
 import {useState} from 'react';
-import {PagesApp, OFFER_IN_HOME} from '../../const';
+import {PagesApp, OFFER_IN_HOME, MAP_PROPERTY} from '../../const';
 
 type PlacesInCityProps = {
   offers: Offer[],
@@ -22,7 +22,7 @@ export default function PlacesInCity({offers, offersCount, activeCity}: PlacesIn
     }
   };
 
-  return(
+  return (
     <>
       <section className='cities__places places'>
         <h2 className='visually-hidden'>Places</h2>
@@ -41,8 +41,8 @@ export default function PlacesInCity({offers, offersCount, activeCity}: PlacesIn
         <Map
           city={activeCity}
           locations={locations}
-          height={752}
-          width={512}
+          height={MAP_PROPERTY.homeMapSize.height}
+          width={MAP_PROPERTY.homeMapSize.width}
           hoverPoint={activePoint}
         />
       </div>

@@ -1,13 +1,13 @@
 
-import {Review} from '../../types/review';
+import {ReviewType} from '../../types/review';
 import dayjs from 'dayjs';
 import {getRatingStyle} from '../../utils';
 
 type ReviewItemProps = {
-  review: Review,
+  review: ReviewType,
 }
 
-export default function ReviewItem({review}: ReviewItemProps): JSX.Element {
+export default function Review({review}: ReviewItemProps): JSX.Element {
   const {comment, user, date, rating} = review;
 
   const FormatsOfDate = {
@@ -15,7 +15,7 @@ export default function ReviewItem({review}: ReviewItemProps): JSX.Element {
     formatedDateFull: dayjs(date).format('YYYY-MM-DD'),
   };
 
-  return(
+  return (
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">

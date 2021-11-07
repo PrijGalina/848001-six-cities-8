@@ -14,7 +14,7 @@ export default function Tabs({onStateChange, activeCity}: TabsProps): JSX.Elemen
           {
             CITIES.map((city: string) => {
               const isActive = (city === activeCity);
-              return(
+              return (
                 <MenuItem
                   key={city}
                   isActive={isActive}

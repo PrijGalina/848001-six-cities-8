@@ -5,7 +5,7 @@ type NoPlacesToStayProps = {
 export default function NoPlacesToStay({activeCity}: NoPlacesToStayProps): JSX.Element {
   document.querySelector('.page--main')?.classList.add('page__main--index-empty');
 
-  return(
+  return (
     <>
       <section className="cities__no-places">
         <div className="cities__status-wrapper tabs__content">

@@ -11,7 +11,7 @@ export default function ImagesOfPlace({images}: ImagesOfPlaceProps): JSX.Element
         {images?.map((image) => {
           const key = nextId();
 
-          return(
+          return (
             <div key={key} className="property__image-wrapper">
               <img className="property__image" src={image} alt="Studio"/>
             </div>

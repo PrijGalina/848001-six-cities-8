@@ -1,4 +1,5 @@
 import {Link} from 'react-router-dom';
+import classnames from 'classnames';
 
 type OfferImageWrapperProps = {
   imageClass: string,
@@ -7,14 +8,10 @@ type OfferImageWrapperProps = {
   width: string,
   height: string,
 };
-/*
-  home:  place-card__image-wrapper,
-  favorites:  place-card__image-wrapper,
-  property:  place-card__image-wrapper,
-*/
+
 export default function OfferImageWrapper({imageClass, pathToOffer, previewImage, width, height}: OfferImageWrapperProps): JSX.Element {
   return (
-    <div className={`${imageClass} place-card__image-wrapper`}>
+    <div className={classnames ('place-card__image-wrapper', imageClass)}>
       <Link to={pathToOffer}>
         <img className="place-card__image" src={previewImage} width={width} height={height} alt="Place" />
       </Link>

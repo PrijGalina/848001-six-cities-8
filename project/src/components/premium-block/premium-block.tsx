@@ -3,8 +3,10 @@ type PremiumBlockProps = {
 };
 
 export default function PremiumBlock({isPropertyDetail}: PremiumBlockProps): JSX.Element {
+  const divClass = isPropertyDetail ? 'property__mark' : 'place-card__mark';
+
   return (
-    <div className={isPropertyDetail ? 'property__mark' : 'place-card__mark'}>
+    <div className={divClass}>
       <span>Premium</span>
     </div>
   );

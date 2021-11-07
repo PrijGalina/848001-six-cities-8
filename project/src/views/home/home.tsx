@@ -21,20 +21,22 @@ export default function Home({offers, onStateChange, activeCity}: HomeProps): JS
     return previousValue;
   },{});
 
-  const isEmpty:boolean = (citiesCount[activeCity] === undefined);
+  const isEmpty: boolean = (citiesCount[activeCity] === undefined);
 
   return (
     <>
       <h1 className="visually-hidden">Cities</h1>
       <Tabs activeCity={activeCity} onStateChange={onStateChange}/>
       <div className="cities">
-        <div className={classnames('cities__places-container container', {'cities__places-container--empty': isEmpty})}>
+        <div className={classnames ('cities__places-container container', {'cities__places-container--empty': isEmpty})}>
           {
-            isEmpty
-              ?
-              <NoPlacesToStay activeCity={activeCity}/>
-              :
-              <PlacesInCity offers={offersFiltred} offersCount={citiesCount[activeCity]} activeCity={activeCity}/>
+            isEmpty ?
+              <NoPlacesToStay activeCity={activeCity}/> :
+              <PlacesInCity
+                offers={offersFiltred}
+                offersCount={citiesCount[activeCity]}
+                activeCity={activeCity}
+              />
           }
         </div>
       </div>

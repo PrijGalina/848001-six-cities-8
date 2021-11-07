@@ -75,4 +75,48 @@ export const OFFER_IN_PROPERTY = {
   info: '',
 };
 
+export const BOOKMARK_CARD = {
+  width: 18,
+  height: 19,
+};
 
+export const BOOKMARK_DETAIL = {
+  width: 31,
+  height: 33,
+};
+
+export const FAVORITE_PAGE_ICON = {
+  width: '150',
+  height: '110',
+};
+
+export const FAVORITE_ICON = {
+  width: '260',
+  height: '200',
+};
+
+export const MAP_PROPERTY = {
+  link : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+  zoomCity: 10,
+  zoomLocation: 8,
+  propertyMapSize: {
+    width: 1144,
+    height: 579,
+  },
+  homeMapSize: {
+    width: 512,
+    height: 752,
+  },
+};
+
+export const LOGO_PROPERTY = {
+  footer: {
+    width: '64',
+    height: '33',
+  },
+  header: {
+    width: '81',
+    height: '41',
+  },
+};

@@ -1,17 +1,17 @@
 import Logo from '../../components/logo/logo';
-import {PagesApp} from '../../const';
+import {PagesApp, LOGO_PROPERTY} from '../../const';
 
 type HeaderProps = {
   page: string,
 }
 
-export default function Header({page} : HeaderProps): JSX.Element {
+export default function Header({page}: HeaderProps): JSX.Element {
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Logo />
+            <Logo place={LOGO_PROPERTY.header}/>
           </div>
           {(page !== PagesApp.LogIn) &&
             <nav className="header__nav">

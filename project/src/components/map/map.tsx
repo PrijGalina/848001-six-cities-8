@@ -13,7 +13,7 @@ type MapProps = {
   width: number,
 };
 
-const LeafIcon = (url:string) => {
+const LeafIcon = (url: string) => {
   const options: IconOptions = {
     iconUrl: url,
     iconSize: PIN_SIZE,
@@ -51,5 +51,14 @@ export default function Map ({city, locations, hoverPoint, height, width}: MapPr
     }
   }, [map, locations, hoverPoint, height, width, city]);
 
-  return <section className="cities__map map" style={{height: `${height}px`, width: `${width}px`}} ref={mapRef}></section>;
+  return (
+    <section
+      className="cities__map map"
+      style={{
+        height: `${height}px`,
+        width: `${width}px`,
+      }}
+      ref={mapRef}
+    />
+  );
 }
