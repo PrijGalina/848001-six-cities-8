@@ -1,69 +1,49 @@
-import Logo from '../../components/logo/logo';
-import {Offer} from '../../types/offers';
-import OffersList from '../../components/offers-list/offers-list';
+import {Offer} from '../../types/offer';
+import FavoritesByCity from '../../components/favorites-by-city/favorites-by-city';
+import {useState} from 'react';
+import {CITIES} from '../../const';
 
 type FavoritesProps = {
   offers: Offer[],
 }
 
-function Favorites({offers}: FavoritesProps): JSX.Element {
-  const offersFiltred = offers.filter(({isFavorite}) => isFavorite);
+export default function Favorites({offers}: FavoritesProps): JSX.Element {
+  const [activeOffer, setActiveOffer] =  useState<Offer>();
+
+  const hoverHandler = (offer?: Offer) => {
+    if(activeOffer?.id !== offer?.id){
+      setActiveOffer(offer);
+    }
+  };
+
+  const favoritesInCities = offers.reduce((previousValue: {[key: string]: Offer[] | []}, currentValue) => {
+    const {name} = currentValue.city;
+    const isFavorite = currentValue.isFavorite;
+    const result: Offer[] = previousValue[name] || [];
+    isFavorite && result.push(currentValue);
+    previousValue[name] = result;
+
+    return previousValue;
+  },{});
 
   return (
-    <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#/">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#/">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
-      <main className="page__main page__main--favorites">
-        <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <a className="locations__item-link" href="#/">
-                      <span>Amsterdam</span>
-                    </a>
-                  </div>
-                </div>
-                <div className="favorites__places">
-                  <OffersList offers={offersFiltred} isFavoritePage/>
-                </div>
-              </li>
-            </ul>
-          </section>
-        </div>
-      </main>
-      <footer className="footer container">
-        <a className="footer__logo-link" href="#/">
-          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
-        </a>
-      </footer>
+    <div className="page__favorites-container container">
+      <section className="favorites">
+        <h1 className="favorites__title">Saved listing</h1>
+        <ul className="favorites__list">
+          {CITIES.map((city) =>
+            (favoritesInCities[city] && favoritesInCities[city].length !== 0)
+            &&
+            (
+              <FavoritesByCity
+                key={city}
+                city={city}
+                offers={favoritesInCities[city]}
+                hoverHandler={hoverHandler}
+              />
+            ))}
+        </ul>
+      </section>
     </div>
   );
 }
-
-export default Favorites;

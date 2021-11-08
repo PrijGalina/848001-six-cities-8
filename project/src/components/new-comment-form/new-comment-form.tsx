@@ -1,7 +1,7 @@
 import {useState, ChangeEvent} from 'react';
 import RatingList from '../rating-list/rating-list';
 
-function NewCommentForm(): JSX.Element {
+export default function NewCommentForm(): JSX.Element {
   const [textareaValue, setTextareaValue] = useState('');
 
   function changeTextArea(e: ChangeEvent<HTMLTextAreaElement>): void {
@@ -24,5 +24,3 @@ function NewCommentForm(): JSX.Element {
     </form>
   );
 }
-
-export default NewCommentForm;

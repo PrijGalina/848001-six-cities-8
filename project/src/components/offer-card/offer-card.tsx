@@ -1,36 +1,34 @@
-import {Offer} from '../../types/offers';
+import {Offer, OfferClasses} from '../../types/offer';
 import OfferImageWrapper from '../offer-image-wrapper/offer-image-wrapper';
 import OfferInfoWrapper from '../offer-info-wrapper/offer-info-wrapper';
+import PremiumBlock from '../premium-block/premium-block';
+import {PagesApp, FAVORITE_ICON, FAVORITE_PAGE_ICON} from '../../const';
 import classnames from 'classnames';
 
 type OfferCardProps = {
   offer: Offer,
-  isFavoritePage: boolean,
+  classes: OfferClasses,
+  page: string,
   onStateChange?: () => void,
   onStateReset?: () => void,
 };
 
-function OfferCard({offer, isFavoritePage, onStateChange, onStateReset}: OfferCardProps): JSX.Element {
+export default function OfferCard({offer, classes, page, onStateChange, onStateReset}: OfferCardProps): JSX.Element {
   const {isPremium, previewImage, price, title, type, rating, isFavorite} = offer;
   const pathToOffer = `/offer/:${offer.id}`;
-  const isPremiumBlock = isFavoritePage && isPremium && (
-    <div className="place-card__mark">
-      <span>Premium</span>
-    </div>
-  );
 
   return (
-    <article className={classnames('place-card', isFavoritePage ? 'favorites__card' : 'cities__place-card')} onMouseEnter={onStateChange} onMouseLeave={onStateReset}>
-      {isPremiumBlock}
+    <article className={classnames ('place-card',classes.article)} onMouseEnter={onStateChange} onMouseLeave={onStateReset}>
+      {isPremium && <PremiumBlock/>}
       <OfferImageWrapper
-        className={isFavoritePage ? 'favorites' : 'cities'}
+        imageClass={classes.image}
         pathToOffer={pathToOffer}
         previewImage={previewImage}
-        width={isFavoritePage ? '150' : '260'}
-        height={isFavoritePage ? '110' : '200'}
+        width={page === PagesApp.Favorites ? FAVORITE_PAGE_ICON.width : FAVORITE_ICON.width}
+        height={page === PagesApp.Favorites ? FAVORITE_PAGE_ICON.height : FAVORITE_ICON.height}
       />
       <OfferInfoWrapper
-        isFavoritesPage={isFavoritePage}
+        infoClass={classes.info}
         pathToOffer={pathToOffer}
         isFavorite={isFavorite}
         rating={rating}
@@ -41,5 +39,3 @@ function OfferCard({offer, isFavoritePage, onStateChange, onStateReset}: OfferCa
     </article>
   );
 }
-
-export default OfferCard;

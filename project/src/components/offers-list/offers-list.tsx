@@ -1,26 +1,30 @@
+import {Offer, OfferClasses} from '../../types/offer';
 import OfferCard from '../../components/offer-card/offer-card';
-import {Offer} from '../../types/offers';
 
 type OffersListProps = {
   offers: Offer[],
-  isFavoritePage: boolean,
-  hoverHandler?: (offer?: Offer) => void,
+  classes: OfferClasses,
+  page: string,
+  hoverHandler: (offer?: Offer) => void,
 };
 
-function OffersList({offers, isFavoritePage, hoverHandler}:OffersListProps): JSX.Element {
+export default function OffersList({offers, classes, page, hoverHandler}: OffersListProps): JSX.Element {
   return (
     <>
       {offers.map((offer: Offer) => {
-        const keyValue = `${offer.id}-${offer.host.name}`;
+        const key = offer.host.name;
 
         return (
-          hoverHandler !== undefined ?
-            <OfferCard key={keyValue} offer={offer} isFavoritePage={isFavoritePage} onStateChange={() => hoverHandler(offer)} onStateReset={() => hoverHandler()}/> :
-            <OfferCard key={keyValue} offer={offer} isFavoritePage={isFavoritePage}/>
+          <OfferCard
+            key={key}
+            offer={offer}
+            classes={classes}
+            page={page}
+            onStateChange={() => hoverHandler(offer)}
+            onStateReset={() => hoverHandler()}
+          />
         );
       })}
     </>
   );
 }
-
-export default OffersList;
