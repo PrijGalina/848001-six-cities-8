@@ -1,4 +1,5 @@
 import {RATING_STARS, RATING_STYLE} from './const';
+import {Offer} from './types/offer';
 
 export const getRatingStyle = (rating: number): number  => {
   rating = Math.round(rating);
@@ -18,3 +19,5 @@ export const getRatingStyle = (rating: number): number  => {
       return RATING_STYLE.zero;
   }
 };
+
+export const getOffersInCity = (offers : Offer[], cityValue:string) => offers.filter(({city}) => (city.name === cityValue));

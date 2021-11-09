@@ -1,10 +1,12 @@
-import {ActionType, ChangeActiveCityAction, ChangeAuthorizationStatusAction} from '../types/action';
+import {ActionType, ActiveCityAction, OffersListAction} from '../types/action';
+import {Offer} from '../types/offer';
 
-export const changeActiveCity = (city: string): ChangeActiveCityAction => ({
-  type: ActionType.ChangeActiveCity,
+export const activeCity = (city: string): ActiveCityAction => ({
+  type: ActionType.ActiveCity,
   payload: city,
 });
 
-export const changeAuthorizationStatus = (): ChangeAuthorizationStatusAction => ({
-  type: ActionType.ChangeAuthorizationStatus,
+export const offersList = (offers: Offer[]): OffersListAction => ({
+  type: ActionType.OffersList,
+  payload: offers,
 });

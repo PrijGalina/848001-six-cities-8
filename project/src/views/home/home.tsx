@@ -4,6 +4,7 @@ import Tabs from '../../components/tabs/tabs';
 import classnames from 'classnames';
 import PlacesInCity from '../../components/places-in-city/places-in-city';
 import NoPlacesToStay from '../../components/no-places-to-stay/no-places-to-stay';
+import {getOffersInCity} from '../../utils';
 
 type HomeProps = {
   offers: Offer[],
@@ -12,7 +13,7 @@ type HomeProps = {
 }
 
 export default function Home({offers, onStateChange, activeCity}: HomeProps): JSX.Element {
-  const offersFiltred = offers.filter(({city}) => (city.name === activeCity));
+  const offersFiltred = getOffersInCity(offers, activeCity);
 
   const citiesCount = offers.reduce((previousValue: {[key: string]: number}, currentValue) => {
     const {name} = currentValue.city;

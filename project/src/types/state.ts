@@ -1,4 +1,6 @@
+import {Offer} from '../types/offer';
+
 export type State = {
-  activeCity: string,
-  authorizationStatus: boolean,
+  city: string,
+  offers: Offer[],
 };

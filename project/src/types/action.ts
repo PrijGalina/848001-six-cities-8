@@ -1,15 +1,18 @@
+import {Offer} from './offer';
+
 export enum ActionType {
-  ChangeActiveCity = 'main/changeActiveCity',
-  ChangeAuthorizationStatus = 'main/changeAuthorizationStatus',
+  ActiveCity = 'main/ActiveCity',
+  OffersList = 'main/OffersList',
 }
 
-export type ChangeActiveCityAction = {
-  type: ActionType.ChangeActiveCity;
+export type ActiveCityAction = {
+  type: ActionType.ActiveCity;
   payload: string,
 };
 
-export type ChangeAuthorizationStatusAction = {
-  type: ActionType.ChangeAuthorizationStatus;
+export type OffersListAction = {
+  type: ActionType.OffersList;
+  payload: Offer[];
 };
 
-export type Actions = ChangeActiveCityAction | ChangeAuthorizationStatusAction;
+export type Actions = ActiveCityAction | OffersListAction;
