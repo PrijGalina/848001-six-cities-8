@@ -1,21 +1,38 @@
 import {BrowserRouter, Route, Switch, Link} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {connect, ConnectedProps} from 'react-redux';
+import {useState} from 'react';
+import {AppRoute, AuthorizationStatus, CITIES, PagesApp} from '../../const';
+import {isCheckedAuth} from '../../utils';
 import Layout from '../../containers/layout/layout';
 import Home from '../../views/home/home';
 import LogIn from '../../views/log-in/log-in';
 import Favorites from '../../views/favorites/favorites';
 import Property from '../../views/property/property';
 import PrivateRoute from '../private-route/private-route';
+import LoadingScreen from '../loading-screen/loading-screen';
 import {Offer} from '../../types/offer';
-import {useState} from 'react';
-import {CITIES, PagesApp} from '../../const';
+import {State} from '../../types/state';
+import {offers} from '../../mocks/offers';
 
-type AppProps = {
-  offers: Offer[],
-};
+const mapStateToProps = ({USER, DATA}: State) => ({
+  authorizationStatus: USER.authorizationStatus,
+  isDataLoaded: DATA.isDataLoaded,
+});
 
-function App({offers}: AppProps): JSX.Element {
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+function App(props: PropsFromRedux): JSX.Element {
   const [activeCity, setActiveCity] = useState<string>(CITIES[0]);
+  const offerList: Offer[] = offers;
+  const {authorizationStatus, isDataLoaded} = props;
+
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <BrowserRouter>
@@ -23,7 +40,7 @@ function App({offers}: AppProps): JSX.Element {
         <Route exact path={AppRoute.Root}>
           <Layout page={PagesApp.Home} isHome isGrey>
             <Home
-              offers={offers}
+              offers={offerList}
               onStateChange={setActiveCity}
               activeCity={activeCity}
             />
@@ -55,7 +72,7 @@ function App({offers}: AppProps): JSX.Element {
         </Route>
 
         <Route
-          render={(props) =>  (
+          render={() =>  (
             <Layout page={PagesApp.undefined}>
               <h1>
                 404.
@@ -71,4 +88,6 @@ function App({offers}: AppProps): JSX.Element {
   );
 }
 
-export default App;
+export {App};
+export default connector(App);
+

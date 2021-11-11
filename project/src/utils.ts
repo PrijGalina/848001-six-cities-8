@@ -1,5 +1,6 @@
 import {RATING_STARS, RATING_STYLE} from './const';
 import {Offer} from './types/offer';
+import {AuthorizationStatus} from './const';
 
 export const getRatingStyle = (rating: number): number  => {
   rating = Math.round(rating);
@@ -20,4 +21,6 @@ export const getRatingStyle = (rating: number): number  => {
   }
 };
 
-export const getOffersInCity = (offers : Offer[], cityValue:string) => offers.filter(({city}) => (city.name === cityValue));
+export const getOffersInCity = (offers : Offer[], cityValue:string): Offer[] => offers.filter(({city}) => (city.name === cityValue));
+
+export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean => authorizationStatus === AuthorizationStatus.Unknown;

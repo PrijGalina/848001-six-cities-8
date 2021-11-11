@@ -3,19 +3,19 @@ import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import App from './components/app/app';
-import {offers} from './mocks/offers';
-import {reducer} from './store/reducer';
+
+import {rootReducer} from './store/root-reducer';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
 const store = createStore(
-  reducer,
+  rootReducer,
   composeWithDevTools(),
 );
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store = {store}>
-      <App offers={offers}/>
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'));
