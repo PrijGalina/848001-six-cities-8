@@ -23,4 +23,4 @@ export const getRatingStyle = (rating: number): number  => {
 
 export const getOffersInCity = (offers : Offer[], cityValue:string): Offer[] => offers.filter(({city}) => (city.name === cityValue));
 
-export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean => authorizationStatus === AuthorizationStatus.Unknown;
+export const isCheckedAuth = (authorizationStatus: string): boolean => authorizationStatus === AuthorizationStatus.Unknown;

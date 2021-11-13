@@ -7,7 +7,8 @@ import {getOffersInCity} from '../../utils';
 const initialState = {
   city: CITIES[0],
   offers: getOffersInCity(offers, CITIES[0]),
-  isDataLoaded: false,
+  isDataLoaded: true,
+  //isDataLoaded: false,
 };
 
 const appData = (state = initialState, action: Actions): AppData => {

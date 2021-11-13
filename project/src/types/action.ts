@@ -1,9 +1,10 @@
 import {Offer} from './offer';
+import {AuthorizationStatus} from '../const';
 
 export enum ActionType {
   ActiveCity = 'main/ActiveCity',
   OffersList = 'main/OffersList',
-  AuthorizationStatus = 'user/AuthorizationStatus',
+  Authorization = 'user/AuthorizationStatus',
 }
 
 export type ActiveCityAction = {
@@ -16,9 +17,9 @@ export type OffersListAction = {
   payload: Offer[];
 };
 
-export type AuthorizationStatus = {
-  type: ActionType.AuthorizationStatus;
-  payload: string,
+export type AuthorizationStatusAction = {
+  type: ActionType.Authorization;
+  payload: AuthorizationStatus;
 }
 
-export type Actions = ActiveCityAction | OffersListAction | AuthorizationStatus;
+export type Actions = ActiveCityAction | OffersListAction | AuthorizationStatusAction;
