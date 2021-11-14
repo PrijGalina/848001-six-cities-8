@@ -1,25 +1,15 @@
-import {Offer} from './offer';
-import {AuthorizationStatus} from '../const';
+import { ActiveCityAction, OffersListAction, AuthorizationStatusAction, OfferInFocusAction} from '../store/action';
 
 export enum ActionType {
   ActiveCity = 'main/ActiveCity',
   OffersList = 'main/OffersList',
+  OfferInFocus = 'main/OfferInFocus',
   Authorization = 'user/AuthorizationStatus',
+  Map = 'map/Map',
 }
 
-export type ActiveCityAction = {
-  type: ActionType.ActiveCity;
-  payload: string,
-};
-
-export type OffersListAction = {
-  type: ActionType.OffersList;
-  payload: Offer[];
-};
-
-export type AuthorizationStatusAction = {
-  type: ActionType.Authorization;
-  payload: AuthorizationStatus;
-}
-
-export type Actions = ActiveCityAction | OffersListAction | AuthorizationStatusAction;
+export type Actions =
+  | ReturnType<typeof ActiveCityAction>
+  | ReturnType<typeof OffersListAction>
+  | ReturnType<typeof OfferInFocusAction>
+  | ReturnType<typeof AuthorizationStatusAction>;

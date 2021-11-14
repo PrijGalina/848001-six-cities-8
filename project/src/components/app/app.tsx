@@ -1,7 +1,6 @@
 import {BrowserRouter, Route, Switch, Link} from 'react-router-dom';
 import {connect, ConnectedProps} from 'react-redux';
-import {useState} from 'react';
-import {AppRoute, AuthorizationStatus, CITIES, PagesApp} from '../../const';
+import {AppRoute, AuthorizationStatus, PagesApp} from '../../const';
 import {isCheckedAuth} from '../../utils';
 import Layout from '../../containers/layout/layout';
 import Home from '../../views/home/home';
@@ -10,13 +9,12 @@ import Favorites from '../../views/favorites/favorites';
 import Property from '../../views/property/property';
 import PrivateRoute from '../private-route/private-route';
 import LoadingScreen from '../loading-screen/loading-screen';
-import {Offer} from '../../types/offer';
 import {State} from '../../types/state';
-import {offers} from '../../mocks/offers';
 
 const mapStateToProps = ({USER, DATA}: State) => ({
   authorizationStatus: USER.authorizationStatus,
   isDataLoaded: DATA.isDataLoaded,
+  city: DATA.city,
 });
 
 const connector = connect(mapStateToProps);
@@ -24,9 +22,7 @@ const connector = connect(mapStateToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function App(props: PropsFromRedux): JSX.Element {
-  const [activeCity, setActiveCity] = useState<string>(CITIES[0]);
-  const offerList: Offer[] = offers;
-  const {authorizationStatus, isDataLoaded} = props;
+  const {authorizationStatus, isDataLoaded, city} = props;
 
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (
@@ -39,17 +35,13 @@ function App(props: PropsFromRedux): JSX.Element {
       <Switch>
         <Route exact path={AppRoute.Root}>
           <Layout page={PagesApp.Home} isHome isGrey>
-            <Home
-              offers={offerList}
-              onStateChange={setActiveCity}
-              activeCity={activeCity}
-            />
+            <Home/>
           </Layout>
         </Route>
 
         <Route exact path={AppRoute.Login}>
           <Layout page={PagesApp.LogIn} isLogIn isGrey>
-            <LogIn activeCity={activeCity}/>
+            <LogIn city={city}/>
           </Layout>
         </Route>
 
@@ -58,7 +50,7 @@ function App(props: PropsFromRedux): JSX.Element {
           path={AppRoute.Favorites}
           render={() =>  (
             <Layout page={PagesApp.Favorites}>
-              <Favorites offers={offers}/>
+              <Favorites/>
             </Layout>
           )}
           authorizationStatus={AuthorizationStatus.Auth}

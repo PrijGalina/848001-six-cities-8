@@ -6,6 +6,7 @@ export type AppData = {
   city: string,
   offers: Offer[],
   isDataLoaded: boolean,
+  offerInFocus?: Offer | undefined,
 };
 
 export type UserProcess = {

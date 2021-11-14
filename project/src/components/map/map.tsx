@@ -1,4 +1,6 @@
-import {useRef, useEffect} from 'react';
+import {State} from '../../types/state';
+import {connect, ConnectedProps} from 'react-redux';
+import { useRef, useEffect} from 'react';
 import {Icon, IconOptions, Map as MapContainer, Marker} from 'leaflet';
 import useMap from '../../hooks/useMap';
 import {Location} from '../../types/offer';
@@ -6,12 +8,21 @@ import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT, PIN_SIZE, PIN_ANCHOR} from '../.
 import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
-  city: string;
-  locations: Location[];
-  hoverPoint?: Location,
   height: number,
   width: number,
 };
+
+const mapStateToProps = ({DATA}: State) => ({
+  city: DATA.city,
+  offers: DATA.offers,
+  offerInFocus: DATA.offerInFocus,
+});
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type ConnectedComponentProps = PropsFromRedux & MapProps;
 
 const LeafIcon = (url: string) => {
   const options: IconOptions = {
@@ -26,14 +37,19 @@ const LeafIcon = (url: string) => {
 const defaultCustomIcon = LeafIcon(URL_MARKER_DEFAULT);
 const currentCustomIcon = LeafIcon(URL_MARKER_CURRENT);
 
-function getMarkers(locations: Location[], map: MapContainer, hoverPoint?: Location) {
+function getMarkers(locations: Location[], map: MapContainer, hoverPoint?: Location | boolean) {
   locations.forEach(({latitude: lat, longitude: lng}) => {
     const marker = new Marker({
       lat,
       lng,
     });
 
-    const isHoverPoint = hoverPoint && lat === hoverPoint.latitude && lng === hoverPoint.longitude;
+    const isHoverPoint =
+      hoverPoint !== false &&
+      hoverPoint !== true &&
+      hoverPoint !== undefined &&
+      lat === hoverPoint.latitude &&
+      lng === hoverPoint.longitude;
 
     marker
       .setIcon(isHoverPoint ? currentCustomIcon : defaultCustomIcon)
@@ -41,15 +57,19 @@ function getMarkers(locations: Location[], map: MapContainer, hoverPoint?: Locat
   });
 }
 
-export default function Map ({city, locations, hoverPoint, height, width}: MapProps): JSX.Element {
+function Map({city, offers, height, width, offerInFocus}: ConnectedComponentProps): JSX.Element {
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
+  const map = useMap(mapRef);
+  const locations = offers.map(({location}) => location);
+
+  const hoverPoint = (offerInFocus !== undefined) && offerInFocus.location;
 
   useEffect(() => {
     if (map) {
       getMarkers(locations, map, hoverPoint);
     }
   }, [map, locations, hoverPoint, height, width, city]);
+
 
   return (
     <section
@@ -62,3 +82,6 @@ export default function Map ({city, locations, hoverPoint, height, width}: MapPr
     />
   );
 }
+
+export {Map};
+export default connector(Map);

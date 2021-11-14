@@ -1,46 +1,38 @@
-import React from 'react';
-import {Offer} from '../../types/offer';
+import {connect, ConnectedProps} from 'react-redux';
+import {State} from '../../types/state';
 import Tabs from '../../components/tabs/tabs';
 import classnames from 'classnames';
 import PlacesInCity from '../../components/places-in-city/places-in-city';
 import NoPlacesToStay from '../../components/no-places-to-stay/no-places-to-stay';
-import {getOffersInCity} from '../../utils';
 
-type HomeProps = {
-  offers: Offer[],
-  onStateChange: React.Dispatch<React.SetStateAction<string>>,
-  activeCity: string,
-}
+const mapStateToProps = ({DATA}: State) => ({
+  offers: DATA.offers,
+  city: DATA.city,
+});
 
-export default function Home({offers, onStateChange, activeCity}: HomeProps): JSX.Element {
-  const offersFiltred = getOffersInCity(offers, activeCity);
+const connector = connect(mapStateToProps);
 
-  const citiesCount = offers.reduce((previousValue: {[key: string]: number}, currentValue) => {
-    const {name} = currentValue.city;
-    previousValue[name] = (previousValue[name] || 0) + 1;
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
-    return previousValue;
-  },{});
-
-  const isEmpty: boolean = (citiesCount[activeCity] === undefined);
+function Home({offers, city}: PropsFromRedux): JSX.Element {
+  const isEmpty: boolean = offers.length === 0;
 
   return (
     <>
       <h1 className="visually-hidden">Cities</h1>
-      <Tabs activeCity={activeCity} onStateChange={onStateChange}/>
+      <Tabs/>
       <div className="cities">
         <div className={classnames ('cities__places-container container', {'cities__places-container--empty': isEmpty})}>
           {
             isEmpty ?
-              <NoPlacesToStay activeCity={activeCity}/> :
-              <PlacesInCity
-                offers={offersFiltred}
-                offersCount={citiesCount[activeCity]}
-                activeCity={activeCity}
-              />
+              <NoPlacesToStay /> :
+              <PlacesInCity />
           }
         </div>
       </div>
     </>
   );
 }
+
+export {Home};
+export default connector(Home);

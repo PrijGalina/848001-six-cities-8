@@ -1,8 +1,9 @@
-import {useState} from 'react';
+
+import {State} from '../../types/state';
+import {connect, ConnectedProps} from 'react-redux';
 import {useLocation} from 'react-router';
-import {CITIES, PagesApp, OFFER_IN_PROPERTY, MAP_PROPERTY} from '../../const';
+import {PagesApp, OFFER_IN_PROPERTY, MAP_PROPERTY} from '../../const';
 import {reviews} from '../../mocks/reviews';
-import {offers, offersInParis} from '../../mocks/offers';
 import {ReviewType} from '../../types/review';
 import {Offer} from '../../types/offer';
 import NewCommentForm from '../../components/new-comment-form/new-comment-form';
@@ -13,19 +14,20 @@ import ImagesOfPlace from '../../components/images-of-place/images-of-place';
 import AboutHost from '../../components/about-host/about-host';
 import AboutPlace from '../../components/about-place/about-place';
 
-export default function Property(): JSX.Element {
-  const [activeOffer, setActiveOffer] =  useState<Offer>();
-  const activePoint = activeOffer?.location;
-  const reviewList: ReviewType[] = reviews;
-  const locations = offersInParis.map(({location}) => location);
-  const offerId = useLocation().pathname.split(':')[1];
-  const offer: Offer = offers.filter((element: Offer) => element.id === +offerId)[0];
+const mapStateToProps = ({ DATA }: State) => ({
+  city: DATA.city,
+  offers: DATA.offers,
+});
 
-  const hoverHandler = (offerItem?: Offer) => {
-    if(activeOffer?.id !== offerItem?.id){
-      setActiveOffer(offerItem);
-    }
-  };
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+function Property({offers, city} : PropsFromRedux): JSX.Element {
+  const reviewList: ReviewType[] = reviews;
+  const offerId = useLocation().pathname.split(':')[1];
+  offers = offers.filter((element: Offer) => (element.id === +offerId) && element.city.name === city);
+  const offer = offers[0];
 
   return (
     <>
@@ -43,11 +45,8 @@ export default function Property(): JSX.Element {
         </div>
         <section className="property__map map">
           <Map
-            city={CITIES[0]}
-            locations={locations}
             height={MAP_PROPERTY.propertyMapSize.height}
             width={MAP_PROPERTY.propertyMapSize.width}
-            hoverPoint={activePoint}
           />
         </section>
       </section>
@@ -56,10 +55,9 @@ export default function Property(): JSX.Element {
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
             <OffersList
-              offers={offersInParis}
+              offers={offers}
               classes={OFFER_IN_PROPERTY}
               page={PagesApp.Property}
-              hoverHandler={hoverHandler}
             />
           </div>
         </section>
@@ -67,3 +65,6 @@ export default function Property(): JSX.Element {
     </>
   );
 }
+
+export {Property};
+export default connector(Property);

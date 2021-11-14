@@ -1,25 +1,31 @@
+import {connect, ConnectedProps} from 'react-redux';
+import {State} from '../../types/state';
 import MenuItem from '../menu-item/menu-item';
 import {CITIES} from '../../const';
 
-type TabsProps = {
-  onStateChange: React.Dispatch<React.SetStateAction<string>>,
-  activeCity: string
-};
+const mapStateToProps = ({ DATA }: State) => ({
+  city: DATA.city,
+});
 
-export default function Tabs({onStateChange, activeCity}: TabsProps): JSX.Element {
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+function Tabs(props: PropsFromRedux): JSX.Element {
+  const {city} = props;
+
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {
-            CITIES.map((city: string) => {
-              const isActive = (city === activeCity);
+            CITIES.map((cityItem: string) => {
+              const isActive = (cityItem === city);
               return (
                 <MenuItem
-                  key={city}
+                  key={cityItem}
                   isActive={isActive}
-                  city={city}
-                  onStateChange={onStateChange}
+                  cityItem={cityItem}
                 />
               );
             })
@@ -29,3 +35,6 @@ export default function Tabs({onStateChange, activeCity}: TabsProps): JSX.Elemen
     </div>
   );
 }
+
+export {Tabs};
+export default connector(Tabs);

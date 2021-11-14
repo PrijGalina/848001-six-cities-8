@@ -8,7 +8,6 @@ const initialState = {
   city: CITIES[0],
   offers: getOffersInCity(offers, CITIES[0]),
   isDataLoaded: true,
-  //isDataLoaded: false,
 };
 
 const appData = (state = initialState, action: Actions): AppData => {
@@ -23,6 +22,11 @@ const appData = (state = initialState, action: Actions): AppData => {
         ...state,
         offers: getOffersInCity(offers, state.city),
         isDataLoaded: true,
+      };
+    case ActionType.OfferInFocus:
+      return {
+        ...state,
+        offerInFocus: action.payload,
       };
     default:
       return state;
