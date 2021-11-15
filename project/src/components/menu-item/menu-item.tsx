@@ -1,30 +1,19 @@
 import classnames from 'classnames';
-import {Dispatch} from 'redux';
-import {connect, ConnectedProps} from 'react-redux';
-import {Actions} from '../../types/action';
+import {useDispatch} from 'react-redux';
 import {ActiveCityAction, OffersListAction} from '../../store/action';
-//import {useCityAnswer} from '../../hooks/actions';
 
 type MenuItemProps = {
   isActive: boolean,
   cityItem: string,
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
-  onCityValue(city: string) {
+export default function MenuItem({isActive, cityItem}: MenuItemProps): JSX.Element {
+  const dispatch = useDispatch();
+
+  const onCityValue = (city: string) => {
     dispatch(ActiveCityAction(city));
     dispatch(OffersListAction(city));
-  },
-});
-
-const connector = connect(null, mapDispatchToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-type ConnectedComponentProps = PropsFromRedux & MenuItemProps;
-
-function MenuItem(props: ConnectedComponentProps): JSX.Element {
-  const {isActive, onCityValue, cityItem} = props;
+  };
 
   return (
     <li className="locations__item">
@@ -34,6 +23,3 @@ function MenuItem(props: ConnectedComponentProps): JSX.Element {
     </li>
   );
 }
-
-export {MenuItem};
-export default connector(MenuItem);

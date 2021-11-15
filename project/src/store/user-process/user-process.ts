@@ -1,5 +1,5 @@
-import {ActionType, Actions} from '../../types/action';
-import {UserProcess} from '../../types/state';
+import {createReducer} from '@reduxjs/toolkit';
+import {AuthorizationStatusAction} from '../action';
 import {AuthorizationStatus} from '../../const';
 
 const initialState = {
@@ -7,16 +7,11 @@ const initialState = {
   authorizationStatus: AuthorizationStatus.Auth,
 };
 
-const userProcess = (state = initialState, action: Actions): UserProcess => {
-  switch (action.type) {
-    case ActionType.Authorization:
-      return {
-        ...state,
-        authorizationStatus: action.payload,
-      };
-    default:
-      return state;
-  }
-};
+const userProcess = createReducer(initialState, (builder) => {
+  builder
+    .addCase(AuthorizationStatusAction, (state, action) => {
+      state.authorizationStatus = action.payload;
+    });
+});
 
 export {userProcess};

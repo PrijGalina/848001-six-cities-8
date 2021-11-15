@@ -1,5 +1,5 @@
 import {BrowserRouter, Route, Switch, Link} from 'react-router-dom';
-import {connect, ConnectedProps} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {AppRoute, AuthorizationStatus, PagesApp} from '../../const';
 import {isCheckedAuth} from '../../utils';
 import Layout from '../../containers/layout/layout';
@@ -9,20 +9,13 @@ import Favorites from '../../views/favorites/favorites';
 import Property from '../../views/property/property';
 import PrivateRoute from '../private-route/private-route';
 import LoadingScreen from '../loading-screen/loading-screen';
-import {State} from '../../types/state';
+import {getCity, getDataLoad} from '../../store/app-data/selectors';
+import {getAuthorization} from '../../store/user-process/selectors';
 
-const mapStateToProps = ({USER, DATA}: State) => ({
-  authorizationStatus: USER.authorizationStatus,
-  isDataLoaded: DATA.isDataLoaded,
-  city: DATA.city,
-});
-
-const connector = connect(mapStateToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-function App(props: PropsFromRedux): JSX.Element {
-  const {authorizationStatus, isDataLoaded, city} = props;
+export default function App(): JSX.Element {
+  const authorizationStatus = useSelector(getAuthorization);
+  const isDataLoaded = useSelector(getDataLoad);
+  const city = useSelector(getCity);
 
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (
@@ -79,7 +72,3 @@ function App(props: PropsFromRedux): JSX.Element {
     </BrowserRouter>
   );
 }
-
-export {App};
-export default connector(App);
-

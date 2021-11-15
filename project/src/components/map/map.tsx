@@ -1,28 +1,16 @@
-import {State} from '../../types/state';
-import {connect, ConnectedProps} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {useRef, useEffect} from 'react';
 import {Icon, IconOptions, Map as MapContainer, Marker} from 'leaflet';
 import useMap from '../../hooks/useMap';
 import {Location} from '../../types/offer';
 import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT, PIN_SIZE, PIN_ANCHOR} from '../../const';
 import 'leaflet/dist/leaflet.css';
+import {getOffer, getCity, getOffers} from '../../store/app-data/selectors';
 
 type MapProps = {
   height: number,
   width: number,
 };
-
-const mapStateToProps = ({DATA}: State) => ({
-  city: DATA.city,
-  offers: DATA.offers,
-  offerInFocus: DATA.offerInFocus,
-});
-
-const connector = connect(mapStateToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-type ConnectedComponentProps = PropsFromRedux & MapProps;
 
 const LeafIcon = (url: string) => {
   const options: IconOptions = {
@@ -57,7 +45,11 @@ function getMarkers(locations: Location[], map: MapContainer, hoverPoint?: Locat
   });
 }
 
-function Map({city, offers, height, width, offerInFocus}: ConnectedComponentProps): JSX.Element {
+export default function Map({ height, width }: MapProps): JSX.Element {
+  const city = useSelector(getCity);
+  const offers = useSelector(getOffers);
+  const offerInFocus = useSelector(getOffer);
+
   const mapRef = useRef(null);
   const map = useMap(mapRef);
   const locations = offers.map(({location}) => location);
@@ -82,6 +74,3 @@ function Map({city, offers, height, width, offerInFocus}: ConnectedComponentProp
     />
   );
 }
-
-export {Map};
-export default connector(Map);

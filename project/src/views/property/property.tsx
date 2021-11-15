@@ -1,6 +1,6 @@
 
 import {State} from '../../types/state';
-import {connect, ConnectedProps} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {useLocation} from 'react-router';
 import {PagesApp, OFFER_IN_PROPERTY, MAP_PROPERTY} from '../../const';
 import {reviews} from '../../mocks/reviews';

@@ -1,16 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
 import {Provider} from 'react-redux';
+import {configureStore} from '@reduxjs/toolkit';
+import {rootReducer} from './store/root-reducer';
 import App from './components/app/app';
 
-import {rootReducer} from './store/root-reducer';
-import {composeWithDevTools} from 'redux-devtools-extension';
-
-export const store = createStore(
-  rootReducer,
-  composeWithDevTools(),
-);
+export const store = configureStore({
+  reducer: rootReducer,
+});
 
 ReactDOM.render(
   <React.StrictMode>

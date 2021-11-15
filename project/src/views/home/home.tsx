@@ -1,13 +1,14 @@
-import {connect, ConnectedProps} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {State} from '../../types/state';
 import Tabs from '../../components/tabs/tabs';
 import classnames from 'classnames';
 import PlacesInCity from '../../components/places-in-city/places-in-city';
 import NoPlacesToStay from '../../components/no-places-to-stay/no-places-to-stay';
+import {getCity, getOffers} from '../../store/app-data/selectors';
 
-const mapStateToProps = ({DATA}: State) => ({
-  offers: DATA.offers,
-  city: DATA.city,
+const mapStateToProps = (store: State) => ({
+  offers: getOffers(store),
+  city: getCity(store),
 });
 
 const connector = connect(mapStateToProps);

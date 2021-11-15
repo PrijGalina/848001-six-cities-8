@@ -1,10 +1,8 @@
-import {Dispatch} from 'redux';
-import {connect, ConnectedProps} from 'react-redux';
-import {Actions} from '../../types/action';
+import {useSelector, useDispatch} from 'react-redux';
 import {OfferInFocusAction} from '../../store/action';
-import {State} from '../../types/state';
 import {Offer, OfferClasses} from '../../types/offer';
 import OfferCard from '../../components/offer-card/offer-card';
+import {getOffer} from '../../store/app-data/selectors';
 
 type OffersListProps = {
   offers: Offer[],
@@ -12,23 +10,15 @@ type OffersListProps = {
   page: string,
 };
 
-const mapStateToProps = ({DATA}: State) => ({
-  offerInFocus: DATA.offerInFocus,
-});
+export default function OffersList({ offers, classes, page }: OffersListProps): JSX.Element {
+  const offerInFocus = useSelector(getOffer);
 
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
-  onFocusOffer(value?: Offer | undefined) {
-    dispatch(OfferInFocusAction(value));
-  },
-});
+  const dispatch = useDispatch();
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+  const onFocusOffer = (value?: Offer) => {
+    dispatch(OfferInFocusAction(offerInFocus));
+  };
 
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-type ConnectedComponentProps = PropsFromRedux & OffersListProps;
-
-function OffersList({ offers, classes, page, offerInFocus, onFocusOffer}: ConnectedComponentProps): JSX.Element {
   return (
     <>
       {offers.map((offer: Offer) => {
@@ -48,6 +38,3 @@ function OffersList({ offers, classes, page, offerInFocus, onFocusOffer}: Connec
     </>
   );
 }
-
-export {OffersList};
-export default connector(OffersList);

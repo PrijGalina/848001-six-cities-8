@@ -1,17 +1,18 @@
 import {State} from '../../types/state';
-import {Dispatch} from 'redux';
-import {connect, ConnectedProps} from 'react-redux';
-import {Actions} from '../../types/action';
+
+import {useSelector, useDispatch} from 'react-redux';
+
 import {OffersSortAction} from '../../store/action';
 import {SORT_VALUE} from '../../const';
 import classnames from 'classnames';
 import {useState} from 'react';
+import {getSort} from '../../store/app-data/selectors';
 
-const mapStateToProps = ({DATA}: State) => ({
-  offersSort: DATA.offersSort,
+const mapStateToProps = (store: State) => ({
+  offersSort: getSort(store),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   onSortValue(value: SORT_VALUE, status: boolean, setStatus: (value: boolean)=> void) {
     dispatch(OffersSortAction(value));
     setStatus(!status);

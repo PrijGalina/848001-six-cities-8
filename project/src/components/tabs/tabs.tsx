@@ -1,4 +1,4 @@
-import {connect, ConnectedProps} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {State} from '../../types/state';
 import MenuItem from '../menu-item/menu-item';
 import {CITIES} from '../../const';

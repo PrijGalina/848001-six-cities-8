@@ -1,20 +1,13 @@
-import {connect, ConnectedProps} from 'react-redux';
-import {State} from '../../types/state';
+import {useSelector} from 'react-redux';
 import PlacesSorting from '../places-sorting/places-sorting';
 import OffersList from '../offers-list/offers-list';
 import Map from '../map/map';
 import {PagesApp, OFFER_IN_HOME, MAP_PROPERTY} from '../../const';
+import {getCity, getOffers} from '../../store/app-data/selectors';
 
-const mapStateToProps = ({DATA}: State) => ({
-  offers: DATA.offers,
-  city: DATA.city,
-});
-
-const connector = connect(mapStateToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-function PlacesInCity({offers, city}: PropsFromRedux): JSX.Element {
+export default function PlacesInCity(): JSX.Element {
+  const offers = useSelector(getOffers);
+  const city = useSelector(getCity);
 
   return (
     <>
@@ -39,6 +32,3 @@ function PlacesInCity({offers, city}: PropsFromRedux): JSX.Element {
     </>
   );
 }
-
-export {PlacesInCity};
-export default connector(PlacesInCity);

@@ -1,15 +1,9 @@
-import {connect, ConnectedProps} from 'react-redux';
-import {State} from '../../types/state';
+import {useSelector} from 'react-redux';
+import {getCity} from '../../store/app-data/selectors';
 
-const mapStateToProps = ({ DATA }: State) => ({
-  city: DATA.city,
-});
+export default function NoPlacesToStay(): JSX.Element {
+  const city = useSelector(getCity);
 
-const connector = connect(mapStateToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-function NoPlacesToStay({city}: PropsFromRedux): JSX.Element {
   document.querySelector('.page--main')?.classList.add('page__main--index-empty');
 
   return (
@@ -24,6 +18,3 @@ function NoPlacesToStay({city}: PropsFromRedux): JSX.Element {
     </>
   );
 }
-
-export {NoPlacesToStay};
-export default connector(NoPlacesToStay);
