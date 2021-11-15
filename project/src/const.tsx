@@ -120,3 +120,10 @@ export const LOGO_PROPERTY = {
     height: '41',
   },
 };
+
+export enum SORT_VALUE {
+  popular = 'Popular',
+  asc = 'Price: low to high',
+  desc = 'Price: high to low',
+  rated = 'Top rated first',
+}

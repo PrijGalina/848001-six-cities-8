@@ -19,6 +19,7 @@ export default function useMap (mapRef: MutableRefObject<HTMLElement | null>): M
       })
       .then((point) => {
         if (mapRef.current !== null && map === null) {
+          console.log('useMap'); /* eslint-disable-line no-console */
           const instance = new Map(mapRef.current, {
             center: {
               lat: point[0],

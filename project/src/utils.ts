@@ -1,4 +1,4 @@
-import {RATING_STARS, RATING_STYLE} from './const';
+import {RATING_STARS, RATING_STYLE, SORT_VALUE} from './const';
 import {Offer} from './types/offer';
 import {AuthorizationStatus} from './const';
 
@@ -24,3 +24,36 @@ export const getRatingStyle = (rating: number): number  => {
 export const isCheckedAuth = (authorizationStatus: string): boolean => authorizationStatus === AuthorizationStatus.Unknown;
 
 export const getOffersInCity = (offers: Offer[], cityValue: string): Offer[] => offers.filter(({ city }) => (city.name === cityValue));
+
+export const sortOffersRating = (offerA: Offer, offerB: Offer): number => {
+  if (offerA.rating < offerB.rating) {return 1;}
+  else if (offerA.rating > offerB.rating) {return -1;}
+  else {return 0;}
+};
+
+export const sortOffersAsc = (offerA: Offer, offerB: Offer): number => {
+  if (offerA.price < offerB.price) {return 1;}
+  else if(offerA.price > offerB.price) {return -1;}
+  else {return 0;}
+};
+
+export const sortOffersDesc = (offerA: Offer, offerB: Offer): number => {
+  if (offerA.price < offerB.price) {return -1;}
+  else if(offerA.price > offerB.price) {return 1;}
+  else {return 0;}
+};
+
+export const getSortOffers = (offers: Offer[], sortValue: string): Offer[] => {
+  switch (sortValue) {
+    case SORT_VALUE.popular:
+      return offers.sort(sortOffersRating);
+    case SORT_VALUE.asc:
+      return offers.sort(sortOffersDesc);
+    case SORT_VALUE.desc:
+      return offers.sort(sortOffersAsc);
+    case SORT_VALUE.rated:
+      return offers.sort(sortOffersRating);
+    default:
+      return offers.sort(sortOffersRating);
+  }
+};

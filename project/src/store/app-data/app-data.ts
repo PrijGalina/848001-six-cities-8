@@ -2,12 +2,13 @@ import {ActionType, Actions} from '../../types/action';
 import {AppData} from '../../types/state';
 import {CITIES} from '../../const';
 import {offers} from '../../mocks/offers';
-import {getOffersInCity} from '../../utils';
+import {getOffersInCity, getSortOffers} from '../../utils';
 
 const initialState = {
   city: CITIES[0],
   offers: getOffersInCity(offers, CITIES[0]),
   isDataLoaded: true,
+  offersSort: 'popular',
 };
 
 const appData = (state = initialState, action: Actions): AppData => {
@@ -28,10 +29,15 @@ const appData = (state = initialState, action: Actions): AppData => {
         ...state,
         offerInFocus: action.payload,
       };
+    case ActionType.OffersSort:
+      return {
+        ...state,
+        offersSort: action.payload,
+        offers: getSortOffers(state.offers, action.payload),
+      };
     default:
       return state;
   }
 };
 
 export {appData};
-

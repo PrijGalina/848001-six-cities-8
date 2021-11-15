@@ -1,6 +1,6 @@
 import {State} from '../../types/state';
 import {connect, ConnectedProps} from 'react-redux';
-import { useRef, useEffect} from 'react';
+import {useRef, useEffect} from 'react';
 import {Icon, IconOptions, Map as MapContainer, Marker} from 'leaflet';
 import useMap from '../../hooks/useMap';
 import {Location} from '../../types/offer';
@@ -61,7 +61,7 @@ function Map({city, offers, height, width, offerInFocus}: ConnectedComponentProp
   const mapRef = useRef(null);
   const map = useMap(mapRef);
   const locations = offers.map(({location}) => location);
-
+  console.log('map'); /* eslint-disable-line no-console */
   const hoverPoint = (offerInFocus !== undefined) && offerInFocus.location;
 
   useEffect(() => {

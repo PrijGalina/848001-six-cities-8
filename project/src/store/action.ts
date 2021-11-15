@@ -1,5 +1,5 @@
 import {ActionType} from '../types/action';
-import {AuthorizationStatus} from '../const';
+import {AuthorizationStatus, SORT_VALUE} from '../const';
 import {Offer} from '../types/offer';
 
 export const ActiveCityAction = (city: string) => ({
@@ -20,4 +20,9 @@ export const AuthorizationStatusAction = (status: AuthorizationStatus) => ({
 export const OfferInFocusAction = (offer: Offer | undefined) => ({
   type: ActionType.OfferInFocus,
   payload: offer,
+} as const);
+
+export const OffersSortAction = (value: SORT_VALUE) => ({
+  type: ActionType.OffersSort,
+  payload: value,
 } as const);
