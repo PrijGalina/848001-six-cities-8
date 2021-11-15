@@ -9,6 +9,11 @@ export const OffersListAction = createAction<string>(ActionType.OffersList);
 
 export const AuthorizationStatusAction = createAction<AuthorizationStatus>(ActionType.Authorization);
 
-export const OfferInFocusAction = createAction<Offer | undefined>(ActionType.OfferInFocus);
+export const OfferInFocusAction = createAction(
+  ActionType.OfferInFocus,
+  (offer: Offer | undefined) => ({
+    payload: offer,
+  }),
+);
 
 export const OffersSortAction = createAction<SORT_VALUE>(ActionType.OffersSort);

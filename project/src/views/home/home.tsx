@@ -1,21 +1,12 @@
-import {useSelector, useDispatch} from 'react-redux';
-import {State} from '../../types/state';
+import {useSelector} from 'react-redux';
 import Tabs from '../../components/tabs/tabs';
 import classnames from 'classnames';
 import PlacesInCity from '../../components/places-in-city/places-in-city';
 import NoPlacesToStay from '../../components/no-places-to-stay/no-places-to-stay';
-import {getCity, getOffers} from '../../store/app-data/selectors';
+import {getOffers} from '../../store/app-data/selectors';
 
-const mapStateToProps = (store: State) => ({
-  offers: getOffers(store),
-  city: getCity(store),
-});
-
-const connector = connect(mapStateToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-function Home({offers, city}: PropsFromRedux): JSX.Element {
+export default function Home(): JSX.Element {
+  const offers = useSelector(getOffers);
   const isEmpty: boolean = offers.length === 0;
 
   return (
@@ -34,6 +25,3 @@ function Home({offers, city}: PropsFromRedux): JSX.Element {
     </>
   );
 }
-
-export {Home};
-export default connector(Home);

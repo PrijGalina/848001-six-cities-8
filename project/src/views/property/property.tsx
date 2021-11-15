@@ -1,6 +1,4 @@
-
-import {State} from '../../types/state';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {useLocation} from 'react-router';
 import {PagesApp, OFFER_IN_PROPERTY, MAP_PROPERTY} from '../../const';
 import {reviews} from '../../mocks/reviews';
@@ -13,20 +11,14 @@ import OffersList from '../../components/offers-list/offers-list';
 import ImagesOfPlace from '../../components/images-of-place/images-of-place';
 import AboutHost from '../../components/about-host/about-host';
 import AboutPlace from '../../components/about-place/about-place';
+import {getCity, getOffers} from '../../store/app-data/selectors';
 
-const mapStateToProps = ({ DATA }: State) => ({
-  city: DATA.city,
-  offers: DATA.offers,
-});
-
-const connector = connect(mapStateToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-function Property({offers, city} : PropsFromRedux): JSX.Element {
+export default function Property(): JSX.Element {
+  const city = useSelector(getCity);
+  const offers = useSelector(getOffers);
   const reviewList: ReviewType[] = reviews;
   const offerId = useLocation().pathname.split(':')[1];
-  offers = offers.filter((element: Offer) => (element.id === +offerId) && element.city.name === city);
+  offers.filter((element: Offer) => (element.id === +offerId) && element.city.name === city);
   const offer = offers[0];
 
   return (
@@ -65,6 +57,3 @@ function Property({offers, city} : PropsFromRedux): JSX.Element {
     </>
   );
 }
-
-export {Property};
-export default connector(Property);

@@ -10,6 +10,7 @@ const initialState:AppData = {
   offers: getOffersInCity(offers, CITIES[0]),
   isDataLoaded: true,
   offersSort: 'popular',
+  offerInFocus: undefined,
 };
 
 const appData = createReducer(initialState, (builder) => {

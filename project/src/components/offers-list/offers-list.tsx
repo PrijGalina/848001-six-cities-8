@@ -1,8 +1,7 @@
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {OfferInFocusAction} from '../../store/action';
 import {Offer, OfferClasses} from '../../types/offer';
 import OfferCard from '../../components/offer-card/offer-card';
-import {getOffer} from '../../store/app-data/selectors';
 
 type OffersListProps = {
   offers: Offer[],
@@ -11,12 +10,10 @@ type OffersListProps = {
 };
 
 export default function OffersList({ offers, classes, page }: OffersListProps): JSX.Element {
-  const offerInFocus = useSelector(getOffer);
-
   const dispatch = useDispatch();
 
-  const onFocusOffer = (value?: Offer) => {
-    dispatch(OfferInFocusAction(offerInFocus));
+  const onFocusOffer = (value?: Offer | undefined) => {
+    dispatch(OfferInFocusAction(value));
   };
 
   return (

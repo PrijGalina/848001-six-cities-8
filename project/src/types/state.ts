@@ -6,7 +6,7 @@ export type AppData = {
   city: string,
   offers: Offer[],
   isDataLoaded: boolean,
-  offerInFocus?: Offer | undefined,
+  offerInFocus: Offer | undefined,
   offersSort: string,
 };
 

@@ -1,18 +1,10 @@
-import {useSelector, useDispatch} from 'react-redux';
-import {State} from '../../types/state';
+import {useSelector} from 'react-redux';
 import MenuItem from '../menu-item/menu-item';
 import {CITIES} from '../../const';
+import {getCity} from '../../store/app-data/selectors';
 
-const mapStateToProps = ({ DATA }: State) => ({
-  city: DATA.city,
-});
-
-const connector = connect(mapStateToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-function Tabs(props: PropsFromRedux): JSX.Element {
-  const {city} = props;
+export default function Tabs(): JSX.Element {
+  const city = useSelector(getCity);
 
   return (
     <div className="tabs">
@@ -35,6 +27,3 @@ function Tabs(props: PropsFromRedux): JSX.Element {
     </div>
   );
 }
-
-export {Tabs};
-export default connector(Tabs);

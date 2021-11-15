@@ -1,31 +1,18 @@
-import {State} from '../../types/state';
-
 import {useSelector, useDispatch} from 'react-redux';
-
 import {OffersSortAction} from '../../store/action';
 import {SORT_VALUE} from '../../const';
 import classnames from 'classnames';
 import {useState} from 'react';
 import {getSort} from '../../store/app-data/selectors';
 
-const mapStateToProps = (store: State) => ({
-  offersSort: getSort(store),
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onSortValue(value: SORT_VALUE, status: boolean, setStatus: (value: boolean)=> void) {
+export default function PlacesSorting(): JSX.Element {
+  const [status, setStatus] = useState<boolean>(false);
+  const offersSort = useSelector(getSort);
+  const dispatch = useDispatch();
+  const onSortValue = (value: SORT_VALUE) => {
     dispatch(OffersSortAction(value));
     setStatus(!status);
-  },
-});
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-function PlacesSorting({offersSort, onSortValue}: PropsFromRedux): JSX.Element {
-  const [status, setStatus] = useState<boolean>(false);
-
+  };
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -43,7 +30,7 @@ function PlacesSorting({offersSort, onSortValue}: PropsFromRedux): JSX.Element {
             className="places__option"
             tabIndex={0}
             onClick={() => {
-              onSortValue(element, status, setStatus);
+              onSortValue(element);
             }}
           >
             {element}
@@ -53,6 +40,3 @@ function PlacesSorting({offersSort, onSortValue}: PropsFromRedux): JSX.Element {
     </form>
   );
 }
-
-export {PlacesSorting};
-export default connector(PlacesSorting);
