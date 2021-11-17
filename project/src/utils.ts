@@ -26,21 +26,39 @@ export const isCheckedAuth = (authorizationStatus: string): boolean => authoriza
 export const getOffersInCity = (offers: Offer[], cityValue: string): Offer[] => offers.filter(({ city }) => (city.name === cityValue));
 
 export const sortOffersRating = (offerA: Offer, offerB: Offer): number => {
-  if (offerA.rating < offerB.rating) {return 1;}
-  else if (offerA.rating > offerB.rating) {return -1;}
-  else {return 0;}
+  if (offerA.rating < offerB.rating) {
+    return 1;
+  }
+  else if (offerA.rating > offerB.rating) {
+    return -1;
+  }
+  else {
+    return 0;
+  }
 };
 
 export const sortOffersAsc = (offerA: Offer, offerB: Offer): number => {
-  if (offerA.price < offerB.price) {return 1;}
-  else if(offerA.price > offerB.price) {return -1;}
-  else {return 0;}
+  if (offerA.price < offerB.price) {
+    return 1;
+  }
+  else if(offerA.price > offerB.price) {
+    return -1;
+  }
+  else {
+    return 0;
+  }
 };
 
 export const sortOffersDesc = (offerA: Offer, offerB: Offer): number => {
-  if (offerA.price < offerB.price) {return -1;}
-  else if(offerA.price > offerB.price) {return 1;}
-  else {return 0;}
+  if (offerA.price < offerB.price) {
+    return -1;
+  }
+  else if (offerA.price > offerB.price) {
+    return 1;
+  }
+  else {
+    return 0;
+  }
 };
 
 export const getSortOffers = (offers: Offer[], sortValue: string): Offer[] => {

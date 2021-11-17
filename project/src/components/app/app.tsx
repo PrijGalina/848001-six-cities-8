@@ -8,18 +8,18 @@ import LogIn from '../../views/log-in/log-in';
 import Favorites from '../../views/favorites/favorites';
 import Property from '../../views/property/property';
 import PrivateRoute from '../private-route/private-route';
-import LoadingScreen from '../loading-screen/loading-screen';
-import {getCity, getDataLoad} from '../../store/app-data/selectors';
+import Loading from '../loading/loading';
+import {getDataLoad} from '../../store/app-data/selectors';
 import {getAuthorization} from '../../store/user-process/selectors';
 
 export default function App(): JSX.Element {
   const authorizationStatus = useSelector(getAuthorization);
   const isDataLoaded = useSelector(getDataLoad);
-  const city = useSelector(getCity);
+
 
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (
-      <LoadingScreen />
+      <Loading />
     );
   }
 
@@ -34,7 +34,7 @@ export default function App(): JSX.Element {
 
         <Route exact path={AppRoute.Login}>
           <Layout page={PagesApp.LogIn} isLogIn isGrey>
-            <LogIn city={city}/>
+            <LogIn />
           </Layout>
         </Route>
 

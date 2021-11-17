@@ -1,8 +1,9 @@
-type LogInProps = {
-  city: string,
-}
+import {useSelector} from 'react-redux';
+import {getCity} from '../../store/app-data/selectors';
 
-export default function LogIn({city}: LogInProps): JSX.Element {
+export default function LogIn(): JSX.Element {
+  const city = useSelector(getCity);
+
   return (
     <div className="page__login-container container">
       <section className="login">

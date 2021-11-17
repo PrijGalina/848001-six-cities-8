@@ -25,7 +25,7 @@ const LeafIcon = (url: string) => {
 const defaultCustomIcon = LeafIcon(URL_MARKER_DEFAULT);
 const currentCustomIcon = LeafIcon(URL_MARKER_CURRENT);
 
-function getMarkers(locations: Location[], map: MapContainer, hoverPoint?: Location | boolean) {
+function  setMarkersOnMap(locations: Location[], map: MapContainer, hoverPoint?: Location | boolean) {
   locations.forEach(({latitude: lat, longitude: lng}) => {
     const marker = new Marker({
       lat,
@@ -53,12 +53,11 @@ export default function Map({ height, width }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef);
   const locations = offers.map(({location}) => location);
-  console.log('map'); /* eslint-disable-line no-console */
   const hoverPoint = (offerInFocus !== undefined) && offerInFocus.location;
 
   useEffect(() => {
     if (map) {
-      getMarkers(locations, map, hoverPoint);
+      setMarkersOnMap(locations, map, hoverPoint);
     }
   }, [map, locations, hoverPoint, height, width, city]);
 
