@@ -1,21 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
 import {Provider} from 'react-redux';
+import {configureStore} from '@reduxjs/toolkit';
+import {rootReducer} from './store/root-reducer';
 import App from './components/app/app';
-import {offers} from './mocks/offers';
-import {reducer} from './store/reducer';
-import {composeWithDevTools} from 'redux-devtools-extension';
 
-const store = createStore(
-  reducer,
-  composeWithDevTools(),
-);
+export const store = configureStore({
+  reducer: rootReducer,
+});
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store = {store}>
-      <App offers={offers}/>
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'));

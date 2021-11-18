@@ -1,5 +1,5 @@
 import {getRatingStyle} from '../../utils';
-import classnames from 'classnames';
+import cn from 'classnames';
 
 type RatingBlockProps = {
   rating: number,
@@ -7,7 +7,7 @@ type RatingBlockProps = {
 };
 
 export default function RatingBlock({rating, isPropertyDetail}: RatingBlockProps): JSX.Element {
-  const ratingClasses = classnames (
+  const ratingClasses = cn (
     'rating',
     {
       'property__rating': isPropertyDetail,
@@ -15,7 +15,7 @@ export default function RatingBlock({rating, isPropertyDetail}: RatingBlockProps
     },
   );
 
-  const starsClasses = classnames (
+  const starsClasses = cn (
     'rating__stars',
     {
       'property__stars': isPropertyDetail,

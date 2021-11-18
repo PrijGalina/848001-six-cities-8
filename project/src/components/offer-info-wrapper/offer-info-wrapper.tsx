@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 import RatingBlock from '../rating-block/rating-block';
 import BookmarkBlock from '../bookmark-block/bookmark-block';
-import classnames from 'classnames';
+import cn from 'classnames';
 
 type OfferInfoWrapperProps = {
   infoClass: string,
@@ -15,7 +15,7 @@ type OfferInfoWrapperProps = {
 
 export default function OfferInfoWrapper({infoClass, pathToOffer, isFavorite, rating, price, title, type}: OfferInfoWrapperProps): JSX.Element {
   return (
-    <div className={classnames ('place-card__info', infoClass)}>
+    <div className={cn ('place-card__info', infoClass)}>
       <div className="place-card__price-wrapper">
         <div className="place-card__price">
           <b className="place-card__price-value">&euro;{price}</b>

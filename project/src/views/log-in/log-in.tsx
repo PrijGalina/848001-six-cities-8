@@ -1,8 +1,9 @@
-type LogInProps = {
-  activeCity: string,
-}
+import {useSelector} from 'react-redux';
+import {getCity} from '../../store/app-data/selectors';
 
-export default function LogIn({activeCity}: LogInProps): JSX.Element {
+export default function LogIn(): JSX.Element {
+  const city = useSelector(getCity);
+
   return (
     <div className="page__login-container container">
       <section className="login">
@@ -34,7 +35,7 @@ export default function LogIn({activeCity}: LogInProps): JSX.Element {
       <section className="locations locations--login locations--current">
         <div className="locations__item">
           <a className="locations__item-link" href="#/">
-            <span>{activeCity}</span>
+            <span>{city}</span>
           </a>
         </div>
       </section>

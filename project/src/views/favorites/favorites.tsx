@@ -1,21 +1,9 @@
+import {offers} from '../../mocks/offers';
 import {Offer} from '../../types/offer';
 import FavoritesByCity from '../../components/favorites-by-city/favorites-by-city';
-import {useState} from 'react';
 import {CITIES} from '../../const';
 
-type FavoritesProps = {
-  offers: Offer[],
-}
-
-export default function Favorites({offers}: FavoritesProps): JSX.Element {
-  const [activeOffer, setActiveOffer] =  useState<Offer>();
-
-  const hoverHandler = (offer?: Offer) => {
-    if(activeOffer?.id !== offer?.id){
-      setActiveOffer(offer);
-    }
-  };
-
+export default function Favorites(): JSX.Element {
   const favoritesInCities = offers.reduce((previousValue: {[key: string]: Offer[] | []}, currentValue) => {
     const {name} = currentValue.city;
     const isFavorite = currentValue.isFavorite;
@@ -39,7 +27,6 @@ export default function Favorites({offers}: FavoritesProps): JSX.Element {
                 key={city}
                 city={city}
                 offers={favoritesInCities[city]}
-                hoverHandler={hoverHandler}
               />
             ))}
         </ul>

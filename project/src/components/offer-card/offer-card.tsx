@@ -3,7 +3,7 @@ import OfferImageWrapper from '../offer-image-wrapper/offer-image-wrapper';
 import OfferInfoWrapper from '../offer-info-wrapper/offer-info-wrapper';
 import PremiumBlock from '../premium-block/premium-block';
 import {PagesApp, FAVORITE_ICON, FAVORITE_PAGE_ICON} from '../../const';
-import classnames from 'classnames';
+import cn from 'classnames';
 
 type OfferCardProps = {
   offer: Offer,
@@ -18,7 +18,7 @@ export default function OfferCard({offer, classes, page, onStateChange, onStateR
   const pathToOffer = `/offer/:${offer.id}`;
 
   return (
-    <article className={classnames ('place-card',classes.article)} onMouseEnter={onStateChange} onMouseLeave={onStateReset}>
+    <article className={cn ('place-card',classes.article)} onMouseEnter={onStateChange} onMouseLeave={onStateReset}>
       {isPremium && <PremiumBlock/>}
       <OfferImageWrapper
         imageClass={classes.image}

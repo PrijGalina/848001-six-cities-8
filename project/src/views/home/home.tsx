@@ -1,43 +1,24 @@
-import React from 'react';
-import {Offer} from '../../types/offer';
+import {useSelector} from 'react-redux';
 import Tabs from '../../components/tabs/tabs';
-import classnames from 'classnames';
+import cn from 'classnames';
 import PlacesInCity from '../../components/places-in-city/places-in-city';
 import NoPlacesToStay from '../../components/no-places-to-stay/no-places-to-stay';
-import {getOffersInCity} from '../../utils';
+import {getOffers} from '../../store/app-data/selectors';
 
-type HomeProps = {
-  offers: Offer[],
-  onStateChange: React.Dispatch<React.SetStateAction<string>>,
-  activeCity: string,
-}
-
-export default function Home({offers, onStateChange, activeCity}: HomeProps): JSX.Element {
-  const offersFiltred = getOffersInCity(offers, activeCity);
-
-  const citiesCount = offers.reduce((previousValue: {[key: string]: number}, currentValue) => {
-    const {name} = currentValue.city;
-    previousValue[name] = (previousValue[name] || 0) + 1;
-
-    return previousValue;
-  },{});
-
-  const isEmpty: boolean = (citiesCount[activeCity] === undefined);
+export default function Home(): JSX.Element {
+  const offers = useSelector(getOffers);
+  const isEmpty: boolean = offers.length === 0;
 
   return (
     <>
       <h1 className="visually-hidden">Cities</h1>
-      <Tabs activeCity={activeCity} onStateChange={onStateChange}/>
+      <Tabs/>
       <div className="cities">
-        <div className={classnames ('cities__places-container container', {'cities__places-container--empty': isEmpty})}>
+        <div className={cn ('cities__places-container container', {'cities__places-container--empty': isEmpty})}>
           {
             isEmpty ?
-              <NoPlacesToStay activeCity={activeCity}/> :
-              <PlacesInCity
-                offers={offersFiltred}
-                offersCount={citiesCount[activeCity]}
-                activeCity={activeCity}
-              />
+              <NoPlacesToStay /> :
+              <PlacesInCity />
           }
         </div>
       </div>

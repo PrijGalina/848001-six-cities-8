@@ -1,38 +1,40 @@
 import {BrowserRouter, Route, Switch, Link} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {useSelector} from 'react-redux';
+import {AppRoute, AuthorizationStatus, PagesApp} from '../../const';
+import {isCheckedAuth} from '../../utils';
 import Layout from '../../containers/layout/layout';
 import Home from '../../views/home/home';
 import LogIn from '../../views/log-in/log-in';
 import Favorites from '../../views/favorites/favorites';
 import Property from '../../views/property/property';
 import PrivateRoute from '../private-route/private-route';
-import {Offer} from '../../types/offer';
-import {useState} from 'react';
-import {CITIES, PagesApp} from '../../const';
+import Loading from '../loading/loading';
+import {getDataLoad} from '../../store/app-data/selectors';
+import {getAuthorization} from '../../store/user-process/selectors';
 
-type AppProps = {
-  offers: Offer[],
-};
+export default function App(): JSX.Element {
+  const authorizationStatus = useSelector(getAuthorization);
+  const isDataLoaded = useSelector(getDataLoad);
 
-function App({offers}: AppProps): JSX.Element {
-  const [activeCity, setActiveCity] = useState<string>(CITIES[0]);
+
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+    return (
+      <Loading />
+    );
+  }
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.Root}>
           <Layout page={PagesApp.Home} isHome isGrey>
-            <Home
-              offers={offers}
-              onStateChange={setActiveCity}
-              activeCity={activeCity}
-            />
+            <Home/>
           </Layout>
         </Route>
 
         <Route exact path={AppRoute.Login}>
           <Layout page={PagesApp.LogIn} isLogIn isGrey>
-            <LogIn activeCity={activeCity}/>
+            <LogIn />
           </Layout>
         </Route>
 
@@ -41,7 +43,7 @@ function App({offers}: AppProps): JSX.Element {
           path={AppRoute.Favorites}
           render={() =>  (
             <Layout page={PagesApp.Favorites}>
-              <Favorites offers={offers}/>
+              <Favorites/>
             </Layout>
           )}
           authorizationStatus={AuthorizationStatus.Auth}
@@ -55,7 +57,7 @@ function App({offers}: AppProps): JSX.Element {
         </Route>
 
         <Route
-          render={(props) =>  (
+          render={() =>  (
             <Layout page={PagesApp.undefined}>
               <h1>
                 404.
@@ -70,5 +72,3 @@ function App({offers}: AppProps): JSX.Element {
     </BrowserRouter>
   );
 }
-
-export default App;

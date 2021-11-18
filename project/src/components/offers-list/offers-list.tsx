@@ -1,3 +1,5 @@
+import {useDispatch} from 'react-redux';
+import {OfferInFocusAction} from '../../store/action';
 import {Offer, OfferClasses} from '../../types/offer';
 import OfferCard from '../../components/offer-card/offer-card';
 
@@ -5,10 +7,15 @@ type OffersListProps = {
   offers: Offer[],
   classes: OfferClasses,
   page: string,
-  hoverHandler: (offer?: Offer) => void,
 };
 
-export default function OffersList({offers, classes, page, hoverHandler}: OffersListProps): JSX.Element {
+export default function OffersList({ offers, classes, page }: OffersListProps): JSX.Element {
+  const dispatch = useDispatch();
+
+  const onFocusOffer = (value?: Offer | undefined) => {
+    dispatch(OfferInFocusAction(value));
+  };
+
   return (
     <>
       {offers.map((offer: Offer) => {
@@ -20,8 +27,8 @@ export default function OffersList({offers, classes, page, hoverHandler}: Offers
             offer={offer}
             classes={classes}
             page={page}
-            onStateChange={() => hoverHandler(offer)}
-            onStateReset={() => hoverHandler()}
+            onStateChange={() => onFocusOffer(offer)}
+            onStateReset={onFocusOffer}
           />
         );
       })}
