@@ -127,3 +127,11 @@ export enum SortValue {
   Desc = 'Price: high to low',
   Rated = 'Top rated first',
 }
+
+export enum APIRoute {
+  Offers = '/hotels',
+  Favorite = '/favorite',
+  Comments = '/comments',
+  Login = '/login',
+  Logout = 'logout',
+}

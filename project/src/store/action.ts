@@ -3,17 +3,21 @@ import {ActionType} from '../types/action';
 import {AuthorizationStatus, SortValue} from '../const';
 import {Offer} from '../types/offer';
 
-export const ActiveCityAction = createAction<string>(ActionType.ActiveCity);
+export const activeCityAction = createAction<string>(ActionType.ActiveCity);
 
-export const OffersListAction = createAction<string>(ActionType.OffersList);
+export const offersListAction = createAction<string>(ActionType.OffersList);
 
-export const AuthorizationStatusAction = createAction<AuthorizationStatus>(ActionType.Authorization);
+export const authorizationStatusAction = createAction<AuthorizationStatus>(ActionType.Authorization);
 
-export const OfferInFocusAction = createAction(
+export const offerInFocusAction = createAction(
   ActionType.OfferInFocus,
   (offer: Offer | undefined) => ({
     payload: offer,
   }),
 );
 
-export const OffersSortAction = createAction<SortValue>(ActionType.OffersSort);
+export const loadOffersAction = createAction<Offer[]>(ActionType.LoadOffers);
+
+export const requireLogoutAction = createAction(ActionType.RequireLogout);
+
+export const offersSortAction = createAction<SortValue>(ActionType.OffersSort);

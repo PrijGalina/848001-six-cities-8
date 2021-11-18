@@ -1,14 +1,14 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {AuthorizationStatusAction} from '../action';
+import {authorizationStatusAction} from '../action';
 import {AuthorizationStatus} from '../../const';
 
 const initialState = {
-  authorizationStatus: AuthorizationStatus.Auth,
+  authorizationStatus: AuthorizationStatus.Unknown,
 };
 
 const userProcess = createReducer(initialState, (builder) => {
   builder
-    .addCase(AuthorizationStatusAction, (state, action) => {
+    .addCase(authorizationStatusAction, (state, action) => {
       state.authorizationStatus = action.payload;
     });
 });

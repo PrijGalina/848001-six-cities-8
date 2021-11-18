@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import {useDispatch} from 'react-redux';
-import {ActiveCityAction, OffersListAction} from '../../store/action';
+import {activeCityAction, offersListAction} from '../../store/action';
 import {useSelector} from 'react-redux';
 import {getCity} from '../../store/app-data/selectors';
 
@@ -14,8 +14,8 @@ export default function MenuItem({cityItem}: MenuItemProps): JSX.Element {
   const isActive = cityCurrent === cityItem;
 
   const onCityValue = (city: string) => {
-    dispatch(ActiveCityAction(city));
-    dispatch(OffersListAction(city));
+    dispatch(activeCityAction(city));
+    dispatch(offersListAction(city));
   };
 
   return (

@@ -1,5 +1,5 @@
 import {useSelector, useDispatch} from 'react-redux';
-import {OffersSortAction} from '../../store/action';
+import {offersSortAction} from '../../store/action';
 import {SortValue} from '../../const';
 import cn from 'classnames';
 import {useState} from 'react';
@@ -11,7 +11,7 @@ export default function PlacesSorting(): JSX.Element {
   const dispatch = useDispatch();
 
   const onSortValue = (type: SortValue) => {
-    dispatch(OffersSortAction(type));
+    dispatch(offersSortAction(type));
     setStatus(!status);
   };
 
