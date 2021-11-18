@@ -1,5 +1,5 @@
 import {BOOKMARK_CARD, BOOKMARK_DETAIL} from '../../const';
-import classnames from 'classnames';
+import cn from 'classnames';
 
 type BookmarkBlockProps = {
   isFavorite: boolean,
@@ -11,7 +11,7 @@ export default function BookmarkBlock({isFavorite, isPropertyDetail}: BookmarkBl
   const height = !isPropertyDetail ? BOOKMARK_CARD.height : BOOKMARK_DETAIL.height;
   const simpleClassSVG = isPropertyDetail ? 'property__bookmark-icon' : 'place-card__bookmark-icon';
 
-  const buttonClasses = classnames (
+  const buttonClasses = cn (
     'button',
     {
       'property__bookmark-button': isPropertyDetail,

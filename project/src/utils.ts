@@ -1,4 +1,4 @@
-import {RATING_STARS, RATING_STYLE, SORT_VALUE} from './const';
+import {RATING_STARS, RATING_STYLE, SortValue} from './const';
 import {Offer} from './types/offer';
 import {AuthorizationStatus} from './const';
 
@@ -25,51 +25,21 @@ export const isCheckedAuth = (authorizationStatus: string): boolean => authoriza
 
 export const getOffersInCity = (offers: Offer[], cityValue: string): Offer[] => offers.filter(({ city }) => (city.name === cityValue));
 
-export const sortOffersRating = (offerA: Offer, offerB: Offer): number => {
-  if (offerA.rating < offerB.rating) {
-    return 1;
-  }
-  else if (offerA.rating > offerB.rating) {
-    return -1;
-  }
-  else {
-    return 0;
-  }
-};
+export const sortOffersRating = (offerA: Offer, offerB: Offer): number => Math.sign(offerB.rating - offerA.rating);
 
-export const sortOffersAsc = (offerA: Offer, offerB: Offer): number => {
-  if (offerA.price < offerB.price) {
-    return 1;
-  }
-  else if(offerA.price > offerB.price) {
-    return -1;
-  }
-  else {
-    return 0;
-  }
-};
+export const sortOffersAsc = (offerA: Offer, offerB: Offer): number => Math.sign(offerB.price -  offerA.price);
 
-export const sortOffersDesc = (offerA: Offer, offerB: Offer): number => {
-  if (offerA.price < offerB.price) {
-    return -1;
-  }
-  else if (offerA.price > offerB.price) {
-    return 1;
-  }
-  else {
-    return 0;
-  }
-};
+export const sortOffersDesc = (offerA: Offer, offerB: Offer): number => Math.sign(offerA.price -  offerB.price);
 
 export const getSortOffers = (offers: Offer[], sortValue: string): Offer[] => {
   switch (sortValue) {
-    case SORT_VALUE.popular:
+    case SortValue.Popular:
       return offers.sort(sortOffersRating);
-    case SORT_VALUE.asc:
+    case SortValue.Asc:
       return offers.sort(sortOffersDesc);
-    case SORT_VALUE.desc:
+    case SortValue.Desc:
       return offers.sort(sortOffersAsc);
-    case SORT_VALUE.rated:
+    case SortValue.Rated:
       return offers.sort(sortOffersRating);
     default:
       return offers.sort(sortOffersRating);

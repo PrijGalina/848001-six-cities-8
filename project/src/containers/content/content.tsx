@@ -1,6 +1,6 @@
 import {PropsWithChildren} from 'react';
 import {PagesClass} from '../../const';
-import classnames from 'classnames';
+import cn from 'classnames';
 
 type ContentProps = {
   page: string,
@@ -8,7 +8,7 @@ type ContentProps = {
 
 export default function Content({children, page}: PropsWithChildren<ContentProps>): JSX.Element {
   return (
-    <main className={classnames ('page__main', PagesClass.get(page))}>
+    <main className={cn ('page__main', PagesClass.get(page))}>
       {children}
     </main>
   );

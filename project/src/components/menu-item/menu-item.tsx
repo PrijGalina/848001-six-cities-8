@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import cn from 'classnames';
 import {useDispatch} from 'react-redux';
 import {ActiveCityAction, OffersListAction} from '../../store/action';
 import {useSelector} from 'react-redux';
@@ -20,7 +20,7 @@ export default function MenuItem({cityItem}: MenuItemProps): JSX.Element {
 
   return (
     <li className="locations__item">
-      <a className={classnames('locations__item-link tabs__item', { 'tabs__item--active': isActive })} href="#/" onClick={() => onCityValue(cityItem)}>
+      <a className={cn('locations__item-link tabs__item', { 'tabs__item--active': isActive })} href="#/" onClick={() => onCityValue(cityItem)}>
         <span>{cityItem}</span>
       </a>
     </li>

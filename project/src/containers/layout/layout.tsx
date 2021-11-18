@@ -1,5 +1,5 @@
 import {PropsWithChildren} from 'react';
-import classnames from 'classnames';
+import cn from 'classnames';
 import Header from '../header/header';
 import Content from '../content/content';
 import Footer from '../footer/footer';
@@ -13,7 +13,7 @@ type LayoutProps = {
 }
 
 export default function Layout({children, page, isHome, isLogIn, isGrey}: PropsWithChildren<LayoutProps>): JSX.Element {
-  const divClasses = classnames (
+  const divClasses = cn (
     'page',
     {
       'page--main': isHome,

@@ -5,7 +5,7 @@ import {getOffersInCity, getSortOffers} from '../../utils';
 import {ActiveCityAction, OfferInFocusAction, OffersSortAction, OffersListAction} from '../action';
 import {AppData} from '../../types/state';
 
-const initialState:AppData = {
+const initialState: AppData = {
   city: CITIES[0],
   offers: getOffersInCity(offers, CITIES[0]),
   isDataLoaded: true,

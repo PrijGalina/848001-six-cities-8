@@ -1,6 +1,6 @@
 import {useSelector} from 'react-redux';
 import Tabs from '../../components/tabs/tabs';
-import classnames from 'classnames';
+import cn from 'classnames';
 import PlacesInCity from '../../components/places-in-city/places-in-city';
 import NoPlacesToStay from '../../components/no-places-to-stay/no-places-to-stay';
 import {getOffers} from '../../store/app-data/selectors';
@@ -14,7 +14,7 @@ export default function Home(): JSX.Element {
       <h1 className="visually-hidden">Cities</h1>
       <Tabs/>
       <div className="cities">
-        <div className={classnames ('cities__places-container container', {'cities__places-container--empty': isEmpty})}>
+        <div className={cn ('cities__places-container container', {'cities__places-container--empty': isEmpty})}>
           {
             isEmpty ?
               <NoPlacesToStay /> :

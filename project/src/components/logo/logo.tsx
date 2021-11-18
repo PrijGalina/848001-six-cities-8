@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import {LOGO_PROPERTY} from '../../const';
-import classnames from 'classnames';
+import cn from 'classnames';
 
 type LogoProperty = {
   width: string,
@@ -12,14 +12,14 @@ type LogoProps = {
 }
 
 export default function Logo({place}: LogoProps): JSX.Element {
-  const linkClass = classnames (
+  const linkClass = cn (
     {
       'footer__logo-link': place === LOGO_PROPERTY.footer,
       'header__logo-link': place === LOGO_PROPERTY.header,
     },
   );
 
-  const imgClass = classnames (
+  const imgClass = cn (
     {
       'footer__logo': place === LOGO_PROPERTY.footer,
       'header__logo': place === LOGO_PROPERTY.header,

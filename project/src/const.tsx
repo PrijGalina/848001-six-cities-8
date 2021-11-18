@@ -121,9 +121,9 @@ export const LOGO_PROPERTY = {
   },
 };
 
-export enum SORT_VALUE {
-  popular = 'Popular',
-  asc = 'Price: low to high',
-  desc = 'Price: high to low',
-  rated = 'Top rated first',
+export enum SortValue {
+  Popular = 'Popular',
+  Asc = 'Price: low to high',
+  Desc = 'Price: high to low',
+  Rated = 'Top rated first',
 }
