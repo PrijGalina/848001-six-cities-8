@@ -16,7 +16,6 @@ export default function App(): JSX.Element {
   const authorizationStatus = useSelector(getAuthorization);
   const isDataLoaded = useSelector(getDataLoad);
 
-
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (
       <Loading />

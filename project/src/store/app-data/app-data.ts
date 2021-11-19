@@ -1,13 +1,14 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {CITIES} from '../../const';
-import {getOffersInCity, getSortOffers} from '../../utils';
-import {activeCityAction, offerInFocusAction, offersSortAction, offersListAction} from '../action';
+import {getSortOffers} from '../../utils';
+import {activeCityAction, offerInFocusAction, offersSortAction, loadOffersAction} from '../action';
 import {AppData} from '../../types/state';
+import {Offer} from '../../types/offer';
 
 const initialState: AppData = {
   city: CITIES[0],
   offers: [],
-  isDataLoaded: true,
+  isDataLoaded: false,
   offersSort: 'popular',
   offerInFocus: undefined,
 };
@@ -17,8 +18,10 @@ const appData = createReducer(initialState, (builder) => {
     .addCase(activeCityAction, (state, action) => {
       state.city = action.payload;
     })
-    .addCase(offersListAction, (state, action) => {
-      state.offers = getOffersInCity(state.offers, action.payload);
+    .addCase(loadOffersAction, (state, action) => {
+      const {offers} = action.payload;
+      const offersFilter = offers.filter((offer: Offer) => offer.city.name === state.city);
+      state.offers = offersFilter;
       state.isDataLoaded = true;
     })
     .addCase(offerInFocusAction, (state, action) => {

@@ -4,13 +4,15 @@ import {AxiosInstance} from 'axios';
 import {State} from '../types/state';
 
 export enum ActionType {
-  ActiveCity = 'data/ActiveCity',
-  OffersList = 'data/OffersList',
-  OfferInFocus = 'data/OfferInFocus',
-  Authorization = 'user/AuthorizationStatus',
-  OffersSort = 'data/OffersSort',
-  LoadOffers = 'data/LoadOffers',
-  RequireLogout = 'user/RequireLogout'
+  ActiveCity = 'data/activeCity',
+  OffersList = 'data/offersList',
+  OfferInFocus = 'data/offerInFocus',
+  Authorization = 'user/authorizationStatus',
+  OffersSort = 'data/offersSort',
+  LoadOffers = 'data/loadOffers',
+  RequireLogout = 'user/requireLogout',
+  RedirectToRoute = 'game/redirectToRoute',
+  UpdateOffers = 'data/updateOffers',
 }
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;

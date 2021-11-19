@@ -5,8 +5,6 @@ import {Offer} from '../types/offer';
 
 export const activeCityAction = createAction<string>(ActionType.ActiveCity);
 
-export const offersListAction = createAction<string>(ActionType.OffersList);
-
 export const authorizationStatusAction = createAction<AuthorizationStatus>(ActionType.Authorization);
 
 export const offerInFocusAction = createAction(
@@ -16,7 +14,16 @@ export const offerInFocusAction = createAction(
   }),
 );
 
-export const loadOffersAction = createAction<Offer[]>(ActionType.LoadOffers);
+export const loadOffersAction = createAction(
+  ActionType.LoadOffers,
+  (offers: Offer[]) => ({
+    payload: {
+      offers,
+    },
+  }),
+);
+
+export const updateOffersList = createAction(ActionType.UpdateOffers);
 
 export const requireLogoutAction = createAction(ActionType.RequireLogout);
 

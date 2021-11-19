@@ -19,7 +19,7 @@ export default function OffersList({ offers, classes, page }: OffersListProps): 
   return (
     <>
       {offers.map((offer: Offer) => {
-        const key = offer.host.name;
+        const key = offer.id;
 
         return (
           <OfferCard
