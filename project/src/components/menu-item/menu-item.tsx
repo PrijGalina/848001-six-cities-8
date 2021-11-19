@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 import {activeCityAction} from '../../store/action';
 import {useSelector} from 'react-redux';
 import {getCity} from '../../store/app-data/selectors';
-//import {allOffers} from '../../index';
+import {fetchOfferAction} from '../../store/api-actions';
 
 type MenuItemProps = {
   cityItem: string,
@@ -16,7 +16,7 @@ export default function MenuItem({cityItem}: MenuItemProps): JSX.Element {
 
   const onCityValue = (city: string) => {
     dispatch(activeCityAction(city));
-    //dispatch(loadOffersAction(allOffers));
+    dispatch(fetchOfferAction());
   };
 
   return (

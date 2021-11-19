@@ -27,8 +27,8 @@ export const store = configureStore({
 });
 
 store.dispatch(checkAuthAction());
-export const allOffers = fetchOfferAction();
-store.dispatch(allOffers);
+
+store.dispatch(fetchOfferAction());
 
 ReactDOM.render(
   <React.StrictMode>
