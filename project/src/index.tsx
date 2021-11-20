@@ -27,7 +27,6 @@ export const store = configureStore({
 });
 
 store.dispatch(checkAuthAction());
-
 store.dispatch(fetchOfferAction());
 
 ReactDOM.render(

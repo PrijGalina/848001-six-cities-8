@@ -38,6 +38,9 @@ export default function useMap (mapRef: MutableRefObject<HTMLElement | null>): M
 
           setMap(instance);
         }
+        else if (map !== null){
+          map.setView([point[0], point[1]]);
+        }
       });
   }, [mapRef, map, city, provider]);
 

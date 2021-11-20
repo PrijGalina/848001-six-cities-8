@@ -2,13 +2,15 @@ import {ThunkActionResult} from '../types/action';
 import {loadOffersAction, authorizationStatusAction, requireLogoutAction} from './action';
 import {saveToken, dropToken, Token} from '../services/token';
 import {APIRoute, AuthorizationStatus} from '../const';
-import {Offer} from '../types/offer';
 import {AuthData} from '../types/auth-data';
+import {adaptToClient} from '../services/adapters';
+import {ServerOffer} from '../types/server-types';
 
 export const fetchOfferAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<Offer[]>(APIRoute.Offers);
-    dispatch(loadOffersAction(data));
+    const { data } = await api.get<ServerOffer[]>(APIRoute.Offers);
+    const newData = adaptToClient(data);
+    dispatch(loadOffersAction(newData));
   };
 
 export const checkAuthAction = (): ThunkActionResult =>

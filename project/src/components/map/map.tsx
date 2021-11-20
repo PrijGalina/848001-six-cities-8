@@ -6,6 +6,7 @@ import {Location} from '../../types/offer';
 import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT, PIN_SIZE, PIN_ANCHOR} from '../../const';
 import 'leaflet/dist/leaflet.css';
 import {getOffer, getCity, getOffers} from '../../store/app-data/selectors';
+import L from 'leaflet';
 
 type MapProps = {
   height: number,
@@ -25,7 +26,9 @@ const LeafIcon = (url: string) => {
 const defaultCustomIcon = LeafIcon(URL_MARKER_DEFAULT);
 const currentCustomIcon = LeafIcon(URL_MARKER_CURRENT);
 
-function  setMarkersOnMap(locations: Location[], map: MapContainer, hoverPoint?: Location | boolean) {
+function setMarkersOnMap(locations: Location[], map: MapContainer, hoverPoint?: Location | boolean) {
+  const markerGroup = L.layerGroup().addTo(map);
+
   locations.forEach(({latitude: lat, longitude: lng}) => {
     const marker = new Marker({
       lat,
@@ -41,7 +44,7 @@ function  setMarkersOnMap(locations: Location[], map: MapContainer, hoverPoint?:
 
     marker
       .setIcon(isHoverPoint ? currentCustomIcon : defaultCustomIcon)
-      .addTo(map);
+      .addTo(markerGroup);
   });
 }
 
