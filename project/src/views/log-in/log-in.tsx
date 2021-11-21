@@ -1,14 +1,50 @@
 import {useSelector} from 'react-redux';
 import {getCity} from '../../store/app-data/selectors';
+import {useRef, FormEvent} from 'react';
+import {connect, ConnectedProps} from 'react-redux';
+import {loginAction} from '../../store/api-actions';
+import {ThunkAppDispatch} from '../../types/action';
+import {AuthData} from '../../types/auth-data';
+import {useHistory} from 'react-router-dom';
+import {AppRoute} from '../../const';
 
-export default function LogIn(): JSX.Element {
+const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
+  onSubmit(authData: AuthData) {
+    dispatch(loginAction(authData));
+  },
+});
+
+const connector = connect(null, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+function LogIn(props: PropsFromRedux): JSX.Element {
   const city = useSelector(getCity);
+
+  const history = useHistory();
+  const {onSubmit} = props;
+
+  const loginRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (loginRef.current !== null && passwordRef.current !== null) {
+      onSubmit({
+        login: loginRef.current.value,
+        password: passwordRef.current.value,
+      });
+    }
+    history.push(AppRoute.Root);
+
+  };
 
   return (
     <div className="page__login-container container">
       <section className="login">
         <h1 className="login__title">Sign in</h1>
-        <form className="login__form form" action="#" method="post">
+        <form className="login__form form" action="#" method="post" onSubmit={handleSubmit}>
           <div className="login__input-wrapper form__input-wrapper">
             <label className="visually-hidden">E-mail</label>
             <input
@@ -16,6 +52,7 @@ export default function LogIn(): JSX.Element {
               type="email"
               name="email"
               placeholder="Email"
+              ref={loginRef}
               required
             />
           </div>
@@ -26,6 +63,7 @@ export default function LogIn(): JSX.Element {
               type="password"
               name="password"
               placeholder="Password"
+              ref={passwordRef}
               required
             />
           </div>
@@ -42,3 +80,6 @@ export default function LogIn(): JSX.Element {
     </div>
   );
 }
+
+export {LogIn};
+export default connector(LogIn);

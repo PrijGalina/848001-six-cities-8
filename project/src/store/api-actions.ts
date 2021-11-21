@@ -8,7 +8,7 @@ import {ServerOffer} from '../types/server-types';
 
 export const fetchOfferAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const { data } = await api.get<ServerOffer[]>(APIRoute.Offers);
+    const {data} = await api.get<ServerOffer[]>(APIRoute.Offers);
     const newData = adaptToClient(data);
     dispatch(loadOffersAction(newData));
   };
@@ -17,7 +17,7 @@ export const checkAuthAction = (): ThunkActionResult =>
   async (dispatch, _getState, api) => {
     await api.get(APIRoute.Login)
       .then(() => {
-        dispatch(authorizationStatusAction(AuthorizationStatus.Auth));
+        dispatch(authorizationStatusAction(AuthorizationStatus.NoAuth));
       });
   };
 

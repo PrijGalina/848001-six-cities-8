@@ -1,6 +1,6 @@
 import {BrowserRouter, Route, Switch, Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
-import {AppRoute, AuthorizationStatus, PagesApp} from '../../const';
+import {AppRoute, PagesApp} from '../../const';
 import {isCheckedAuth} from '../../utils';
 import Layout from '../../containers/layout/layout';
 import Home from '../../views/home/home';
@@ -45,7 +45,6 @@ export default function App(): JSX.Element {
               <Favorites/>
             </Layout>
           )}
-          authorizationStatus={AuthorizationStatus.Auth}
         >
         </PrivateRoute>
 

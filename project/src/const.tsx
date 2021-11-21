@@ -32,7 +32,6 @@ export const RATING_STYLE = {
   'five': 100,
 };
 
-
 export const CITIES = [ 'Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 export const URL_MARKER_DEFAULT = 'http://localhost:3000/img/pin.svg';

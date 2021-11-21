@@ -6,6 +6,7 @@ import {getOffers} from '../../store/app-data/selectors';
 
 export default function Favorites(): JSX.Element {
   const offers = useSelector(getOffers);
+
   const favoritesInCities = offers.reduce((previousValue: {[key: string]: Offer[] | []}, currentValue) => {
     const {name} = currentValue.city;
     const isFavorite = currentValue.isFavorite;
