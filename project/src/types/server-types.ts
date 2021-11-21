@@ -1,23 +1,23 @@
 import {Location, City} from './offer';
 
-export type ServerHosts = {
+export type HostsDTO = {
   'avatar_url': string,
   'id': number,
   'is_pro': boolean,
   'name': string,
 }
 
-export type ServerOffer = {
+export type OfferDTO = {
   'bedrooms': number,
-  city: City,
+  'city': City,
   'description': string,
   'goods': string[],
-  host: ServerHosts,
+  'host': HostsDTO,
   'id': number,
   'images': string[],
   'is_favorite': boolean,
   'is_premium': boolean,
-  location: Location,
+  'location': Location,
   'max_adults': number,
   'preview_image': string,
   'price': number,

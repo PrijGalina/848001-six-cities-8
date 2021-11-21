@@ -17,9 +17,7 @@ export const offerInFocusAction = createAction(
 export const loadOffersAction = createAction(
   ActionType.LoadOffers,
   (offers: Offer[]) => ({
-    payload: {
-      offers,
-    },
+    payload: {offers},
   }),
 );
 

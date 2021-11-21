@@ -14,14 +14,14 @@ export default function MenuItem({cityItem}: MenuItemProps): JSX.Element {
   const dispatch = useDispatch();
   const isActive = cityCurrent === cityItem;
 
-  const onCityValue = (city: string) => {
+  const onCityChange = (city: string) => {
     dispatch(activeCityAction(city));
     dispatch(fetchOfferAction());
   };
 
   return (
     <li className="locations__item">
-      <a className={cn('locations__item-link tabs__item', { 'tabs__item--active': isActive })} href="#/" onClick={() => onCityValue(cityItem)}>
+      <a className={cn('locations__item-link tabs__item', { 'tabs__item--active': isActive })} href="#/" onClick={() => onCityChange(cityItem)}>
         <span>{cityItem}</span>
       </a>
     </li>

@@ -15,7 +15,7 @@ export default function Header({page}: HeaderProps): JSX.Element {
   const isAuth = useSelector(getAuthorization);
   const dispatch = useDispatch();
 
-  const onCityValue = () => {
+  const onCityChange = () => {
     dispatch(fetchOfferAction());
   };
 
@@ -35,7 +35,7 @@ export default function Header({page}: HeaderProps): JSX.Element {
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
                   {isAuth === AuthorizationStatus.Auth &&
-                  <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile" href="#/" onClick={() => onCityValue()}>
+                  <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile" href="#/" onClick={() => onCityChange()}>
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                   </Link>}

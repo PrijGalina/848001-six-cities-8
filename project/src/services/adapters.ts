@@ -1,15 +1,11 @@
 import {Offer} from '../types/offer';
-import {ServerOffer} from '../types/server-types';
+import {OfferDTO} from '../types/server-types';
 
-const adaptToClient = (offers:ServerOffer[] = []):Offer[] =>
+const adaptToClient = (offers:OfferDTO[] = []):Offer[] =>
   offers.map((offer) => ({
     bedrooms: offer.bedrooms,
     city: {
-      location: {
-        latitude: offer.city.location.latitude,
-        longitude: offer.city.location.longitude,
-        zoom: offer.city.location.zoom,
-      },
+      location: {...offer.city.location },
       name: offer.city.name,
     },
     description: offer.description,
@@ -24,11 +20,7 @@ const adaptToClient = (offers:ServerOffer[] = []):Offer[] =>
     images: offer.images,
     isFavorite: offer.is_favorite,
     isPremium: offer.is_premium,
-    location: {
-      zoom: offer.location.zoom,
-      latitude: offer.location.latitude,
-      longitude: offer.location.longitude,
-    },
+    location: {...offer.city.location },
     maxAdults: offer.max_adults,
     previewImage: offer.preview_image,
     price: offer.price,
