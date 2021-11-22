@@ -51,6 +51,7 @@ function setMarkersOnMap(locations: Location[], map: MapContainer, hoverPoint?: 
 export default function Map({ height, width }: MapProps): JSX.Element {
   const city = useSelector(getCity);
   const offers = useSelector(getOffers);
+
   const offerInFocus = useSelector(getOffer);
 
   const mapRef = useRef(null);

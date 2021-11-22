@@ -7,12 +7,7 @@ export const activeCityAction = createAction<string>(ActionType.ActiveCity);
 
 export const authorizationStatusAction = createAction<AuthorizationStatus>(ActionType.Authorization);
 
-export const offerInFocusAction = createAction(
-  ActionType.OfferInFocus,
-  (offer: Offer | undefined) => ({
-    payload: offer,
-  }),
-);
+export const offerInFocusAction = createAction<Offer | undefined>(ActionType.OfferInFocus);
 
 export const loadOffersAction = createAction(
   ActionType.LoadOffers,
@@ -26,3 +21,14 @@ export const updateOffersList = createAction(ActionType.UpdateOffers);
 export const requireLogoutAction = createAction(ActionType.RequireLogout);
 
 export const offersSortAction = createAction<SortValue>(ActionType.OffersSort);
+
+export const offerActiveIdAction = createAction<number | undefined>(ActionType.OfferActiveId);
+
+export const loadOffersNearbyAction = createAction<Offer[]>(ActionType.OfferNearby);
+
+export const loadOfferInfoAction = createAction(
+  ActionType.OfferInfo,
+  (offer: Offer | undefined) => ({
+    payload: offer,
+  }),
+);

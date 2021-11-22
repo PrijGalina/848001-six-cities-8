@@ -14,7 +14,7 @@ type OfferCardProps = {
 };
 
 export default function OfferCard({offer, classes, page, onStateChange, onStateReset}: OfferCardProps): JSX.Element {
-  const {isPremium, previewImage, price, title, type, rating, isFavorite} = offer;
+  const {isPremium} = offer;
   const pathToOffer = `/offer/:${offer.id}`;
 
   return (
@@ -23,18 +23,14 @@ export default function OfferCard({offer, classes, page, onStateChange, onStateR
       <OfferImageWrapper
         imageClass={classes.image}
         pathToOffer={pathToOffer}
-        previewImage={previewImage}
         width={page === PagesApp.Favorites ? FAVORITE_PAGE_ICON.width : FAVORITE_ICON.width}
         height={page === PagesApp.Favorites ? FAVORITE_PAGE_ICON.height : FAVORITE_ICON.height}
+        id={offer.id}
       />
       <OfferInfoWrapper
         infoClass={classes.info}
         pathToOffer={pathToOffer}
-        isFavorite={isFavorite}
-        rating={rating}
-        price={price}
-        title={title}
-        type={type}
+        id={offer.id}
       />
     </article>
   );

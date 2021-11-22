@@ -5,7 +5,7 @@ import {getAuthorization} from '../../store/user-process/selectors';
 import {AuthorizationStatus, AppRoute} from '../../const';
 import {Link} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
-import { fetchOfferAction, logoutAction} from '../../store/api-actions';
+import {fetchOfferAction, logoutAction} from '../../store/api-actions';
 
 type HeaderProps = {
   page: string,

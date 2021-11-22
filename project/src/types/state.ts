@@ -8,6 +8,9 @@ export type AppData = {
   isDataLoaded: boolean,
   offerInFocus: Offer | undefined,
   offersSort: string,
+  offerActiveId: number | undefined,
+  offerNearby?: Offer[],
+  offerInfo: Offer | undefined,
 };
 
 export type UserProcess = {
