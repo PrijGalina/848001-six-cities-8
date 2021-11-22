@@ -4,15 +4,16 @@ import BookmarkBlock from '../bookmark-block/bookmark-block';
 import cn from 'classnames';
 import {offerActiveIdAction} from '../../store/action';
 import {useDispatch} from 'react-redux';
+import {Offer} from '../../types/offer';
 
 type OfferInfoWrapperProps = {
   infoClass: string,
   pathToOffer: string,
-  id: number,
+  offer: Offer,
 };
 
-export default function OfferInfoWrapper({infoClass, pathToOffer, id}: OfferInfoWrapperProps): JSX.Element {
-  //const {isFavorite, rating, price, title, type} = offer;
+export default function OfferInfoWrapper({infoClass, pathToOffer, offer}: OfferInfoWrapperProps): JSX.Element {
+  const {isFavorite, rating, price, title, type, id} = offer;
   const dispatch = useDispatch();
 
   const onClickOffer = (value: number) => {
@@ -23,16 +24,16 @@ export default function OfferInfoWrapper({infoClass, pathToOffer, id}: OfferInfo
     <div className={cn ('place-card__info', infoClass)}>
       <div className="place-card__price-wrapper">
         <div className="place-card__price">
-          <b className="place-card__price-value">&euro;{/*price*/}</b>
+          <b className="place-card__price-value">&euro;{price}</b>
           <span className="place-card__price-text">&#47;&nbsp;night</span>
         </div>
-        <BookmarkBlock isFavorite={/*isFavorite*/false}/>
+        <BookmarkBlock isFavorite={isFavorite}/>
       </div>
-      <RatingBlock rating={/*rating*/5}/>
+      <RatingBlock rating={rating}/>
       <h2 className="place-card__name">
-        <Link to={pathToOffer} onClick={() => onClickOffer(id)}>{/*title*/}</Link>
+        <Link to={pathToOffer} onClick={() => onClickOffer(id)}>{title}</Link>
       </h2>
-      <p className="place-card__type">{/*type*/}</p>
+      <p className="place-card__type">{type}</p>
     </div>
   );
 }

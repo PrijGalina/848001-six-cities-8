@@ -1,12 +1,14 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {CITIES} from '../../const';
+import {CITIES, citiesData} from '../../const';
 import {getSortOffers} from '../../utils';
 import {activeCityAction, offerInFocusAction, offersSortAction, loadOffersAction, offerActiveIdAction, loadOffersNearbyAction, loadOfferInfoAction} from '../action';
 import {AppData} from '../../types/state';
 import {Offer} from '../../types/offer';
 
+const cityCurrent = citiesData.filter((cityObj) => cityObj.title === CITIES[0])[0];
+
 const initialState: AppData = {
-  city: CITIES[0],
+  city: cityCurrent,
   offers: [],
   isDataLoaded: false,
   offersSort: 'popular',
@@ -18,11 +20,18 @@ const initialState: AppData = {
 const appData = createReducer(initialState, (builder) => {
   builder
     .addCase(activeCityAction, (state, action) => {
-      state.city = action.payload;
+      const cityData = citiesData.filter((cityObj) => cityObj.title === action.payload.title)[0];
+
+      state.city = {
+        title: cityData.title,
+        lat: cityData.lat,
+        lng: cityData.lng,
+        zoom: cityData.zoom,
+      };
     })
     .addCase(loadOffersAction, (state, action) => {
       const {offers} = action.payload;
-      const offersFilter = offers.filter((offer: Offer) => offer.city.name === state.city);
+      const offersFilter = offers.filter((offer: Offer) => offer.city.name === state.city.title);
       state.offers = offersFilter;
       state.isDataLoaded = true;
     })

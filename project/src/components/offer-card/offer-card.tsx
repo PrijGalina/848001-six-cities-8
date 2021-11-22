@@ -25,12 +25,12 @@ export default function OfferCard({offer, classes, page, onStateChange, onStateR
         pathToOffer={pathToOffer}
         width={page === PagesApp.Favorites ? FAVORITE_PAGE_ICON.width : FAVORITE_ICON.width}
         height={page === PagesApp.Favorites ? FAVORITE_PAGE_ICON.height : FAVORITE_ICON.height}
-        id={offer.id}
+        offer={offer}
       />
       <OfferInfoWrapper
         infoClass={classes.info}
         pathToOffer={pathToOffer}
-        id={offer.id}
+        offer={offer}
       />
     </article>
   );

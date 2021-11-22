@@ -2,8 +2,9 @@ import {createAction} from '@reduxjs/toolkit';
 import {ActionType} from '../types/action';
 import {AuthorizationStatus, SortValue} from '../const';
 import {Offer} from '../types/offer';
+import {MapCity} from '../types/map';
 
-export const activeCityAction = createAction<string>(ActionType.ActiveCity);
+export const activeCityAction = createAction<MapCity>(ActionType.ActiveCity);
 
 export const authorizationStatusAction = createAction<AuthorizationStatus>(ActionType.Authorization);
 

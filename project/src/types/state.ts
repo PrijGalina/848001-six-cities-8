@@ -1,9 +1,10 @@
-import {Offer} from '../types/offer';
+import {Offer} from './offer';
+import {MapCity} from './map';
 import {RootState} from '../store/root-reducer';
 import {AuthorizationStatus} from '../const';
 
 export type AppData = {
-  city: string,
+  city: MapCity,
   offers: Offer[],
   isDataLoaded: boolean,
   offerInFocus: Offer | undefined,

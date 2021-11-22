@@ -1,4 +1,5 @@
 import {PointExpression} from 'leaflet';
+import * as mapJSON from './components/map/map-data.json';
 
 export enum AppRoute {
   Root = '/',
@@ -134,3 +135,5 @@ export enum APIRoute {
   Login = '/login',
   Logout = 'logout',
 }
+
+export const citiesData = mapJSON.cities;
