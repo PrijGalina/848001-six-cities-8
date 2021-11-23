@@ -25,3 +25,16 @@ export type OfferDTO = {
   'title': string,
   'type': string,
 }
+
+export type CommentDTO = {
+  'comment': string,
+  'date': string,
+  'id': number,
+  'rating': number,
+  'user': {
+    'avatar_url': string,
+    'id': number,
+    'is_pro': boolean,
+    'name': string,
+  },
+}

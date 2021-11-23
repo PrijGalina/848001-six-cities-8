@@ -2,7 +2,6 @@ import {Action} from 'redux';
 import {ThunkAction,ThunkDispatch} from 'redux-thunk';
 import {AxiosInstance} from 'axios';
 import {State} from '../types/state';
-//import {Offer} from '../types/offer';
 
 export enum ActionType {
   ActiveCity = 'data/activeCity',
@@ -17,6 +16,7 @@ export enum ActionType {
   OfferActiveId = 'data/offeraActiveId',
   OfferNearby = 'data/offerNearby',
   OfferInfo = 'data/offerInfo',
+  CommentsList = 'data/commentList',
 }
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;

@@ -1,7 +1,7 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {CITIES, citiesData} from '../../const';
 import {getSortOffers} from '../../utils';
-import {activeCityAction, offerInFocusAction, offersSortAction, loadOffersAction, offerActiveIdAction, loadOffersNearbyAction, loadOfferInfoAction} from '../action';
+import {activeCityAction, offerInFocusAction, offersSortAction, loadOffersAction, offerActiveIdAction, loadOffersNearbyAction, loadOfferInfoAction, loadCommentsAction} from '../action';
 import {AppData} from '../../types/state';
 import {Offer} from '../../types/offer';
 
@@ -15,6 +15,7 @@ const initialState: AppData = {
   offerInFocus: undefined,
   offerActiveId: undefined,
   offerInfo: undefined,
+  commentsList: [],
 };
 
 const appData = createReducer(initialState, (builder) => {
@@ -50,6 +51,9 @@ const appData = createReducer(initialState, (builder) => {
     })
     .addCase(loadOfferInfoAction, (state, action) => {
       state.offerInfo = action.payload;
+    })
+    .addCase(loadCommentsAction, (state, action) => {
+      state.commentsList = action.payload;
     });
 });
 

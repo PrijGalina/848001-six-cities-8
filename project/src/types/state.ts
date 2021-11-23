@@ -1,4 +1,5 @@
 import {Offer} from './offer';
+import {ReviewType} from './review';
 import {MapCity} from './map';
 import {RootState} from '../store/root-reducer';
 import {AuthorizationStatus} from '../const';
@@ -12,6 +13,7 @@ export type AppData = {
   offerActiveId: number | undefined,
   offerNearby?: Offer[],
   offerInfo: Offer | undefined,
+  commentsList?: ReviewType[],
 };
 
 export type UserProcess = {

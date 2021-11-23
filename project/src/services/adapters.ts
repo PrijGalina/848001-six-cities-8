@@ -1,7 +1,8 @@
 import {Offer} from '../types/offer';
-import {OfferDTO} from '../types/server-types';
+import {ReviewType} from '../types/review';
+import {OfferDTO, CommentDTO} from '../types/server-types';
 
-const adaptToClient = (offers:OfferDTO[] = []):Offer[] =>
+const adaptOfferToClient = (offers:OfferDTO[] = []): Offer[] =>
   offers.map((offer) => ({
     bedrooms: offer.bedrooms,
     city: {
@@ -29,7 +30,7 @@ const adaptToClient = (offers:OfferDTO[] = []):Offer[] =>
     type: offer.type,
   }));
 
-const adaptToClientOneOffer = (offer:OfferDTO): Offer =>
+const adaptOfferToClientOneOffer = (offer:OfferDTO): Offer =>
   ({
     bedrooms: offer.bedrooms,
     city: {
@@ -57,4 +58,18 @@ const adaptToClientOneOffer = (offer:OfferDTO): Offer =>
     type: offer.type,
   });
 
-export {adaptToClient, adaptToClientOneOffer};
+const adaptCommentToClient = (comments: CommentDTO[] = []): ReviewType[] =>
+  comments.map((comment) => ({
+    comment: comment.comment,
+    date: comment.date,
+    id: comment.id,
+    rating: comment.rating,
+    user: {
+      avatarUrl: comment.user.avatar_url,
+      id: comment.user.id,
+      isPro: comment.user.is_pro,
+      name: comment.user.name,
+    },
+  }));
+
+export {adaptOfferToClient, adaptOfferToClientOneOffer, adaptCommentToClient};

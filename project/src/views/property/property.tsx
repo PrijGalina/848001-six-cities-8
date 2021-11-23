@@ -1,6 +1,6 @@
 import {useDispatch} from 'react-redux';
 //import {fetchOfferNearbyAction} from '../../store/api-actions';
-import {fetchOfferInfoAction} from '../../store/api-actions';
+import { fetchOfferInfoAction} from '../../store/api-actions';
 import {useSelector} from 'react-redux';
 import {getOfferIdActive, getOfferInfo} from '../../store/app-data/selectors';
 import ImagesOfPlace from '../../components/images-of-place/images-of-place';
@@ -9,20 +9,18 @@ import AboutHost from '../../components/about-host/about-host';
 //import ReviewsList from '../../components//reviews-list/reviews-list';
 //import NewCommentForm from '../../components/new-comment-form/new-comment-form';
 import Map from '../../components/map/map';
-//import {PagesApp, OFFER_IN_PROPERTY, MAP_PROPERTY} from '../../const';
 import {MAP_PROPERTY} from '../../const';
-//import {reviews} from '../../mocks/reviews';
-//import {ReviewType} from '../../types/review';
+//import {PagesApp, OFFER_IN_PROPERTY} from '../../const';
 //import OffersList from '../../components/offers-list/offers-list';
 
 export default function Property(): JSX.Element {
-  //const reviewList: ReviewType[] = reviews;
 
   const dispatch = useDispatch();
   const offerId = useSelector(getOfferIdActive);
 
   if (offerId !== undefined){
     dispatch(fetchOfferInfoAction(offerId));
+
   }
 
   const offer = useSelector(getOfferInfo);
@@ -62,7 +60,7 @@ export default function Property(): JSX.Element {
 }
 
 /*
-                  <ReviewsList reviews={reviewList} />
+                  <ReviewsList reviews={comments} />
                   <NewCommentForm />
 */
 

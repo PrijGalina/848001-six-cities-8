@@ -1,15 +1,15 @@
 import {ThunkActionResult} from '../types/action';
-import {loadOffersAction, authorizationStatusAction, requireLogoutAction,loadOffersNearbyAction, loadOfferInfoAction} from './action';
+import {loadOffersAction, authorizationStatusAction, requireLogoutAction,loadOffersNearbyAction, loadOfferInfoAction, loadCommentsAction} from './action';
 import {saveToken, dropToken, Token} from '../services/token';
 import {APIRoute, AuthorizationStatus} from '../const';
 import {AuthData} from '../types/auth-data';
-import {adaptToClient, adaptToClientOneOffer} from '../services/adapters';
-import {OfferDTO} from '../types/server-types';
+import {adaptOfferToClient, adaptOfferToClientOneOffer, adaptCommentToClient} from '../services/adapters';
+import {OfferDTO, CommentDTO} from '../types/server-types';
 
 export const fetchOfferAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const {data} = await api.get<OfferDTO[]>(APIRoute.Offers);
-    const newData = adaptToClient(data);
+    const newData = adaptOfferToClient(data);
     dispatch(loadOffersAction(newData));
   };
 
@@ -17,19 +17,26 @@ export const fetchOfferInfoAction = (id: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const path = `${APIRoute.Offers}/${id}`;
     const {data} = await api.get<OfferDTO>(path);
-    // eslint-disable-next-line no-console
-    console.log(data);
-    const newData = adaptToClientOneOffer(data);
+    const newData = adaptOfferToClientOneOffer(data);
     dispatch(loadOfferInfoAction(newData));
   };
 
 export const fetchOfferNearbyAction = (id: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const path = `${APIRoute.Offers}:${id}/nearby`;
+    const path = `${APIRoute.Offers}/${id}/nearby`;
 
     const {data} = await api.get<OfferDTO[]>(path);
-    const newData = adaptToClient(data);
+    const newData = adaptOfferToClient(data);
     dispatch(loadOffersNearbyAction(newData));
+  };
+
+export const fetchCommentAboutAction = (id: number): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    const path = `${APIRoute.Comments}/${id}`;
+
+    const { data } = await api.get<CommentDTO[]>(path);
+    const newData = adaptCommentToClient(data);
+    dispatch(loadCommentsAction(newData));
   };
 
 export const checkAuthAction = (): ThunkActionResult =>
