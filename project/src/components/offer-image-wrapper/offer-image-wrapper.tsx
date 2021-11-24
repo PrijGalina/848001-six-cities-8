@@ -1,15 +1,19 @@
+
 import {Link} from 'react-router-dom';
 import cn from 'classnames';
+import {Offer} from '../../types/offer';
 
 type OfferImageWrapperProps = {
   imageClass: string,
   pathToOffer: string,
-  previewImage: string,
   width: string,
   height: string,
+  offer: Offer,
 };
 
-export default function OfferImageWrapper({imageClass, pathToOffer, previewImage, width, height}: OfferImageWrapperProps): JSX.Element {
+export default function OfferImageWrapper({imageClass, pathToOffer, width, height, offer}: OfferImageWrapperProps): JSX.Element {
+  const {previewImage} = offer;
+
   return (
     <div className={cn ('place-card__image-wrapper', imageClass)}>
       <Link to={pathToOffer}>

@@ -1,6 +1,6 @@
 import {BrowserRouter, Route, Switch, Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
-import {AppRoute, AuthorizationStatus, PagesApp} from '../../const';
+import {AppRoute, PagesApp} from '../../const';
 import {isCheckedAuth} from '../../utils';
 import Layout from '../../containers/layout/layout';
 import Home from '../../views/home/home';
@@ -12,10 +12,10 @@ import Loading from '../loading/loading';
 import {getDataLoad} from '../../store/app-data/selectors';
 import {getAuthorization} from '../../store/user-process/selectors';
 
+
 export default function App(): JSX.Element {
   const authorizationStatus = useSelector(getAuthorization);
   const isDataLoaded = useSelector(getDataLoad);
-
 
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (
@@ -46,7 +46,6 @@ export default function App(): JSX.Element {
               <Favorites/>
             </Layout>
           )}
-          authorizationStatus={AuthorizationStatus.Auth}
         >
         </PrivateRoute>
 

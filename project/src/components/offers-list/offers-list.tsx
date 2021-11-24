@@ -1,5 +1,5 @@
 import {useDispatch} from 'react-redux';
-import {OfferInFocusAction} from '../../store/action';
+import {offerInFocusAction} from '../../store/action';
 import {Offer, OfferClasses} from '../../types/offer';
 import OfferCard from '../../components/offer-card/offer-card';
 
@@ -13,13 +13,13 @@ export default function OffersList({ offers, classes, page }: OffersListProps): 
   const dispatch = useDispatch();
 
   const onFocusOffer = (value?: Offer | undefined) => {
-    dispatch(OfferInFocusAction(value));
+    dispatch(offerInFocusAction(value));
   };
 
   return (
     <>
       {offers.map((offer: Offer) => {
-        const key = offer.host.name;
+        const key = offer.id;
 
         return (
           <OfferCard
@@ -28,7 +28,7 @@ export default function OffersList({ offers, classes, page }: OffersListProps): 
             classes={classes}
             page={page}
             onStateChange={() => onFocusOffer(offer)}
-            onStateReset={onFocusOffer}
+            onStateReset={() => onFocusOffer(undefined)}
           />
         );
       })}

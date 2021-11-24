@@ -1,4 +1,5 @@
 import {PointExpression} from 'leaflet';
+import * as mapJSON from './components/map/map-data.json';
 
 export enum AppRoute {
   Root = '/',
@@ -31,7 +32,6 @@ export const RATING_STYLE = {
   'four': 80,
   'five': 100,
 };
-
 
 export const CITIES = [ 'Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
@@ -127,3 +127,13 @@ export enum SortValue {
   Desc = 'Price: high to low',
   Rated = 'Top rated first',
 }
+
+export enum APIRoute {
+  Offers = '/hotels',
+  Favorite = '/favorite',
+  Comments = '/comments',
+  Login = '/login',
+  Logout = 'logout',
+}
+
+export const citiesData = mapJSON.cities;

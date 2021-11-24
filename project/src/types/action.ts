@@ -1,7 +1,23 @@
+import {Action} from 'redux';
+import {ThunkAction,ThunkDispatch} from 'redux-thunk';
+import {AxiosInstance} from 'axios';
+import {State} from '../types/state';
+
 export enum ActionType {
-  ActiveCity = 'main/ActiveCity',
-  OffersList = 'main/OffersList',
-  OfferInFocus = 'main/OfferInFocus',
-  Authorization = 'user/AuthorizationStatus',
-  OffersSort = 'main/OffersSort',
+  ActiveCity = 'data/activeCity',
+  OffersList = 'data/offersList',
+  OfferInFocus = 'data/offerInFocus',
+  Authorization = 'user/authorizationStatus',
+  OffersSort = 'data/offersSort',
+  LoadOffers = 'data/loadOffers',
+  RequireLogout = 'user/requireLogout',
+  RedirectToRoute = 'user/redirectToRoute',
+  UpdateOffers = 'data/updateOffers',
+  OfferNearby = 'data/offerNearby',
+  OfferInfo = 'data/offerInfo',
+  CommentsList = 'data/commentList',
 }
+
+export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;
+
+export type ThunkAppDispatch = ThunkDispatch<State, AxiosInstance, Action>;

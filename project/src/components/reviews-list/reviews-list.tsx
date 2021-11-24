@@ -2,7 +2,7 @@ import Review from '../review/review';
 import {ReviewType} from '../../types/review';
 
 type reviewsProps = {
-  reviews: ReviewType[],
+  reviews: ReviewType[] | undefined,
 }
 
 export default function ReviewsList({reviews = []}: reviewsProps): JSX.Element {

@@ -1,33 +1,55 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {CITIES} from '../../const';
-import {offers} from '../../mocks/offers';
-import {getOffersInCity, getSortOffers} from '../../utils';
-import {ActiveCityAction, OfferInFocusAction, OffersSortAction, OffersListAction} from '../action';
+import {CITIES, citiesData} from '../../const';
+import {getSortOffers} from '../../utils';
+import {activeCityAction, offerInFocusAction, offersSortAction, loadOffersAction, loadOffersNearbyAction, loadOfferInfoAction, loadCommentsAction} from '../action';
 import {AppData} from '../../types/state';
+import {Offer} from '../../types/offer';
+
+const cityCurrent = citiesData.filter((cityObj) => cityObj.title === CITIES[0])[0];
 
 const initialState: AppData = {
-  city: CITIES[0],
-  offers: getOffersInCity(offers, CITIES[0]),
-  isDataLoaded: true,
+  city: cityCurrent,
+  offers: [],
+  isDataLoaded: false,
   offersSort: 'popular',
   offerInFocus: undefined,
+  offerInfo: undefined,
+  commentsList: [],
 };
 
 const appData = createReducer(initialState, (builder) => {
   builder
-    .addCase(ActiveCityAction, (state, action) => {
-      state.city = action.payload;
+    .addCase(activeCityAction, (state, action) => {
+      const cityData = citiesData.filter((cityObj) => cityObj.title === action.payload.title)[0];
+
+      state.city = {
+        title: cityData.title,
+        lat: cityData.lat,
+        lng: cityData.lng,
+        zoom: cityData.zoom,
+      };
     })
-    .addCase(OffersListAction, (state, action) => {
-      state.offers = getOffersInCity(offers, action.payload);
+    .addCase(loadOffersAction, (state, action) => {
+      const {offers} = action.payload;
+      const offersFilter = offers.filter((offer: Offer) => offer.city.name === state.city.title);
+      state.offers = offersFilter;
       state.isDataLoaded = true;
     })
-    .addCase(OfferInFocusAction, (state, action) => {
+    .addCase(offerInFocusAction, (state, action) => {
       state.offerInFocus = action.payload;
     })
-    .addCase(OffersSortAction, (state, action) => {
+    .addCase(offersSortAction, (state, action) => {
       state.offersSort = action.payload;
       state.offers = getSortOffers(state.offers, action.payload);
+    })
+    .addCase(loadOffersNearbyAction, (state, action) => {
+      state.offerNearby = action.payload;
+    })
+    .addCase(loadOfferInfoAction, (state, action) => {
+      state.offerInfo = action.payload;
+    })
+    .addCase(loadCommentsAction, (state, action) => {
+      state.commentsList = action.payload;
     });
 });
 

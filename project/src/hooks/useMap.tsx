@@ -1,45 +1,40 @@
-import {useEffect, useState, MutableRefObject} from 'react';
+import {MutableRefObject, useEffect, useState} from 'react';
 import {Map, TileLayer} from 'leaflet';
-import {OpenStreetMapProvider} from 'leaflet-geosearch';
+import {useSelector} from 'react-redux';
+import {getCity} from '../store/app-data/selectors';
+import {MapCity} from '../types/map';
 import {MAP_PROPERTY} from '../const';
-import {store} from '../index';
 
 export default function useMap (mapRef: MutableRefObject<HTMLElement | null>): Map | null {
   const [map, setMap] = useState<Map | null>(null);
-  const newLocal = new OpenStreetMapProvider();
-  const provider = newLocal;
-  const city = store.getState().DATA.city;
+  const city: MapCity = useSelector(getCity);
+  const lat = city.lat;
+  const lng = city.lng;
 
   useEffect(() => {
-    provider.search({ query: city})
-      .then((result) => {
-        const lat = parseFloat(result[0].raw.lat);
-        const lng = parseFloat(result[0].raw.lon);
-        return [lat, lng];
-      })
-      .then((point) => {
-        if (mapRef.current !== null && map === null) {
-          const instance = new Map(mapRef.current, {
-            center: {
-              lat: point[0],
-              lng: point[1],
-            },
-            zoom: MAP_PROPERTY.zoomCity,
-          });
-
-          const layer = new TileLayer(
-            MAP_PROPERTY.link,
-            {
-              attribution: MAP_PROPERTY.attribution,
-            },
-          );
-
-          instance.addLayer(layer);
-
-          setMap(instance);
-        }
+    if (mapRef.current !== null && map === null) {
+      const instance: Map = new Map(mapRef.current, {
+        center: {
+          lat,
+          lng,
+        },
+        zoom: MAP_PROPERTY.zoomCity,
       });
-  }, [mapRef, map, city, provider]);
+
+      const layer = new TileLayer(
+        MAP_PROPERTY.link,
+        {
+          attribution: MAP_PROPERTY.attribution,
+        },
+      );
+
+      instance.addLayer(layer);
+      setMap(instance);
+    }
+    else {
+      map && map.setView([lat, lng]);
+    }
+  }, [lat, lng, map, mapRef]);
 
   return map;
 }
