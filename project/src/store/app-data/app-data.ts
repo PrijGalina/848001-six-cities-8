@@ -1,7 +1,7 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {CITIES, citiesData} from '../../const';
 import {getSortOffers} from '../../utils';
-import {activeCityAction, offerInFocusAction, offersSortAction, loadOffersAction, offerActiveIdAction, loadOffersNearbyAction, loadOfferInfoAction, loadCommentsAction} from '../action';
+import {activeCityAction, offerInFocusAction, offersSortAction, loadOffersAction, loadOffersNearbyAction, loadOfferInfoAction, loadCommentsAction} from '../action';
 import {AppData} from '../../types/state';
 import {Offer} from '../../types/offer';
 
@@ -13,7 +13,6 @@ const initialState: AppData = {
   isDataLoaded: false,
   offersSort: 'popular',
   offerInFocus: undefined,
-  offerActiveId: undefined,
   offerInfo: undefined,
   commentsList: [],
 };
@@ -42,9 +41,6 @@ const appData = createReducer(initialState, (builder) => {
     .addCase(offersSortAction, (state, action) => {
       state.offersSort = action.payload;
       state.offers = getSortOffers(state.offers, action.payload);
-    })
-    .addCase(offerActiveIdAction, (state, action) => {
-      state.offerActiveId = action.payload;
     })
     .addCase(loadOffersNearbyAction, (state, action) => {
       state.offerNearby = action.payload;

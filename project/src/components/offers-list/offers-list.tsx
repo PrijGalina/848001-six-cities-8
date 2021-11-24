@@ -28,7 +28,7 @@ export default function OffersList({ offers, classes, page }: OffersListProps): 
             classes={classes}
             page={page}
             onStateChange={() => onFocusOffer(offer)}
-            onStateReset={onFocusOffer}
+            onStateReset={() => onFocusOffer(undefined)}
           />
         );
       })}

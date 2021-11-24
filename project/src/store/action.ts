@@ -24,8 +24,6 @@ export const requireLogoutAction = createAction(ActionType.RequireLogout);
 
 export const offersSortAction = createAction<SortValue>(ActionType.OffersSort);
 
-export const offerActiveIdAction = createAction<number | undefined>(ActionType.OfferActiveId);
-
 export const loadOffersNearbyAction = createAction<Offer[]>(ActionType.OfferNearby);
 
 export const loadOfferInfoAction = createAction(

@@ -12,6 +12,7 @@ import Loading from '../loading/loading';
 import {getDataLoad} from '../../store/app-data/selectors';
 import {getAuthorization} from '../../store/user-process/selectors';
 
+
 export default function App(): JSX.Element {
   const authorizationStatus = useSelector(getAuthorization);
   const isDataLoaded = useSelector(getDataLoad);

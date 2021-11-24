@@ -2,8 +2,6 @@ import {Link} from 'react-router-dom';
 import RatingBlock from '../rating-block/rating-block';
 import BookmarkBlock from '../bookmark-block/bookmark-block';
 import cn from 'classnames';
-import {offerActiveIdAction} from '../../store/action';
-import {useDispatch} from 'react-redux';
 import {Offer} from '../../types/offer';
 
 type OfferInfoWrapperProps = {
@@ -13,12 +11,7 @@ type OfferInfoWrapperProps = {
 };
 
 export default function OfferInfoWrapper({infoClass, pathToOffer, offer}: OfferInfoWrapperProps): JSX.Element {
-  const {isFavorite, rating, price, title, type, id} = offer;
-  const dispatch = useDispatch();
-
-  const onClickOffer = (value: number) => {
-    dispatch(offerActiveIdAction(value));
-  };
+  const {isFavorite, rating, price, title, type} = offer;
 
   return (
     <div className={cn ('place-card__info', infoClass)}>
@@ -31,7 +24,7 @@ export default function OfferInfoWrapper({infoClass, pathToOffer, offer}: OfferI
       </div>
       <RatingBlock rating={rating}/>
       <h2 className="place-card__name">
-        <Link to={pathToOffer} onClick={() => onClickOffer(id)}>{title}</Link>
+        <Link to={pathToOffer}>{title}</Link>
       </h2>
       <p className="place-card__type">{type}</p>
     </div>

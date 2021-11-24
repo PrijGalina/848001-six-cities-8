@@ -13,7 +13,6 @@ export enum ActionType {
   RequireLogout = 'user/requireLogout',
   RedirectToRoute = 'user/redirectToRoute',
   UpdateOffers = 'data/updateOffers',
-  OfferActiveId = 'data/offeraActiveId',
   OfferNearby = 'data/offerNearby',
   OfferInfo = 'data/offerInfo',
   CommentsList = 'data/commentList',
