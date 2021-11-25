@@ -2,7 +2,7 @@ import {useParams, useLocation} from 'react-router-dom';
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {fetchOfferInfoAction, fetchCommentsAboutAction, fetchOffersNearbyAction} from '../../store/api-actions';
-import {setOfferActive} from '../../store/action';
+import {setOfferActive, setActiveCity} from '../../store/action';
 import {useSelector} from 'react-redux';
 import {getOfferInfo, getComments, getOffersNearby} from '../../store/offer/selectors';
 import ImagesOfPlace from '../../components/images-of-place/images-of-place';
@@ -39,6 +39,15 @@ export default function Property(): JSX.Element {
   const comments = useSelector(getComments);
   const offersNearby = useSelector(getOffersNearby);
   const images = offer ? offer.images.slice(0, 6) : [];
+
+  const cityAdapted =   offer && {
+    title:offer.city.name,
+    lat: offer.city.location.latitude,
+    lng: offer.city.location.longitude,
+    zoom: offer.city.location.zoom,
+  };
+
+  offer && cityAdapted && dispatch(setActiveCity(cityAdapted));
 
   return (
     <div>
