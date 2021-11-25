@@ -1,11 +1,11 @@
 import Logo from '../../components/logo/logo';
 import {PagesApp, LOGO_PROPERTY} from '../../const';
 import {useSelector} from 'react-redux';
-import {getAuthorization} from '../../store/user-process/selectors';
+import {getAuthorization} from '../../store/user/selectors';
 import {AuthorizationStatus, AppRoute} from '../../const';
 import {Link} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
-import {fetchOfferAction, logoutAction} from '../../store/api-actions';
+import {deleteAuthData} from '../../store/api-actions';
 
 type HeaderProps = {
   page: string,
@@ -15,12 +15,8 @@ export default function Header({page}: HeaderProps): JSX.Element {
   const isAuth = useSelector(getAuthorization);
   const dispatch = useDispatch();
 
-  const onCityChange = () => {
-    dispatch(fetchOfferAction());
-  };
-
-  const onLogOut = () => {
-    dispatch(logoutAction());
+  const handleLogOut = () => {
+    dispatch(deleteAuthData());
   };
 
   return (
@@ -35,14 +31,14 @@ export default function Header({page}: HeaderProps): JSX.Element {
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
                   {isAuth === AuthorizationStatus.Auth &&
-                  <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile" href="#/" onClick={() => onCityChange()}>
+                  <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile" href="#/">
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                   </Link>}
                 </li>
                 <li className="header__nav-item">
                   {isAuth === AuthorizationStatus.Auth ?
-                    <Link to={AppRoute.Root} className="header__nav-link" href="#/" onClick={() => onLogOut()}>
+                    <Link to={AppRoute.Root} className="header__nav-link" href="#/" onClick={() => handleLogOut()}>
                       <span className="header__signout">Sign out</span>
                     </Link>
                     :

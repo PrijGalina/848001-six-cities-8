@@ -5,37 +5,37 @@ import {Offer} from '../types/offer';
 import {ReviewType} from '../types/review';
 import {MapCity} from '../types/map';
 
-export const activeCityAction = createAction<MapCity>(ActionType.ActiveCity);
-
-export const authorizationStatusAction = createAction<AuthorizationStatus>(ActionType.Authorization);
-
-export const offerInFocusAction = createAction<Offer | undefined>(ActionType.OfferInFocus);
-
-export const loadOffersAction = createAction(
+export const loadOffers = createAction(
   ActionType.LoadOffers,
   (offers: Offer[]) => ({
     payload: {offers},
   }),
 );
 
-export const updateOffersList = createAction(ActionType.UpdateOffers);
+export const loadOffersNearby = createAction<Offer[]>(ActionType.LoadOffersNearby);
 
-export const requireLogoutAction = createAction(ActionType.RequireLogout);
-
-export const offersSortAction = createAction<SortValue>(ActionType.OffersSort);
-
-export const loadOffersNearbyAction = createAction<Offer[]>(ActionType.OfferNearby);
-
-export const loadOfferInfoAction = createAction(
-  ActionType.OfferInfo,
+export const loadInfoAboutOffer = createAction(
+  ActionType.LoadInfoAboutOffer,
   (offer: Offer | undefined) => ({
     payload: offer,
   }),
 );
 
-export const loadCommentsAction = createAction(
-  ActionType.CommentsList,
-  (comment: ReviewType[] | undefined) => ({
+export const loadCommentsAboutOffer = createAction(
+  ActionType.LoadCommentsAboutOffer,
+  (comment: ReviewType[]) => ({
     payload: comment,
   }),
 );
+
+export const setActiveCity = createAction<MapCity>(ActionType.SetActiveCity);
+
+export const setAuthStatus = createAction<AuthorizationStatus>(ActionType.SetAuthStatus);
+
+export const setOfferActive = createAction<Offer | undefined>(ActionType.SetOfferActive);
+
+export const deleteAuthorization = createAction(ActionType.DeleteAuthorization);
+
+export const setSortOffers = createAction<SortValue>(ActionType.SetSortOffers);
+
+

@@ -3,14 +3,17 @@ import {useRef, useEffect} from 'react';
 import {Icon, IconOptions, Map as MapContainer, Marker} from 'leaflet';
 import useMap from '../../hooks/useMap';
 import {Location} from '../../types/offer';
-import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT, PIN_SIZE, PIN_ANCHOR} from '../../const';
+import {UrlMarker, PIN_SIZE, PIN_ANCHOR} from '../../const';
 import 'leaflet/dist/leaflet.css';
-import {getOffer, getOffers} from '../../store/app-data/selectors';
+import {getOfferActive} from '../../store/offer/selectors';
+import {Offer} from '../../types/offer';
 import L from 'leaflet';
 
 type MapProps = {
   height: number,
   width: number,
+  zoom: number,
+  offers: Offer[],
 };
 
 const LeafIcon = (url: string) => {
@@ -23,12 +26,12 @@ const LeafIcon = (url: string) => {
   return new Icon(options);
 };
 
-const defaultCustomIcon = LeafIcon(URL_MARKER_DEFAULT);
-const currentCustomIcon = LeafIcon(URL_MARKER_CURRENT);
+const defaultCustomIcon = LeafIcon(UrlMarker.Default);
+const currentCustomIcon = LeafIcon(UrlMarker.Active);
+const markerGroup = L.layerGroup();
 
 function setMarkersOnMap(locations: Location[], map: MapContainer, hoverPoint?: Location | boolean) {
-  const markerGroup = L.layerGroup().addTo(map);
-
+  markerGroup.clearLayers();
   locations.forEach(({latitude: lat, longitude: lng}) => {
     const marker = new Marker({
       lat,
@@ -48,14 +51,14 @@ function setMarkersOnMap(locations: Location[], map: MapContainer, hoverPoint?: 
   });
 }
 
-export default function Map({ height, width }: MapProps): JSX.Element {
+export default function Map({ height, width, zoom, offers }: MapProps): JSX.Element {
 
-  const offers = useSelector(getOffers);
-  const offerInFocus = useSelector(getOffer);
+  const offerInFocus = useSelector(getOfferActive);
   const mapRef = useRef(null);
-  const map = useMap(mapRef);
+  const map = useMap(mapRef, zoom);
   const locations = offers.map(({location}) => location);
   const hoverPoint = (offerInFocus !== undefined) && offerInFocus.location;
+  map && markerGroup.addTo(map);
 
   useEffect(() => {
     if (map) {

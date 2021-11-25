@@ -1,11 +1,11 @@
 import {MutableRefObject, useEffect, useState} from 'react';
 import {Map, TileLayer} from 'leaflet';
 import {useSelector} from 'react-redux';
-import {getCity} from '../store/app-data/selectors';
+import {getCity} from '../store/main/selectors';
 import {MapCity} from '../types/map';
 import {MAP_PROPERTY} from '../const';
 
-export default function useMap (mapRef: MutableRefObject<HTMLElement | null>): Map | null {
+export default function useMap (mapRef: MutableRefObject<HTMLElement | null>, zoom: number): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const city: MapCity = useSelector(getCity);
   const lat = city.lat;
@@ -18,7 +18,7 @@ export default function useMap (mapRef: MutableRefObject<HTMLElement | null>): M
           lat,
           lng,
         },
-        zoom: MAP_PROPERTY.zoomCity,
+        zoom: zoom,
       });
 
       const layer = new TileLayer(
@@ -28,13 +28,14 @@ export default function useMap (mapRef: MutableRefObject<HTMLElement | null>): M
         },
       );
 
+
       instance.addLayer(layer);
       setMap(instance);
     }
     else {
       map && map.setView([lat, lng]);
     }
-  }, [lat, lng, map, mapRef]);
+  }, [lat, lng, map, mapRef, zoom]);
 
   return map;
 }

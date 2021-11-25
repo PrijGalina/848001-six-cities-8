@@ -23,8 +23,6 @@ export const getRatingStyle = (rating: number): number  => {
 
 export const isCheckedAuth = (authorizationStatus: string): boolean => authorizationStatus === AuthorizationStatus.Unknown;
 
-export const getOffersInCity = (offers: Offer[], cityValue: string): Offer[] => offers.filter(({city}) => (city.name === cityValue));
-
 export const sortOffersRating = (offerA: Offer, offerB: Offer): number => Math.sign(offerB.rating - offerA.rating);
 
 export const sortOffersAsc = (offerA: Offer, offerB: Offer): number => Math.sign(offerB.price -  offerA.price);
@@ -45,3 +43,5 @@ export const getSortOffers = (offers: Offer[], sortValue: string): Offer[] => {
       return offers.sort(sortOffersRating);
   }
 };
+
+export const getFiltredOffers = (offers: Offer[], city: string): Offer[] => offers.filter((offer: Offer) => offer.city.name === city);

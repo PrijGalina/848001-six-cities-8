@@ -1,63 +1,60 @@
-import {ThunkActionResult} from '../types/action';
-import {loadOffersAction, authorizationStatusAction, requireLogoutAction,loadOffersNearbyAction, loadOfferInfoAction, loadCommentsAction} from './action';
 import {saveToken, dropToken, Token} from '../services/token';
-import {APIRoute, AuthorizationStatus} from '../const';
+import {adaptOffersToClient, adaptOfferToClient, adaptCommentsToClient} from '../services/adapters';
+import {loadOffers, setAuthStatus, deleteAuthorization,loadOffersNearby, loadInfoAboutOffer, loadCommentsAboutOffer} from './action';
+import {ThunkActionResult} from '../types/action';
 import {AuthData} from '../types/auth-data';
-import {adaptOfferToClient, adaptOfferToClientOneOffer, adaptCommentToClient} from '../services/adapters';
 import {OfferDTO, CommentDTO} from '../types/server-types';
+import {APIRoute, AuthorizationStatus} from '../const';
 
-export const fetchOfferAction = (): ThunkActionResult =>
+export const fetchOffersAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const {data} = await api.get<OfferDTO[]>(APIRoute.Offers);
-    const newData = adaptOfferToClient(data);
-    dispatch(loadOffersAction(newData));
+    const adaptedData = adaptOffersToClient(data);
+    dispatch(loadOffers(adaptedData));
   };
 
 export const fetchOfferInfoAction = (id: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const path = `${APIRoute.Offers}/${id}`;
     const {data} = await api.get<OfferDTO>(path);
-    const newData = adaptOfferToClientOneOffer(data);
-    dispatch(loadOfferInfoAction(newData));
+    const adaptedData = adaptOfferToClient(data);
+    dispatch(loadInfoAboutOffer(adaptedData));
   };
 
-export const fetchOfferNearbyAction = (id: number): ThunkActionResult =>
+export const fetchOffersNearbyAction = (id: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const path = `${APIRoute.Offers}/${id}/nearby`;
-
     const {data} = await api.get<OfferDTO[]>(path);
-    const newData = adaptOfferToClient(data);
-    dispatch(loadOffersNearbyAction(newData));
+    const adaptedData = adaptOffersToClient(data);
+    dispatch(loadOffersNearby(adaptedData));
   };
 
-export const fetchCommentAboutAction = (id: number): ThunkActionResult =>
+export const fetchCommentsAboutAction = (id: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const path = `${APIRoute.Comments}/${id}`;
-
-    const { data } = await api.get<CommentDTO[]>(path);
-    const newData = adaptCommentToClient(data);
-    dispatch(loadCommentsAction(newData));
+    const {data} = await api.get<CommentDTO[]>(path);
+    const adaptedData = adaptCommentsToClient(data);
+    dispatch(loadCommentsAboutOffer(adaptedData));
   };
 
-export const checkAuthAction = (): ThunkActionResult =>
+export const fetchAuthCheckAction = (): ThunkActionResult =>
   async (dispatch, _getState, api) => {
     await api.get(APIRoute.Login)
       .then(() => {
-        dispatch(authorizationStatusAction(AuthorizationStatus.NoAuth));
+        dispatch(setAuthStatus(AuthorizationStatus.NoAuth));
       });
   };
 
-export const loginAction = ({login: email, password}: AuthData): ThunkActionResult =>
+export const sendAuthData = ({login: email, password}: AuthData): ThunkActionResult =>
   async (dispatch, _getState, api) => {
     const {data: {token}} = await api.post<{token: Token}>(APIRoute.Login, {email, password});
     saveToken(token);
-    dispatch(authorizationStatusAction(AuthorizationStatus.Auth));
+    dispatch(setAuthStatus(AuthorizationStatus.Auth));
   };
 
-
-export const logoutAction = (): ThunkActionResult =>
+export const deleteAuthData = (): ThunkActionResult =>
   async (dispatch, _getState, api) => {
     api.delete(APIRoute.Logout);
     dropToken();
-    dispatch(requireLogoutAction());
+    dispatch(deleteAuthorization());
   };

@@ -5,7 +5,7 @@ export enum AppRoute {
   Root = '/',
   Login = '/login',
   Favorites = '/favorites',
-  Room = '/offer/:id',
+  Room = '/offer/',
 }
 
 export enum AuthorizationStatus {
@@ -35,8 +35,10 @@ export const RATING_STYLE = {
 
 export const CITIES = [ 'Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
-export const URL_MARKER_DEFAULT = 'http://localhost:3000/img/pin.svg';
-export const URL_MARKER_CURRENT = 'http://localhost:3000/img/pin-active.svg';
+export enum UrlMarker {
+  Default = 'http://localhost:3000/img/pin.svg',
+  Active = 'http://localhost:3000/img/pin-active.svg',
+}
 
 export const PIN_SIZE: PointExpression = [20, 30];
 export const PIN_ANCHOR: PointExpression = [10, 30];
@@ -99,6 +101,7 @@ export const MAP_PROPERTY = {
   link : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
   zoomCity: 10,
+  zoomOffer: 16,
   zoomLocation: 8,
   propertyMapSize: {
     width: 1144,

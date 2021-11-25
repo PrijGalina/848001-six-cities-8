@@ -1,15 +1,18 @@
 import {combineReducers} from 'redux';
-import {appData} from './app-data/app-data';
-import {userProcess} from './user-process/user-process';
+import {main} from './main/main';
+import {user} from './user/user';
+import {offer} from './offer/offer';
 
 export enum NameSpace {
-  data = 'DATA',
-  user = 'USER',
+  mainReducer = 'MAIN',
+  userReducer = 'USER',
+  offerReducer = 'OFFER',
 }
 
 export const rootReducer = combineReducers({
-  [NameSpace.data]: appData,
-  [NameSpace.user]: userProcess,
+  [NameSpace.mainReducer]: main,
+  [NameSpace.userReducer]: user,
+  [NameSpace.offerReducer]: offer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

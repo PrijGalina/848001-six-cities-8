@@ -1,10 +1,10 @@
 import {useParams, useLocation} from 'react-router-dom';
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {fetchOfferInfoAction, fetchCommentAboutAction, fetchOfferNearbyAction} from '../../store/api-actions';
-import {offerInFocusAction} from '../../store/action';
+import {fetchOfferInfoAction, fetchCommentsAboutAction, fetchOffersNearbyAction} from '../../store/api-actions';
+import {setOfferActive} from '../../store/action';
 import {useSelector} from 'react-redux';
-import {getOfferInfo, getComments, getOffersNearby} from '../../store/app-data/selectors';
+import {getOfferInfo, getComments, getOffersNearby} from '../../store/offer/selectors';
 import ImagesOfPlace from '../../components/images-of-place/images-of-place';
 import AboutPlace from '../../components/about-place/about-place';
 import AboutHost from '../../components/about-host/about-host';
@@ -27,17 +27,18 @@ export default function Property(): JSX.Element {
   id = id.replace(':', '');
 
   useEffect(() => {
-    dispatch(offerInFocusAction());
+    dispatch(setOfferActive(undefined));
     if (id) {
       dispatch(fetchOfferInfoAction(+id));
-      dispatch(fetchCommentAboutAction(+id));
-      dispatch(fetchOfferNearbyAction(+id));
+      dispatch(fetchCommentsAboutAction(+id));
+      dispatch(fetchOffersNearbyAction(+id));
     }
   }, [dispatch, id, location, param]);
 
   const offer = useSelector(getOfferInfo);
   const comments = useSelector(getComments);
   const offersNearby = useSelector(getOffersNearby);
+  const images = offer ? offer.images.slice(0, 6) : [];
 
   return (
     <div>
@@ -45,7 +46,7 @@ export default function Property(): JSX.Element {
         offer &&
         <>
           <section className="property">
-            <ImagesOfPlace images={offer.images} />
+            <ImagesOfPlace images={images} />
             <div className="property__container container">
               <div className="property__wrapper">
                 <AboutPlace offer={offer} />
@@ -58,8 +59,10 @@ export default function Property(): JSX.Element {
             </div>
             <section className="property__map map">
               <Map
+                offers = {offersNearby ? offersNearby : []}
                 height={MAP_PROPERTY.propertyMapSize.height}
                 width={MAP_PROPERTY.propertyMapSize.width}
+                zoom = {MAP_PROPERTY.zoomOffer}
               />
             </section>
           </section>

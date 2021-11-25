@@ -4,18 +4,21 @@ import {MapCity} from './map';
 import {RootState} from '../store/root-reducer';
 import {AuthorizationStatus} from '../const';
 
-export type AppData = {
+export type MainType = {
   city: MapCity,
   offers: Offer[],
   isDataLoaded: boolean,
-  offerInFocus: Offer | undefined,
-  offersSort: string,
-  offerNearby?: Offer[],
-  offerInfo: Offer | undefined,
-  commentsList?: ReviewType[],
+  sort: string,
 };
 
-export type UserProcess = {
+export type OfferType = {
+  info: Offer | undefined,
+  focus?: Offer | undefined,
+  comments: ReviewType[] | [],
+  nearby: Offer[] | [],
+};
+
+export type UserType = {
   authorizationStatus: AuthorizationStatus,
 };
 

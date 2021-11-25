@@ -3,11 +3,13 @@ import PlacesSorting from '../places-sorting/places-sorting';
 import OffersList from '../offers-list/offers-list';
 import Map from '../map/map';
 import {PagesApp, OFFER_IN_HOME, MAP_PROPERTY} from '../../const';
-import {getCity, getOffers} from '../../store/app-data/selectors';
+import {getCity, getOffers} from '../../store/main/selectors';
+import {getFiltredOffers} from '../../utils';
 
 export default function PlacesInCity(): JSX.Element {
-  const offers = useSelector(getOffers);
+  const allOffers = useSelector(getOffers);
   const city = useSelector(getCity);
+  const offers = getFiltredOffers(allOffers, city.title);
 
   return (
     <>
@@ -25,8 +27,10 @@ export default function PlacesInCity(): JSX.Element {
       </section>
       <div className='cities__right-section'>
         <Map
+          offers = {offers}
           height={MAP_PROPERTY.homeMapSize.height}
           width={MAP_PROPERTY.homeMapSize.width}
+          zoom = {MAP_PROPERTY.zoomCity}
         />
       </div>
     </>

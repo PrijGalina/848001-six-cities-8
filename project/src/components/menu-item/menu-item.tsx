@@ -1,9 +1,8 @@
 import cn from 'classnames';
 import {useDispatch} from 'react-redux';
-import {activeCityAction} from '../../store/action';
+import {setActiveCity} from '../../store/action';
 import {useSelector} from 'react-redux';
-import {getCity} from '../../store/app-data/selectors';
-import {fetchOfferAction} from '../../store/api-actions';
+import {getCity} from '../../store/main/selectors';
 import {MapCity} from '../../types/map';
 import {citiesData } from '../../const';
 
@@ -17,9 +16,8 @@ export default function MenuItem({cityItem}: MenuItemProps): JSX.Element {
   const dispatch = useDispatch();
   const isActive = cityCurrent.title === cityItem;
 
-  const onCityChange = (city: MapCity) => {
-    dispatch(activeCityAction(city));
-    dispatch(fetchOfferAction());
+  const handleCityChange = (city: MapCity) => {
+    dispatch(setActiveCity(city));
   };
 
   return (
@@ -29,7 +27,7 @@ export default function MenuItem({cityItem}: MenuItemProps): JSX.Element {
         href="#/"
         onClick={(e) => {
           e.preventDefault();
-          onCityChange(cityClick);
+          handleCityChange(cityClick);
         }}
       >
         <span>{cityItem}</span>

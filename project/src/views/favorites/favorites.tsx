@@ -2,7 +2,7 @@ import {useSelector} from 'react-redux';
 import {Offer} from '../../types/offer';
 import FavoritesByCity from '../../components/favorites-by-city/favorites-by-city';
 import {CITIES} from '../../const';
-import {getOffers} from '../../store/app-data/selectors';
+import {getOffers} from '../../store/main/selectors';
 
 export default function Favorites(): JSX.Element {
   const offers = useSelector(getOffers);

@@ -9,8 +9,8 @@ import Favorites from '../../views/favorites/favorites';
 import Property from '../../views/property/property';
 import PrivateRoute from '../private-route/private-route';
 import Loading from '../loading/loading';
-import {getDataLoad} from '../../store/app-data/selectors';
-import {getAuthorization} from '../../store/user-process/selectors';
+import {getDataLoad} from '../../store/main/selectors';
+import {getAuthorization} from '../../store/user/selectors';
 
 
 export default function App(): JSX.Element {
@@ -49,7 +49,7 @@ export default function App(): JSX.Element {
         >
         </PrivateRoute>
 
-        <Route exact path={AppRoute.Room}>
+        <Route exact path={`${AppRoute.Room}:id`}>
           <Layout page={PagesApp.Property}>
             <Property/>
           </Layout>
@@ -58,12 +58,14 @@ export default function App(): JSX.Element {
         <Route
           render={() =>  (
             <Layout page={PagesApp.undefined}>
-              <h1>
-                404.
-                <br />
-                <small>Page not found</small>
-              </h1>
-              <Link to="/">Go to main page</Link>
+              <div className="container">
+                <h1>
+                  404.
+                  <br />
+                  <small>Page not found</small>
+                </h1>
+                <Link to="/">Go to main page</Link>
+              </div>
             </Layout>
           )}
         />

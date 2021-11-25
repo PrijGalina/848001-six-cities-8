@@ -1,5 +1,5 @@
 import {useSelector} from 'react-redux';
-import {getCity} from '../../store/app-data/selectors';
+import {getCity} from '../../store/main/selectors';
 
 export default function NoPlacesToStay(): JSX.Element {
   const city = useSelector(getCity);

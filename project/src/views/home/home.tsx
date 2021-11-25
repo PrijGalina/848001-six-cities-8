@@ -3,7 +3,7 @@ import Tabs from '../../components/tabs/tabs';
 import cn from 'classnames';
 import PlacesInCity from '../../components/places-in-city/places-in-city';
 import NoPlacesToStay from '../../components/no-places-to-stay/no-places-to-stay';
-import {getOffers} from '../../store/app-data/selectors';
+import {getOffers} from '../../store/main/selectors';
 
 export default function Home(): JSX.Element {
   const offers = useSelector(getOffers);
