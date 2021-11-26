@@ -100,8 +100,8 @@ export const FAVORITE_ICON = {
 export const MAP_PROPERTY = {
   link : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-  zoomCity: 10,
-  zoomOffer: 16,
+  zoomCity: 13,
+  zoomOffer: 14,
   zoomLocation: 8,
   propertyMapSize: {
     width: 1144,

@@ -31,6 +31,8 @@ export default function PlacesInCity(): JSX.Element {
           height={MAP_PROPERTY.homeMapSize.height}
           width={MAP_PROPERTY.homeMapSize.width}
           zoom = {MAP_PROPERTY.zoomCity}
+          lat = {city.lat}
+          lng = {city.lng}
         />
       </div>
     </>

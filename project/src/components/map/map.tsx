@@ -14,6 +14,8 @@ type MapProps = {
   width: number,
   zoom: number,
   offers: Offer[],
+  lat: number,
+  lng: number,
 };
 
 const LeafIcon = (url: string) => {
@@ -51,11 +53,10 @@ function setMarkersOnMap(locations: Location[], map: MapContainer, hoverPoint?: 
   });
 }
 
-export default function Map({ height, width, zoom, offers }: MapProps): JSX.Element {
-
+export default function Map({ height, width, zoom, offers, lat, lng}: MapProps): JSX.Element {
   const offerInFocus = useSelector(getOfferActive);
   const mapRef = useRef(null);
-  const map = useMap(mapRef, zoom);
+  const map = useMap(mapRef, zoom, lat, lng);
   const locations = offers.map(({location}) => location);
   const hoverPoint = (offerInFocus !== undefined) && offerInFocus.location;
   map && markerGroup.addTo(map);

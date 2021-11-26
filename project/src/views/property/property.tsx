@@ -22,9 +22,7 @@ type ParamType = {
 export default function Property(): JSX.Element {
   const dispatch = useDispatch();
   const location = useLocation();
-  const param: ParamType = useParams();
-  let {id} = param;
-  id = id.replace(':', '');
+  const {id}: ParamType = useParams();
 
   useEffect(() => {
     dispatch(setOfferActive(undefined));
@@ -33,7 +31,7 @@ export default function Property(): JSX.Element {
       dispatch(fetchCommentsAboutAction(+id));
       dispatch(fetchOffersNearbyAction(+id));
     }
-  }, [dispatch, id, location, param]);
+  }, [dispatch, id, location]);
 
   const offer = useSelector(getOfferInfo);
   const comments = useSelector(getComments);
@@ -72,6 +70,8 @@ export default function Property(): JSX.Element {
                 height={MAP_PROPERTY.propertyMapSize.height}
                 width={MAP_PROPERTY.propertyMapSize.width}
                 zoom = {MAP_PROPERTY.zoomOffer}
+                lat = {offer.location.latitude}
+                lng = {offer.location.longitude}
               />
             </section>
           </section>
