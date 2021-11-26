@@ -1,22 +1,22 @@
 import Logo from '../../components/logo/logo';
 import {PagesApp, LOGO_PROPERTY} from '../../const';
 import {useSelector} from 'react-redux';
-import {getAuthorization} from '../../store/user/selectors';
+import {getAuthorizationStatus} from '../../store/user/selectors';
 import {AuthorizationStatus, AppRoute} from '../../const';
 import {Link} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
-import {deleteAuthData} from '../../store/api-actions';
+import {logoutAction} from '../../store/api-actions';
 
 type HeaderProps = {
   page: string,
 }
 
 export default function Header({page}: HeaderProps): JSX.Element {
-  const isAuth = useSelector(getAuthorization);
+  const isAuth = useSelector(getAuthorizationStatus);
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
-    dispatch(deleteAuthData());
+    dispatch(logoutAction());
   };
 
   return (

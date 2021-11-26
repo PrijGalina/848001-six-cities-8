@@ -9,6 +9,7 @@ export type MainType = {
   offers: Offer[],
   isDataLoaded: boolean,
   sort: string,
+  favorites: Offer[],
 };
 
 export type OfferType = {

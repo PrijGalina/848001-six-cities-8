@@ -6,14 +6,16 @@ import {State} from '../types/state';
 export enum ActionType {
   LoadOffers = 'main/loadOffers',
   LoadOffersNearby = 'offer/loadOffersNearby',
+  LoadFavoriteOffers = 'main/loadFavoriteOffers',
   LoadInfoAboutOffer = 'offer/loadInfoAboutOffer',
   LoadCommentsAboutOffer = 'offer/loadCommentsAboutOffer',
-  DeleteAuthorization = 'user/deleteAuthorization',
+  DeleteAuthorization = 'user/logout',
   RedirectToRoute = 'user/redirectToRoute',
   SetActiveCity = 'main/setActiveCity',
   SetOfferActive = 'offer/setOfferActive',
-  SetAuthStatus = 'user/setAuthStatus',
+  SetAuthStatus = 'user/login',
   SetSortOffers = 'main/setSortOffers',
+  SetFavoriteStatus = 'offer/setFavoriteStatus',
 }
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;

@@ -2,7 +2,7 @@ import {useSelector} from 'react-redux';
 import {getCity} from '../../store/main/selectors';
 import {useRef, FormEvent} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
-import {sendAuthData} from '../../store/api-actions';
+import {loginAction} from '../../store/api-actions';
 import {ThunkAppDispatch} from '../../types/action';
 import {AuthData} from '../../types/auth-data';
 import {useHistory} from 'react-router-dom';
@@ -10,7 +10,7 @@ import {AppRoute} from '../../const';
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   onSubmit(authData: AuthData) {
-    dispatch(sendAuthData(authData));
+    dispatch(loginAction(authData));
   },
 });
 
@@ -27,8 +27,8 @@ function LogIn(props: PropsFromRedux): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
       onSubmit({

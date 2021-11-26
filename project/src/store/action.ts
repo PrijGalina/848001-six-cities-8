@@ -1,41 +1,28 @@
 import {createAction} from '@reduxjs/toolkit';
 import {ActionType} from '../types/action';
-import {AuthorizationStatus, SortValue} from '../const';
 import {Offer} from '../types/offer';
 import {ReviewType} from '../types/review';
 import {MapCity} from '../types/map';
+import {AuthorizationStatus, SortValue, AppRoute} from '../const';
 
-export const loadOffers = createAction(
-  ActionType.LoadOffers,
-  (offers: Offer[]) => ({
-    payload: {offers},
-  }),
-);
+export const loadOffers = createAction<Offer[]>(ActionType.LoadOffers);
 
 export const loadOffersNearby = createAction<Offer[]>(ActionType.LoadOffersNearby);
 
-export const loadInfoAboutOffer = createAction(
-  ActionType.LoadInfoAboutOffer,
-  (offer: Offer | undefined) => ({
-    payload: offer,
-  }),
-);
+export const loadInfoAboutOffer = createAction<Offer | undefined>(ActionType.LoadInfoAboutOffer);
 
-export const loadCommentsAboutOffer = createAction(
-  ActionType.LoadCommentsAboutOffer,
-  (comment: ReviewType[]) => ({
-    payload: comment,
-  }),
-);
+export const loadFavoriteOffers = createAction<Offer[]>(ActionType.LoadFavoriteOffers);
+
+export const loadCommentsAboutOffer = createAction<ReviewType[]>(ActionType.LoadCommentsAboutOffer);
 
 export const setActiveCity = createAction<MapCity>(ActionType.SetActiveCity);
 
-export const setAuthStatus = createAction<AuthorizationStatus>(ActionType.SetAuthStatus);
-
 export const setOfferActive = createAction<Offer | undefined>(ActionType.SetOfferActive);
-
-export const deleteAuthorization = createAction(ActionType.DeleteAuthorization);
 
 export const setSortOffers = createAction<SortValue>(ActionType.SetSortOffers);
 
+export const login = createAction<AuthorizationStatus>(ActionType.SetAuthStatus);
 
+export const logout = createAction(ActionType.DeleteAuthorization);
+
+export const redirectToRoute = createAction<AppRoute>(ActionType.RedirectToRoute);

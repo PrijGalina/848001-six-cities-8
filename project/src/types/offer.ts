@@ -40,3 +40,8 @@ export type OfferClasses = {
   image: string,
   info: string,
 }
+
+export type OfferStatusFavorite = {
+  id: number,
+  status: number,
+}

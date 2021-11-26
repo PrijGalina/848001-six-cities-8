@@ -4,8 +4,8 @@ import {Provider} from 'react-redux';
 import {configureStore} from '@reduxjs/toolkit';
 import {createAPI} from './services/api';
 import {rootReducer} from './store/root-reducer';
-import {setAuthStatus} from './store/action';
-import {fetchOffersAction, fetchAuthCheckAction} from './store/api-actions';
+import {login} from './store/action';
+import {fetchOffersAction, checkAuthAction} from './store/api-actions';
 import {redirect} from './store/middlewares/redirect';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,7 +13,7 @@ import {AuthorizationStatus} from './const';
 import App from './components/app/app';
 
 const api = createAPI(
-  () => store.dispatch(setAuthStatus(AuthorizationStatus.NoAuth)),
+  () => store.dispatch(login(AuthorizationStatus.NoAuth)),
 );
 
 export const store = configureStore({
@@ -26,7 +26,7 @@ export const store = configureStore({
     }).concat(redirect),
 });
 
-store.dispatch(fetchAuthCheckAction());
+store.dispatch(checkAuthAction());
 store.dispatch(fetchOffersAction());
 
 ReactDOM.render(
