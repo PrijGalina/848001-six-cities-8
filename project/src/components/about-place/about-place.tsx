@@ -16,7 +16,7 @@ export default function AboutPlace({offer}: AboutPlaceProps): JSX.Element {
         <h1 className="property__name">
           {offer.title}
         </h1>
-        <BookmarkBlock  isPropertyDetail isFavorite={offer.isFavorite}/>
+        <BookmarkBlock  isPropertyDetail isFavorite={offer.isFavorite} forOffer={offer.id}/>
       </div>
       <RatingBlock rating={offer.rating} isPropertyDetail/>
       <ul className="property__features">

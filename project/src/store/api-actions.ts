@@ -54,6 +54,7 @@ export const sendOfferStatusFavoriteAction = ({id, status}: OfferStatusFavorite)
     const {data} = await api.post<OfferDTO>(path);
     const adaptedData = adaptOfferToClient(data);
     dispatch(loadInfoAboutOffer(adaptedData));
+    dispatch(fetchOffersAction());
   };
 
 export const checkAuthAction = (): ThunkActionResult =>

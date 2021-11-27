@@ -1,15 +1,26 @@
+import {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {useRef, FormEvent} from 'react';
-import {useSelector} from 'react-redux';
 import {getCity} from '../../store/main/selectors';
-import {useDispatch} from 'react-redux';
+import {getAuthorizationStatus} from '../../store/user/selectors';
 import {loginAction} from '../../store/api-actions';
+import {redirectToRoute} from '../../store/action';
+import {AppRoute, AuthorizationStatus} from '../../const';
 
 export default function LogIn(): JSX.Element {
+  const city = useSelector(getCity);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-  const city = useSelector(getCity);
+
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(redirectToRoute(AppRoute.Root));
+    }
+  }, [authorizationStatus, dispatch]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

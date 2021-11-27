@@ -1,19 +1,18 @@
 import {useParams, useLocation} from 'react-router-dom';
 import {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch,useSelector} from 'react-redux';
 import {fetchOfferInfoAction, fetchCommentsAboutAction, fetchOffersNearbyAction} from '../../store/api-actions';
 import {setOfferActive, setActiveCity} from '../../store/action';
-import {useSelector} from 'react-redux';
 import {getOfferInfo, getComments, getOffersNearby} from '../../store/offer/selectors';
+import {getAuthorizationStatus} from '../../store/user/selectors';
 import ImagesOfPlace from '../../components/images-of-place/images-of-place';
 import AboutPlace from '../../components/about-place/about-place';
 import AboutHost from '../../components/about-host/about-host';
 import NewCommentForm from '../../components/new-comment-form/new-comment-form';
 import ReviewsList from '../../components//reviews-list/reviews-list';
 import Map from '../../components/map/map';
-import {MAP_PROPERTY} from '../../const';
-import {PagesApp, OFFER_IN_PROPERTY} from '../../const';
 import OffersList from '../../components/offers-list/offers-list';
+import {PagesApp, OFFER_IN_PROPERTY, MAP_PROPERTY, AuthorizationStatus} from '../../const';
 
 type ParamType = {
   id: string,
@@ -36,6 +35,7 @@ export default function Property(): JSX.Element {
   const offer = useSelector(getOfferInfo);
   const comments = useSelector(getComments);
   const offersNearby = useSelector(getOffersNearby);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
   const images = offer ? offer.images.slice(0, 6) : [];
 
   const cityAdapted =   offer && {
@@ -60,7 +60,7 @@ export default function Property(): JSX.Element {
                 <AboutHost offer={offer} />
                 <section className="property__reviews reviews">
                   <ReviewsList reviews={comments} />
-                  <NewCommentForm />
+                  {authorizationStatus === AuthorizationStatus.Auth && <NewCommentForm />}
                 </section>
               </div>
             </div>
