@@ -1,5 +1,5 @@
 import {connect, ConnectedProps} from 'react-redux';
-import {BrowserRouter, Route, Switch, Link} from 'react-router-dom';
+import {Route, Switch, Link} from 'react-router-dom';
 import {AppRoute, PagesApp} from '../../const';
 import {isCheckedAuth} from '../../utils';
 import Layout from '../../containers/layout/layout';
@@ -30,53 +30,51 @@ function App(props: PropsFromRedux): JSX.Element {
   }
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path={AppRoute.Root}>
-          <Layout page={PagesApp.Home} isHome isGrey>
-            <Home/>
+    <Switch>
+      <Route exact path={AppRoute.Root}>
+        <Layout page={PagesApp.Home} isHome isGrey>
+          <Home/>
+        </Layout>
+      </Route>
+
+      <Route exact path={AppRoute.Login}>
+        <Layout page={PagesApp.LogIn} isLogIn isGrey>
+          <LogIn />
+        </Layout>
+      </Route>
+
+      <PrivateRoute
+        exact
+        path={AppRoute.Favorites}
+        render={() =>  (
+          <Layout page={PagesApp.Favorites}>
+            <Favorites/>
           </Layout>
-        </Route>
+        )}
+      >
+      </PrivateRoute>
 
-        <Route exact path={AppRoute.Login}>
-          <Layout page={PagesApp.LogIn} isLogIn isGrey>
-            <LogIn />
+      <Route exact path={`${AppRoute.Room}:id`}>
+        <Layout page={PagesApp.Property}>
+          <Property/>
+        </Layout>
+      </Route>
+
+      <Route
+        render={() =>  (
+          <Layout page={PagesApp.undefined}>
+            <div className="container">
+              <h1>
+                404.
+                <br />
+                <small>Page not found</small>
+              </h1>
+              <Link to="/">Go to main page</Link>
+            </div>
           </Layout>
-        </Route>
-
-        <PrivateRoute
-          exact
-          path={AppRoute.Favorites}
-          render={() =>  (
-            <Layout page={PagesApp.Favorites}>
-              <Favorites/>
-            </Layout>
-          )}
-        >
-        </PrivateRoute>
-
-        <Route exact path={`${AppRoute.Room}:id`}>
-          <Layout page={PagesApp.Property}>
-            <Property/>
-          </Layout>
-        </Route>
-
-        <Route
-          render={() =>  (
-            <Layout page={PagesApp.undefined}>
-              <div className="container">
-                <h1>
-                  404.
-                  <br />
-                  <small>Page not found</small>
-                </h1>
-                <Link to="/">Go to main page</Link>
-              </div>
-            </Layout>
-          )}
-        />
-      </Switch>
-    </BrowserRouter>
+        )}
+      />
+    </Switch>
   );
 }
 

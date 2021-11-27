@@ -21,7 +21,7 @@ export const getRatingStyle = (rating: number): number  => {
   }
 };
 
-export const isCheckedAuth = (authorizationStatus: string): boolean => authorizationStatus === AuthorizationStatus.Unknown;
+export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean => authorizationStatus === AuthorizationStatus.Unknown;
 
 export const sortOffersRating = (offerA: Offer, offerB: Offer): number => Math.sign(offerB.rating - offerA.rating);
 

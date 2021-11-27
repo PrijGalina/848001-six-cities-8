@@ -3,6 +3,7 @@ import {ActionType} from '../types/action';
 import {Offer} from '../types/offer';
 import {ReviewType} from '../types/review';
 import {MapCity} from '../types/map';
+import {UserData} from '../types/auth-data';
 import {AuthorizationStatus, SortValue, AppRoute} from '../const';
 
 export const loadOffers = createAction<Offer[]>(ActionType.LoadOffers);
@@ -20,6 +21,8 @@ export const setActiveCity = createAction<MapCity>(ActionType.SetActiveCity);
 export const setOfferActive = createAction<Offer | undefined>(ActionType.SetOfferActive);
 
 export const setSortOffers = createAction<SortValue>(ActionType.SetSortOffers);
+
+export const setUserInfo = createAction<UserData>(ActionType.setUserInfo);
 
 export const login = createAction<AuthorizationStatus>(ActionType.SetAuthStatus);
 

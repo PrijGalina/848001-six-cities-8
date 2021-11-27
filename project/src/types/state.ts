@@ -3,6 +3,7 @@ import {ReviewType} from './review';
 import {MapCity} from './map';
 import {RootState} from '../store/root-reducer';
 import {AuthorizationStatus} from '../const';
+import {UserData} from './auth-data';
 
 export type MainType = {
   city: MapCity,
@@ -21,6 +22,7 @@ export type OfferType = {
 
 export type UserType = {
   authorizationStatus: AuthorizationStatus,
+  user: UserData | undefined;
 };
 
 export type State = RootState;

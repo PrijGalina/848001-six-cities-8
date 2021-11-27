@@ -1,16 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux';
 import {configureStore} from '@reduxjs/toolkit';
 import {createAPI} from './services/api';
+import {Provider} from 'react-redux';
+import {Router as BrowserRouter} from 'react-router-dom';
+import App from './components/app/app';
 import {rootReducer} from './store/root-reducer';
 import {login} from './store/action';
 import {fetchOffersAction, checkAuthAction} from './store/api-actions';
+import {AuthorizationStatus} from './const';
 import {redirect} from './store/middlewares/redirect';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {AuthorizationStatus} from './const';
-import App from './components/app/app';
+import browserHistory from './browser-history';
 
 const api = createAPI(
   () => store.dispatch(login(AuthorizationStatus.NoAuth)),
@@ -32,8 +34,10 @@ store.dispatch(fetchOffersAction());
 ReactDOM.render(
   <React.StrictMode>
     <Provider store = {store}>
-      <ToastContainer />
-      <App />
+      <BrowserRouter history={browserHistory}>
+        <ToastContainer />
+        <App />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'));

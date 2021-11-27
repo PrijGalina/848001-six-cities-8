@@ -22,8 +22,8 @@ export default function PrivateRoute(props: PrivateRouteProps): JSX.Element {
       exact={exact}
       path={path}
       render={(routeProps) => (
-        authorizationStatus === AuthorizationStatus.Auth ?
-          render(routeProps)
+        authorizationStatus === AuthorizationStatus.Auth
+          ? render(routeProps)
           : <Redirect to={AppRoute.Login} />
       )}
     />

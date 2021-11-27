@@ -38,3 +38,12 @@ export type CommentDTO = {
     'name': string,
   },
 }
+
+export type UserDTO = {
+  'email': string,
+  'avatar_url': string,
+  'id': number,
+  'is_pro': boolean,
+  'name': string,
+  'token': string,
+}

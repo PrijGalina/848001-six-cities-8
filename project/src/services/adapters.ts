@@ -1,6 +1,7 @@
 import {Offer} from '../types/offer';
 import {ReviewType} from '../types/review';
-import {OfferDTO, CommentDTO} from '../types/server-types';
+import {OfferDTO, CommentDTO, UserDTO} from '../types/server-types';
+import {UserData} from '../types/auth-data';
 
 const adaptOffersToClient = (offers:OfferDTO[] = []): Offer[] =>
   offers.map((offer) => ({
@@ -72,4 +73,14 @@ const adaptCommentsToClient = (comments: CommentDTO[] = []): ReviewType[] =>
     },
   }));
 
-export {adaptOffersToClient, adaptOfferToClient, adaptCommentsToClient};
+const adaptUserToClient = (user: UserDTO): UserData =>
+  ({
+    avatarUrl: user.avatar_url,
+    email: user.email,
+    id: user.id,
+    isPro: user.is_pro,
+    name: user.name,
+    token: user.token,
+  });
+
+export {adaptOffersToClient, adaptOfferToClient, adaptCommentsToClient, adaptUserToClient};
