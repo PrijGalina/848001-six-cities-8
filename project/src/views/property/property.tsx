@@ -60,7 +60,7 @@ export default function Property(): JSX.Element {
                 <AboutHost offer={offer} />
                 <section className="property__reviews reviews">
                   <ReviewsList reviews={comments} />
-                  {authorizationStatus === AuthorizationStatus.Auth && <NewCommentForm />}
+                  {authorizationStatus === AuthorizationStatus.Auth && <NewCommentForm id={+id}/>}
                 </section>
               </div>
             </div>

@@ -16,7 +16,9 @@ export enum ActionType {
   SetAuthStatus = 'user/login',
   SetSortOffers = 'main/setSortOffers',
   SetFavoriteStatus = 'offer/setFavoriteStatus',
-  setUserInfo ='user/setUserInfo',
+  SetUserInfo ='user/setUserInfo',
+  SetRating = 'offer/setRating',
+  SetTextComment = 'offer/setTextComment',
 }
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;

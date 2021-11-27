@@ -22,7 +22,11 @@ export const setOfferActive = createAction<Offer | undefined>(ActionType.SetOffe
 
 export const setSortOffers = createAction<SortValue>(ActionType.SetSortOffers);
 
-export const setUserInfo = createAction<UserData>(ActionType.setUserInfo);
+export const setUserInfo = createAction<UserData>(ActionType.SetUserInfo);
+
+export const setRating = createAction<number>(ActionType.SetRating);
+
+export const setTextComment = createAction<string>(ActionType.SetTextComment);
 
 export const login = createAction<AuthorizationStatus>(ActionType.SetAuthStatus);
 

@@ -45,3 +45,9 @@ export type OfferStatusFavorite = {
   id: number,
   status: number,
 }
+
+export type CommentForm = {
+  id: number,
+  comment: string,
+  rating: number,
+}

@@ -27,11 +27,11 @@ export default function Header({page}: HeaderProps): JSX.Element {
           <div className="header__left">
             <Logo place={LOGO_PROPERTY.header}/>
           </div>
-          {(page !== PagesApp.LogIn) && user &&
+          {(page !== PagesApp.LogIn) &&
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  {isAuth === AuthorizationStatus.Auth &&
+                  {isAuth === AuthorizationStatus.Auth && user &&
                   <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile" href="#/">
                     <div
                       className="header__avatar-wrapper user__avatar-wrapper"

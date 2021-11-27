@@ -18,6 +18,8 @@ export type OfferType = {
   focus?: Offer | undefined,
   comments: ReviewType[] | [],
   nearby: Offer[] | [],
+  newCommentText: string,
+  newCommentRating: number,
 };
 
 export type UserType = {

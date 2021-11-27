@@ -6,7 +6,7 @@ import {toast} from 'react-toastify';
 import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
 import {AuthData} from '../types/auth-data';
 import {OfferDTO, CommentDTO, UserDTO} from '../types/server-types';
-import {OfferStatusFavorite} from '../types/offer';
+import {OfferStatusFavorite, CommentForm} from '../types/offer';
 
 const AUTH_FAIL_MESSAGE = 'Не забудьте авторизоваться';
 
@@ -55,6 +55,13 @@ export const sendOfferStatusFavoriteAction = ({id, status}: OfferStatusFavorite)
     const adaptedData = adaptOfferToClient(data);
     dispatch(loadInfoAboutOffer(adaptedData));
     dispatch(fetchOffersAction());
+  };
+
+export const sendNewComment = ({id, comment, rating}: CommentForm): ThunkActionResult =>
+  async (dispatch, _getState, api) => {
+    const path = `${APIRoute.Comments}/${id}`;
+    await api.post<CommentForm>(path, {comment, rating});
+    dispatch(fetchCommentsAboutAction(id));
   };
 
 export const checkAuthAction = (): ThunkActionResult =>

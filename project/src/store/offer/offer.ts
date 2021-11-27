@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {setOfferActive, loadOffersNearby, loadInfoAboutOffer, loadCommentsAboutOffer} from '../action';
+import {setOfferActive, loadOffersNearby, loadInfoAboutOffer, loadCommentsAboutOffer, setRating, setTextComment} from '../action';
 import {OfferType} from '../../types/state';
 
 const initialState: OfferType = {
@@ -7,6 +7,8 @@ const initialState: OfferType = {
   info: undefined,
   comments: [],
   nearby: [],
+  newCommentText: '',
+  newCommentRating: 0,
 };
 
 const offer = createReducer(initialState, (builder) => {
@@ -22,6 +24,12 @@ const offer = createReducer(initialState, (builder) => {
     })
     .addCase(loadCommentsAboutOffer, (state, action) => {
       state.comments = action.payload;
+    })
+    .addCase(setRating, (state, action) => {
+      state.newCommentRating = action.payload;
+    })
+    .addCase(setTextComment, (state, action) => {
+      state.newCommentText = action.payload;
     });
 });
 
