@@ -4,7 +4,7 @@ import {sendNewComment} from '../../store/api-actions';
 import RatingList from '../rating-list/rating-list';
 import {getRating} from '../../store/offer/selectors';
 import {getCommentText} from '../../store/offer/selectors';
-import {setTextComment, setRating} from '../../store/action';
+import {setTextComment} from '../../store/action';
 
 type NewCommentFormProps = {
   id: number,
@@ -33,8 +33,6 @@ export default function NewCommentForm({id} : NewCommentFormProps): JSX.Element 
     };
 
     dispatch(sendNewComment(sendData));
-    dispatch(setTextComment(''));
-    dispatch(setRating(0));
   };
 
   return (

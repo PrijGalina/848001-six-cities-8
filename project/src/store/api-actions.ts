@@ -1,5 +1,5 @@
 import {ThunkActionResult} from '../types/action';
-import {loadOffers, login, logout, loadOffersNearby, loadInfoAboutOffer, loadCommentsAboutOffer, loadFavoriteOffers, redirectToRoute, setUserInfo} from './action';
+import {loadOffers, login, logout, loadOffersNearby, loadInfoAboutOffer, loadCommentsAboutOffer, loadFavoriteOffers, redirectToRoute, setUserInfo, setRating, setTextComment} from './action';
 import {saveToken, dropToken} from '../services/token';
 import {adaptOffersToClient, adaptOfferToClient, adaptCommentsToClient, adaptUserToClient} from '../services/adapters';
 import {toast} from 'react-toastify';
@@ -67,6 +67,8 @@ export const sendNewComment = ({id, comment, rating}: CommentForm): ThunkActionR
     await api.post<CommentForm>(path, {comment, rating})
       .then(() => {
         dispatch(fetchCommentsAboutAction(id));
+        dispatch(setTextComment(''));
+        dispatch(setRating(0));
       })
       .catch(() => {
         toast.info(COMMENT_FAIL_MESSAGE);

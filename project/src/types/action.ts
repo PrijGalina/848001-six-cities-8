@@ -1,5 +1,5 @@
 import {Action} from 'redux';
-import {ThunkAction,ThunkDispatch} from 'redux-thunk';
+import {ThunkAction} from 'redux-thunk';
 import {AxiosInstance} from 'axios';
 import {State} from '../types/state';
 
@@ -15,12 +15,9 @@ export enum ActionType {
   SetOfferActive = 'offer/setOfferActive',
   SetAuthStatus = 'user/login',
   SetSortOffers = 'main/setSortOffers',
-  SetFavoriteStatus = 'offer/setFavoriteStatus',
   SetUserInfo ='user/setUserInfo',
   SetRating = 'offer/setRating',
   SetTextComment = 'offer/setTextComment',
 }
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;
-
-export type ThunkAppDispatch = ThunkDispatch<State, AxiosInstance, Action>;
