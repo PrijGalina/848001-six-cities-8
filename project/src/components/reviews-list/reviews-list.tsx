@@ -6,6 +6,8 @@ type reviewsProps = {
 }
 
 export default function ReviewsList({reviews = []}: reviewsProps): JSX.Element {
+  reviews = reviews.slice(0, 10);
+
   return (
     <>
       <h2 className="reviews__title">Reviews &middot;

@@ -1,10 +1,13 @@
 
 import {MutableRefObject, useEffect, useState} from 'react';
-import {Map, TileLayer} from 'leaflet';
+import {Map, TileLayer, Marker} from 'leaflet';
 import {MAP_PROPERTY} from '../const';
+import {useLocation } from 'react-router-dom';
+import {currentCustomIcon} from '../components/map/map';
 
 export default function useMap (mapRef: MutableRefObject<HTMLElement | null>, zoom: number, lat: number, lng: number): Map | null {
   const [map, setMap] = useState<Map | null>(null);
+  const location = useLocation();
 
   useEffect(() => {
     if (mapRef.current !== null && map === null) {
@@ -15,6 +18,16 @@ export default function useMap (mapRef: MutableRefObject<HTMLElement | null>, zo
         },
         zoom: zoom,
       });
+
+      if (location.pathname !== '/'){
+        const marker = new Marker({
+          lat,
+          lng,
+        });
+        marker
+          .setIcon(currentCustomIcon)
+          .addTo(instance);
+      }
 
       const layer = new TileLayer(
         MAP_PROPERTY.link,
@@ -27,10 +40,18 @@ export default function useMap (mapRef: MutableRefObject<HTMLElement | null>, zo
       setMap(instance);
     }
     else {
-
+      if (location.pathname !== '/' && map) {
+        const marker = new Marker({
+          lat,
+          lng,
+        });
+        marker
+          .setIcon(currentCustomIcon)
+          .addTo(map);
+      }
       map && map.setView([lat, lng]);
     }
-  }, [lat, lng, map, mapRef, zoom]);
+  }, [lat, lng, location.pathname, map, mapRef, zoom]);
 
   return map;
 }

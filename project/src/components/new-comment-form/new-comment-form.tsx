@@ -15,7 +15,8 @@ export default function NewCommentForm({id} : NewCommentFormProps): JSX.Element 
   const rating = useSelector(getRating);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const comment: string = useSelector(getCommentText);
-  const isDisabled = (textareaRef.current !== null && textareaRef.current.value.length < 50);
+
+  const isDisabled = (textareaRef.current !== null) && (textareaRef.current.value.length < 50 || textareaRef.current.value.length > 300 || rating === 0);
 
   const handleTextareaChange = (): void => {
     if (textareaRef.current !== null) {

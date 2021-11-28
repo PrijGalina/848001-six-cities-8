@@ -58,8 +58,10 @@ export default function LogIn(): JSX.Element {
               placeholder="Password"
               ref={passwordRef}
               required
+              pattern="^(?=(.*?[0-9]){1})(?=.*?[a-zA-Z])[0-9A-Za-z]{2,20}$"
             />
           </div>
+          <label className="prompt">* Password, must contain at least one letter and number.</label>
           <button className="login__submit form__submit button" type="submit">Sign in</button>
         </form>
       </section>

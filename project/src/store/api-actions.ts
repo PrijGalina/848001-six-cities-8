@@ -1,14 +1,16 @@
 import {ThunkActionResult} from '../types/action';
 import {loadOffers, login, logout, loadOffersNearby, loadInfoAboutOffer, loadCommentsAboutOffer, loadFavoriteOffers, redirectToRoute, setUserInfo} from './action';
 import {saveToken, dropToken} from '../services/token';
-import { adaptOffersToClient, adaptOfferToClient, adaptCommentsToClient, adaptUserToClient} from '../services/adapters';
+import {adaptOffersToClient, adaptOfferToClient, adaptCommentsToClient, adaptUserToClient} from '../services/adapters';
 import {toast} from 'react-toastify';
 import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
 import {AuthData} from '../types/auth-data';
 import {OfferDTO, CommentDTO, UserDTO} from '../types/server-types';
 import {OfferStatusFavorite, CommentForm} from '../types/offer';
+import {sortCommentsByDate} from '../utils';
 
 const AUTH_FAIL_MESSAGE = 'Не забудьте авторизоваться';
+const COMMENT_FAIL_MESSAGE = 'Ошибка при отправке сообщения';
 
 export const fetchOffersAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
@@ -38,6 +40,7 @@ export const fetchCommentsAboutAction = (id: number): ThunkActionResult =>
     const path = `${APIRoute.Comments}/${id}`;
     const {data} = await api.get<CommentDTO[]>(path);
     const adaptedData = adaptCommentsToClient(data);
+    adaptedData.sort(sortCommentsByDate);
     dispatch(loadCommentsAboutOffer(adaptedData));
   };
 
@@ -55,13 +58,19 @@ export const sendOfferStatusFavoriteAction = ({id, status}: OfferStatusFavorite)
     const adaptedData = adaptOfferToClient(data);
     dispatch(loadInfoAboutOffer(adaptedData));
     dispatch(fetchOffersAction());
+    dispatch(fetchFavoriteOffersAction());
   };
 
 export const sendNewComment = ({id, comment, rating}: CommentForm): ThunkActionResult =>
   async (dispatch, _getState, api) => {
     const path = `${APIRoute.Comments}/${id}`;
-    await api.post<CommentForm>(path, {comment, rating});
-    dispatch(fetchCommentsAboutAction(id));
+    await api.post<CommentForm>(path, {comment, rating})
+      .then(() => {
+        dispatch(fetchCommentsAboutAction(id));
+      })
+      .catch(() => {
+        toast.info(COMMENT_FAIL_MESSAGE);
+      });
   };
 
 export const checkAuthAction = (): ThunkActionResult =>

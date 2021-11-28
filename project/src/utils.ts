@@ -1,6 +1,7 @@
-import {RATING_STARS, RATING_STYLE, SortValue} from './const';
+import dayjs from 'dayjs';
 import {Offer} from './types/offer';
-import {AuthorizationStatus} from './const';
+import {ReviewType} from './types/review';
+import {RATING_STARS, RATING_STYLE, SortValue, AuthorizationStatus} from './const';
 
 export const getRatingStyle = (rating: number): number  => {
   rating = Math.round(rating);
@@ -28,6 +29,8 @@ export const sortOffersRating = (offerA: Offer, offerB: Offer): number => Math.s
 export const sortOffersAsc = (offerA: Offer, offerB: Offer): number => Math.sign(offerB.price -  offerA.price);
 
 export const sortOffersDesc = (offerA: Offer, offerB: Offer): number => Math.sign(offerA.price -  offerB.price);
+
+export const sortCommentsByDate = (commentA: ReviewType, commentB: ReviewType): number => dayjs(commentB.date).diff(dayjs(commentA.date));
 
 export const getSortOffers = (offers: Offer[], sortValue: string): Offer[] => {
   switch (sortValue) {

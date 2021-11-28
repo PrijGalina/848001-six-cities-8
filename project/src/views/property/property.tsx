@@ -2,14 +2,14 @@ import {useParams, useLocation} from 'react-router-dom';
 import {useEffect} from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {fetchOfferInfoAction, fetchCommentsAboutAction, fetchOffersNearbyAction} from '../../store/api-actions';
-import {setOfferActive, setActiveCity} from '../../store/action';
+import {setOfferActive} from '../../store/action';
 import {getOfferInfo, getComments, getOffersNearby} from '../../store/offer/selectors';
 import {getAuthorizationStatus} from '../../store/user/selectors';
 import ImagesOfPlace from '../../components/images-of-place/images-of-place';
 import AboutPlace from '../../components/about-place/about-place';
 import AboutHost from '../../components/about-host/about-host';
 import NewCommentForm from '../../components/new-comment-form/new-comment-form';
-import ReviewsList from '../../components//reviews-list/reviews-list';
+import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import OffersList from '../../components/offers-list/offers-list';
 import {PagesApp, OFFER_IN_PROPERTY, MAP_PROPERTY, AuthorizationStatus} from '../../const';
@@ -37,15 +37,6 @@ export default function Property(): JSX.Element {
   const offersNearby = useSelector(getOffersNearby);
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const images = offer ? offer.images.slice(0, 6) : [];
-
-  const cityAdapted =   offer && {
-    title:offer.city.name,
-    lat: offer.city.location.latitude,
-    lng: offer.city.location.longitude,
-    zoom: offer.city.location.zoom,
-  };
-
-  offer && cityAdapted && dispatch(setActiveCity(cityAdapted));
 
   return (
     <div>

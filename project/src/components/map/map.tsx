@@ -1,13 +1,13 @@
 import {useSelector} from 'react-redux';
 import {useRef, useEffect} from 'react';
-import {Icon, IconOptions, Map as MapContainer, Marker} from 'leaflet';
-import useMap from '../../hooks/useMap';
+import L, {Icon, IconOptions, Map as MapContainer, Marker} from 'leaflet';
+import useMap from '../../hooks/use-map';
 import {Location} from '../../types/offer';
 import {UrlMarker, PIN_SIZE, PIN_ANCHOR} from '../../const';
 import 'leaflet/dist/leaflet.css';
 import {getOfferActive} from '../../store/offer/selectors';
 import {Offer} from '../../types/offer';
-import L from 'leaflet';
+
 
 type MapProps = {
   height: number,
@@ -29,7 +29,7 @@ const LeafIcon = (url: string) => {
 };
 
 const defaultCustomIcon = LeafIcon(UrlMarker.Default);
-const currentCustomIcon = LeafIcon(UrlMarker.Active);
+export const currentCustomIcon = LeafIcon(UrlMarker.Active);
 const markerGroup = L.layerGroup();
 
 function setMarkersOnMap(locations: Location[], map: MapContainer, hoverPoint?: Location | boolean) {

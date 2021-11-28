@@ -1,18 +1,20 @@
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchFavoriteOffersAction} from '../../store/api-actions';
-import {Offer} from '../../types/offer';
-import FavoritesByCity from '../../components/favorites-by-city/favorites-by-city';
-import {CITIES} from '../../const';
 import {getFavoriteOffers} from '../../store/main/selectors';
+import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
+import FavoritesByCity from '../../components/favorites-by-city/favorites-by-city';
+import {Offer} from '../../types/offer';
+import {CITIES} from '../../const';
 
 export default function Favorites(): JSX.Element {
   const dispatch = useDispatch();
+
   const offers: Offer[] = useSelector(getFavoriteOffers);
 
   useEffect(() => {
     dispatch(fetchFavoriteOffersAction());
-  },[dispatch, offers]);
+  },[dispatch]);
 
   const favoritesInCities = offers.reduce((previousValue: {[key: string]: Offer[] | []}, currentValue) => {
     const {name} = currentValue.city;
@@ -23,6 +25,13 @@ export default function Favorites(): JSX.Element {
 
     return previousValue;
   },{});
+
+  if (offers.length === 0) {
+    return (
+      <FavoritesEmpty />
+    );
+  }
+
 
   return (
     <div className="page__favorites-container container">
