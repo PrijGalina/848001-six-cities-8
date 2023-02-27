@@ -36,8 +36,8 @@ export const RATING_STYLE = {
 export const CITIES = [ 'Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 export enum UrlMarker {
-  Default = '%PUBLIC_URL%/img/pin.svg',
-  Active = '%PUBLIC_URL%/img/pin-active.svg',
+  Default = '/img/pin.svg',
+  Active = '/img/pin-active.svg',
 }
 
 export const PIN_SIZE: PointExpression = [20, 30];
