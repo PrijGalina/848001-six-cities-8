@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.js": "C:/Program Files/Git/six-cities/static/js/main.b02f641d.chunk.js",
-    "main.js.map": "C:/Program Files/Git/six-cities/static/js/main.b02f641d.chunk.js.map",
-    "runtime-main.js": "C:/Program Files/Git/six-cities/static/js/runtime-main.1a508cba.js",
-    "runtime-main.js.map": "C:/Program Files/Git/six-cities/static/js/runtime-main.1a508cba.js.map",
-    "static/css/2.297cece4.chunk.css": "C:/Program Files/Git/six-cities/static/css/2.297cece4.chunk.css",
-    "static/js/2.680be494.chunk.js": "C:/Program Files/Git/six-cities/static/js/2.680be494.chunk.js",
-    "static/js/2.680be494.chunk.js.map": "C:/Program Files/Git/six-cities/static/js/2.680be494.chunk.js.map",
-    "index.html": "C:/Program Files/Git/six-cities/index.html",
-    "static/css/2.297cece4.chunk.css.map": "C:/Program Files/Git/six-cities/static/css/2.297cece4.chunk.css.map",
-    "static/js/2.680be494.chunk.js.LICENSE.txt": "C:/Program Files/Git/six-cities/static/js/2.680be494.chunk.js.LICENSE.txt"
+    "main.js": "/six-cities/static/js/main.b02f641d.chunk.js",
+    "main.js.map": "/six-cities/static/js/main.b02f641d.chunk.js.map",
+    "runtime-main.js": "/six-cities/static/js/runtime-main.86218a98.js",
+    "runtime-main.js.map": "/six-cities/static/js/runtime-main.86218a98.js.map",
+    "static/css/2.297cece4.chunk.css": "/six-cities/static/css/2.297cece4.chunk.css",
+    "static/js/2.680be494.chunk.js": "/six-cities/static/js/2.680be494.chunk.js",
+    "static/js/2.680be494.chunk.js.map": "/six-cities/static/js/2.680be494.chunk.js.map",
+    "index.html": "/six-cities/index.html",
+    "static/css/2.297cece4.chunk.css.map": "/six-cities/static/css/2.297cece4.chunk.css.map",
+    "static/js/2.680be494.chunk.js.LICENSE.txt": "/six-cities/static/js/2.680be494.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.1a508cba.js",
+    "static/js/runtime-main.86218a98.js",
     "static/css/2.297cece4.chunk.css",
     "static/js/2.680be494.chunk.js",
     "static/js/main.b02f641d.chunk.js"
